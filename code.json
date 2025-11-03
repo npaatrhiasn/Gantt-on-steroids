@@ -1124,7 +1124,7 @@
     {"name": "headerMarginY", "value": -130},
     {"name": "headerHeight", "value": 50},
     {"name": "TitleMarginX", "value": 10},
-    {"name": "Title", "value": "Title : You can change the title if you change the para..."},
+    {"name": "Title", "value": "Title that you can change"},
     {"name": "TitleFontSize", "value": 24},
     {"name": "TitleFontWeight", "value": "bold"},
     {"name": "ButtonWidth", "value":50},
@@ -1156,7 +1156,7 @@
     {"name": "TaskColumnWidthSeparatorOpacity", "value":0.3},
     {"name": "TaskColumnStrokes", "value":"#e9ecef"},
     {"name": "TaskColumnStrokesWidth", "value":1},
-    {"name": "ColumnTaskTitle", "value":"Hiérarchie"},
+    {"name": "ColumnTaskTitle", "value":"Hierarchie"},
     {"name": "ShapeSize", "value":200},
 
     // Gantt Settings //
@@ -1549,7 +1549,7 @@
             "update": {
               "x": {"signal": "showLegendPaddingX"},
               "y": {"value": 0},
-              "text": {"value": "Légendes"},
+              "text": {"value": "Legends"},
               "fill": {"signal": "MainColor"},
               "fontSize": {"value": 12},
               "align": {"value": "left"}
@@ -1690,7 +1690,7 @@
             "update": {
               "x": {"signal": "showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems"},
               "y": {"value": 0},
-              "text": {"value": "Niveau de détail"},
+              "text": {"value": "Level of details"},
               "fill": {"signal": "MainColor"},
               "fontSize": {"value": 12},
               "align": {"value": "left"}
