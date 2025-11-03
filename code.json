@@ -1,0 +1,2295 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 1200,
+  "height": 600,
+  "padding": 5,
+  "description": "Made by Nathan BODIN, ispired by Davide BACCI and Madison GIAMMARIA. You can contact me on Linkedin : Nathan BODIN and on Instagram : @nathanbod1. Every comments that you will find in this code have two parts. The first one is English version and the last one is French version of the comment.",
+
+  // Data part: this is where vega receives the raw data and transforms it to output the three datasets that vega needs to display the Gantt (OfficialId, VisibleRectangles and VisibleMilestones) | Partie data : c'est ici que vega reçoit les données brutes et les transforme pour sortir les 3 datasets dont vega à besoin pour afficher le Gantt (OfficialId, VisibleRectangles et VisibleMilestones) //
+  "data": [
+
+    // ===================================================== //
+    // =========== STATIC PART | PARTIE STATIQUE =========== //
+    // ===================================================== //
+
+    {
+      // Dataset that you inject into Vega | Dataset que vous injectez dans Vega //
+      "name": "dataset",
+      "values": 
+      [
+        {
+          "Category": "Division A",
+          "Subcategory": "Team 1",
+          "Segment": "WP2",
+          "Subsegment": "Review 4",
+          "Item": "Reporting 2",
+          "Start": "01/03/2026",
+          "End": "18/03/2027",
+          "Legend": "Development",
+          "Color": "#00008B",
+          "Milestone": 0,
+          "Shape": ""
+        },
+        {
+          "Category": "Division C",
+          "Subcategory": "Team 1",
+          "Segment": "WP3",
+          "Subsegment": "Design 1",
+          "Item": "Planning 3",
+          "Start": "03/09/2025",
+          "End": "01/12/2025",
+          "Legend": "Research",
+          "Color": "#800020",
+          "Milestone": 0,
+          "Shape": ""
+        },
+        {
+          "Category": "Division A",
+          "Subcategory": "Team 3",
+          "Segment": "WP3",
+          "Subsegment": "Testing 1",
+          "Item": "Optimization 1",
+          "Start": "20/02/2025",
+          "End": "06/03/2025",
+          "Legend": "Milestone",
+          "Color": "#095228",
+          "Milestone": 1,
+          "Shape": "diamond"
+        },
+        {
+          "Category": "Division B",
+          "Subcategory": "Team 3",
+          "Segment": "WP3",
+          "Subsegment": "Testing 1",
+          "Item": "Optimization 1",
+          "Start": "20/02/2026",
+          "End": "06/03/2026",
+          "Legend": "Milestone",
+          "Color": "#095228",
+          "Milestone": 1,
+          "Shape": "wedge"
+        },
+        {
+          "Category": "Division C",
+          "Subcategory": "Team 2",
+          "Segment": "WP3",
+          "Subsegment": "Design 5",
+          "Item": "Planning 1",
+          "Start": "28/09/2026",
+          "End": "21/03/2027",
+          "Legend": "Development",
+          "Color": "#00008B",
+          "Milestone": 0,
+          "Shape": ""
+        },
+        {
+          "Category": "Division B",
+          "Subcategory": "Team 2",
+          "Segment": "WP3",
+          "Subsegment": "ProtoLegend 1",
+          "Item": "Planning 3",
+          "Start": "02/01/2025",
+          "End": "27/01/2025",
+          "Legend": "Development",
+          "Color": "#00008B",
+          "Milestone": 0,
+          "Shape": ""
+        },
+        {
+          "Category": "Division B",
+          "Subcategory": "Team 3",
+          "Segment": "WP4",
+          "Subsegment": "Testing 3",
+          "Item": "Planning 3",
+          "Start": "07/02/2027",
+          "End": "07/03/2028",
+          "Legend": "Research",
+          "Color": "#800020",
+          "Milestone": 0,
+          "Shape": ""
+        }
+      ]
+    },
+    {
+      // DisplayRectangles matrix, here you decide where and how to display the rectangles (I am level 1, my depth is 1 so I display my level children...on my row) | Matrice d'affichage de rectangles, ici vous décidez où et comment afficher les rectangles (je suis de niveau 1, ma profondeur est 1 alors j'affiche mes enfants de niveau...sur ma ligne) //
+      "name": "DisplayRectangles",
+      "values": [
+        {"Level": 1,"Depth 1": 5, "Depth 2": 5, "Depth 3": 5, "Depth 4": 5, "Depth 5": 5},
+        {"Level": 2,"Depth 1": "X", "Depth 2": 5, "Depth 3": 5, "Depth 4": 5, "Depth 5": 5},
+        {"Level": 3,"Depth 1": "X", "Depth 2": "X", "Depth 3": 5, "Depth 4": 5, "Depth 5": 5},
+        {"Level": 4,"Depth 1": "X", "Depth 2": "X", "Depth 3": "X", "Depth 4": 5, "Depth 5": 5},
+        {"Level": 5,"Depth 1": "X", "Depth 2": "X", "Depth 3": "X", "Depth 4": "X", "Depth 5": 5}
+      ]
+    },
+    {
+      // DisplayMilestones matrix, here you decide where and how to display the milestones (I am level 1, my depth is 1 so I display my level children...on my row) | Matrice d'affichage de milestones, ici vous décidez où et comment afficher les milestones (je suis de niveau 1, ma profondeur est 1 alors j'affiche mes enfants de niveau...sur ma ligne) //
+      "name": "DisplayMilestones",
+      "values": [
+        {"Level": 1,"Depth 1": 5, "Depth 2": 5, "Depth 3": 5, "Depth 4": 5, "Depth 5": 5},
+        {"Level": 2,"Depth 1": "X", "Depth 2": 5, "Depth 3": 5, "Depth 4": 5, "Depth 5": 5},
+        {"Level": 3,"Depth 1": "X", "Depth 2": "X", "Depth 3": 5, "Depth 4": 5, "Depth 5": 5},
+        {"Level": 4,"Depth 1": "X", "Depth 2": "X", "Depth 3": "X", "Depth 4": 5, "Depth 5": 5},
+        {"Level": 5,"Depth 1": "X", "Depth 2": "X", "Depth 3": "X", "Depth 4": "X", "Depth 5": 5}
+      ]
+    },
+    {
+      // You can match your colors to your Legend | Vous pouvez associer vos couleurs à votre Legend //
+      "name": "Color",
+      "values": [
+        {"Legend": "Development","Color": "#00008B"},
+        {"Legend": "Research","Color": "#800020"},
+        {"Legend": "Division B","Color": "white"}
+      ]
+    },
+    {
+      // You can decide the size of your milestones according to their shape | Vous pouvez associer une taille à vos formes //
+      "name": "Shape",
+      "values": [
+        {"Shape": "daimond","Size": "500"},
+        {"Shape": "circle","Size": "500"},
+        {"Shape": "wedge","Size": "500"}
+      ]
+    },
+    {
+      // Step that ranks the rows of your dataset, this is where you can change the sort order and the sorting method | Étape qui rank les lignes de votre dataset, c'est ici que vous pouvez modifier l'ordre de tri et la manière de trier //
+      "name": "data",
+      "source": "dataset",
+      "transform": [
+        {
+          // The Start column of type dd/mm/yy has been transformed into miliseconds since 1970 | On transforme la colonne Start de type dd/mm/aa en milisecondes depuis 1970 //
+          "type": "formula",
+          "as": "Start",
+          "expr": "isDate(datum.Start) ? time(datum.Start) : time(timeParse(datum.Start, '%d/%m/%Y'))"
+        },
+        {
+          // The Start column of type dd/mm/yy has been transformed into miliseconds since 1970 | On transforme la colonne Start de type dd/mm/aa en milisecondes depuis 1970 //
+          "type": "formula",
+          "as": "FEnd",
+          "expr": "isDate(datum.End) ? time(datum.End) : time(timeParse(datum.End,'%d/%m/%Y'))"
+        },
+        {
+          // If it's a milestone, then End is the Start column plus one millisecond | Si c'est un milestone alors End c'est la colonne Start plus une milliseconde //
+          "type": "formula",
+          "as": "End",
+          "expr": "datum.Milestone == 1 ? datum.Start + 1 : datum.FEnd"
+        },
+        // Part where we rank level 1 (Category) | Partie où l'on rank les niveau 1 (Category) //
+        {
+          "type": "joinaggregate",
+          "groupby": [
+            "Category"
+          ],
+          "fields": [
+            "Start"
+          ],
+          "ops": [
+            "min"
+          ],
+          "as": [
+            "DateMinCategory"
+          ]
+        },
+        {
+          "type": "window",
+          "sort": {
+            "field": ["DateMinCategory", "Category"], // This row orders the level 1 rows first by the minimum Start date and then alphabetically (if two rows have the same start date). This is where you can change the row ordering mode (first alphabetically or otherwise according to your needs). You should always order the rows with two columns (to avoid row conflicts) | Cette ligne ordonne les lignes de niveau 1 selon d'abord la date Start minimum puis par ordre alphabétique (si deux lignes ont la même date de départ). C'est ici que vous pouvez changer le mode d'ordonnancement des lignes (d'abord par ordre alphabétique ou autre selon vos besoins). Il faudra toujours ordonner les lignes avec deux colonnes (pour éviter les conflits de lignes) //
+            "order": ["ascending", "ascending"] // In ascending order | Par ordre croissant //
+          },
+          "ops": [
+            "dense_rank"
+          ],
+          "as": [
+            "RankCategory" // We add the rank (1; 2; 3 etc) to each level 1 row after their ordering | On ajoute le rank (1; 2; 3 etc) à chaque ligne de niveau 1 après leur ordonnancement //
+          ]
+        },
+        // Part where we rank level 2 (Subcategory) | Partie où l'on rank les niveau 2 (Subcategory) //
+        {
+          "type": "joinaggregate",
+          "groupby": [
+            "Category",
+            "Subcategory"
+          ],
+          "fields": [
+            "Start"
+          ],
+          "ops": [
+            "min"
+          ],
+          "as": [
+            "DateMinSubcategory"
+          ]
+        },
+        {
+          "type": "window",
+          "groupby": [
+            "Category"
+          ],
+          "sort": {
+            "field": ["DateMinSubcategory", "Subcategory"],
+            "order": ["ascending", "ascending"]
+          },
+          "ops": [
+            "dense_rank"
+          ],
+          "as": [
+            "RankSubcategory"
+          ]
+        },
+        // Part where we rank level 3 (Segment) | Partie où l'on rank les niveau 3 (Segment) //
+        {
+          "type": "joinaggregate",
+          "groupby": [
+            "Category",
+            "Subcategory",
+            "Segment"
+          ],
+          "fields": [
+            "Start"
+          ],
+          "ops": [
+            "min"
+          ],
+          "as": [
+            "DateMinSegment"
+          ]
+        },
+        {
+          "type": "window",
+          "groupby": [
+            "Category",
+            "Subcategory"
+          ],
+          "sort": {
+            "field": ["DateMinSegment", "Segment"],
+            "order": ["ascending", "ascending"]
+          },
+          "ops": [
+            "dense_rank"
+          ],
+          "as": [
+            "RankSegment"
+          ]
+        },
+        // Part where we rank level 4 (Subsegment) | Partie où l'on rank les niveau 4 (Subsegment) //
+        {
+          "type": "joinaggregate",
+          "groupby": [
+            "Category",
+            "Subcategory",
+            "Segment",
+            "Subsegment"
+          ],
+          "fields": [
+            "Start"
+          ],
+          "ops": [
+            "min"
+          ],
+          "as": [
+            "DateMinSubsegment"
+          ]
+        },
+        {
+          "type": "window",
+          "groupby": [
+            "Category",
+            "Subcategory",
+            "Segment"
+          ],
+          "sort": {
+            "field": ["DateMinSubsegment", "Subsegment"],
+            "order": ["ascending", "ascending"]
+          },
+          "ops": [
+            "dense_rank"
+          ],
+          "as": [
+            "RankSubsegment"
+          ]
+        },
+        // Part where we rank level 5 (Item) | Partie où l'on rank les niveau 5 (Item) //
+        {
+          "type": "joinaggregate",
+          "groupby": [
+            "Category",
+            "Subcategory",
+            "Segment",
+            "Subsegment",
+            "Item"
+          ],
+          "fields": [
+            "Start"
+          ],
+          "ops": [
+            "min"
+          ],
+          "as": [
+            "DateMinItem"
+          ]
+        },
+        {
+          "type": "window",
+          "groupby": [
+            "Category",
+            "Subcategory",
+            "Segment",
+            "Subsegment"
+          ],
+          "sort": {
+            "field": ["DateMinItem", "Item"],
+            "order": ["ascending", "ascending"]
+          },
+          "ops": [
+            "dense_rank"
+          ],
+          "as": [
+            "RankItem"
+          ]
+        },
+        // Calculating how many levels you have created | Calcul de combien de Level avez vous créé //
+        {
+          "type": "formula",
+          "as": "maxLevel",
+          "expr": "datum.Item ? 5 : datum.Subsegment ? 4 : datum.Segment ? 3 : datum.Subcategory ? 2 : 1"
+        }
+      ]
+    },
+    {
+      // Creation of level 1 lines | Création des lignes de niveau 1 //
+      "name": "Categories",
+      "source": "data",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.maxLevel != 1"
+        },
+        {
+          "type": "aggregate",
+          "groupby": ["Category", "RankCategory", "maxLevel"],
+          "fields": ["Start", "End"],
+          "ops": ["min", "max"],
+          "as": ["Start", "End"]
+        },
+        {"type": "formula", "as": "Id", "expr": "datum.Category"},
+        {"type": "formula", "as": "DisplayText", "expr": "datum.Category"},
+        {"type": "formula", "as": "SubcategoryFull", "expr": "null"},
+        {"type": "formula", "as": "SegmentFull", "expr": "null"},
+        {"type": "formula", "as": "SubsegmentFull", "expr": "null"},
+        {"type": "formula", "as": "ItemFull", "expr": "null"},
+        {"type": "formula", "as": "Level", "expr": "1"},
+        {"type": "formula", "as": "RankSubcategory", "expr": "0"},
+        {"type": "formula", "as": "RankSegment", "expr": "0"},
+        {"type": "formula", "as": "RankSubsegment", "expr": "0"},
+        {"type": "formula", "as": "RankItem", "expr": "0"},
+        {"type": "formula", "as": "Subcategory", "expr": "null"},
+        {"type": "formula", "as": "Segment", "expr": "null"},
+        {"type": "formula", "as": "Subsegment", "expr": "null"},
+        {"type": "formula", "as": "Item", "expr": "null"},
+        {"type": "formula", "as": "Color", "expr": "null"},
+        {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 1 ? datum.Legend : datum.Category"},
+        {"type": "formula", "as": "Milestone", "expr": "0"},
+        {"type": "formula", "as": "Shape", "expr": "null"}
+      ]
+    },
+    {
+      // This table does the same thing as the previous table, but it only runs if you have given Vega only one level column. This is very important so as not to lose space information (which Joinaggregate removes). | Cette table fait la même chose que la table précédente mais elle s'exécute que si vous n'avez donné qu'une colonne de niveau à Vega. Cela est très important pour ne pas perdre des informations d'espace (que Joinaggregate supprime) //
+      "name": "CategoriesDirect",
+      "source": "data",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.maxLevel == 1"
+        },
+        {"type": "formula", "as": "Id", "expr": "datum.Category"},
+        {"type": "formula", "as": "DisplayText", "expr": "datum.Category"},
+        {"type": "formula", "as": "SubcategoryFull", "expr": "null"},
+        {"type": "formula", "as": "SegmentFull", "expr": "null"},
+        {"type": "formula", "as": "SubsegmentFull", "expr": "null"},
+        {"type": "formula", "as": "ItemFull", "expr": "null"},
+        {"type": "formula", "as": "Level", "expr": "1"},
+        {"type": "formula", "as": "RankSubcategory", "expr": "0"},
+        {"type": "formula", "as": "RankSegment", "expr": "0"},
+        {"type": "formula", "as": "RankSubsegment", "expr": "0"},
+        {"type": "formula", "as": "RankItem", "expr": "0"},
+        {"type": "formula", "as": "Subcategory", "expr": "null"},
+        {"type": "formula", "as": "Segment", "expr": "null"},
+        {"type": "formula", "as": "Subsegment", "expr": "null"},
+        {"type": "formula", "as": "Item", "expr": "null"},
+        {"type": "formula", "as": "Color", "expr": "datum.Color"},
+        {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 1 ? datum.Legend : datum.Category"},
+        {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
+        {"type": "formula", "as": "Shape", "expr": "datum.Shape"}
+      ]
+    },
+    {
+      // Creation of level 2 lines | Création des lignes de niveau 2 //
+      "name": "SubCategories",
+      "source": "data",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.Subcategory != null && datum.Subcategory != ''"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.maxLevel != 2"
+        },
+        {
+          "type": "aggregate",
+          "groupby": ["Category", "Subcategory", "RankCategory", "RankSubcategory", "maxLevel"],
+          "fields": ["Start", "End"],
+          "ops": ["min", "max"],
+          "as": ["Start", "End"]
+        },
+        {"type": "formula", "as": "Id", "expr": "datum.Category + '_' + datum.Subcategory"},
+        {"type": "formula", "as": "DisplayText", "expr": "datum.Subcategory"},
+        {"type": "formula", "as": "SubcategoryFull", "expr": "datum.Category + '_' + datum.Subcategory"},
+        {"type": "formula", "as": "SegmentFull", "expr": "null"},
+        {"type": "formula", "as": "SubsegmentFull", "expr": "null"},
+        {"type": "formula", "as": "ItemFull", "expr": "null"},
+        {"type": "formula", "as": "Level", "expr": "2"},
+        {"type": "formula", "as": "RankSegment", "expr": "0"},
+        {"type": "formula", "as": "RankSubsegment", "expr": "0"},
+        {"type": "formula", "as": "RankItem", "expr": "0"},
+        {"type": "formula", "as": "Segment", "expr": "null"},
+        {"type": "formula", "as": "Subsegment", "expr": "null"},
+        {"type": "formula", "as": "Item", "expr": "null"},
+        {"type": "formula", "as": "Color", "expr": "null"},
+        {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 2 ? datum.Legend : datum.Subcategory"},
+        {"type": "formula", "as": "Milestone", "expr": "0"},
+        {"type": "formula", "as": "Shape", "expr": "null"}
+      ]
+    },
+    {
+      "name": "SubCategoriesDirect",
+      "source": "data",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.Subcategory != null && datum.Subcategory != ''"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.maxLevel == 2"
+        },
+        {"type": "formula", "as": "Id", "expr": "datum.Category + '_' + datum.Subcategory"},
+        {"type": "formula", "as": "DisplayText", "expr": "datum.Subcategory"},
+        {"type": "formula", "as": "SubcategoryFull", "expr": "datum.Category + '_' + datum.Subcategory"},
+        {"type": "formula", "as": "SegmentFull", "expr": "null"},
+        {"type": "formula", "as": "SubsegmentFull", "expr": "null"},
+        {"type": "formula", "as": "ItemFull", "expr": "null"},
+        {"type": "formula", "as": "Level", "expr": "2"},
+        {"type": "formula", "as": "RankSegment", "expr": "0"},
+        {"type": "formula", "as": "RankSubsegment", "expr": "0"},
+        {"type": "formula", "as": "RankItem", "expr": "0"},
+        {"type": "formula", "as": "Segment", "expr": "null"},
+        {"type": "formula", "as": "Subsegment", "expr": "null"},
+        {"type": "formula", "as": "Item", "expr": "null"},
+        {"type": "formula", "as": "Color", "expr": "datum.Color"},
+        {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 2 ? datum.Legend : datum.Subcategory"},
+        {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
+        {"type": "formula", "as": "Shape", "expr": "datum.Shape"}
+      ]
+    },
+    {
+      // Creation of level 3 lines | Création des lignes de niveau 3 //
+      "name": "Segments",
+      "source": "data",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.Segment != null && datum.Segment != ''"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.maxLevel != 3"
+        },
+        {
+          "type": "aggregate",
+          "groupby": ["Category", "Subcategory", "Segment", "RankCategory", "RankSubcategory", "RankSegment", "maxLevel"],
+          "fields": ["Start", "End"],
+          "ops": ["min", "max"],
+          "as": ["Start", "End"]
+        },
+        {"type": "formula", "as": "Id", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment"},
+        {"type": "formula", "as": "DisplayText", "expr": "datum.Segment"},
+        {"type": "formula", "as": "SubcategoryFull", "expr": "datum.Category + '_' + datum.Subcategory"},
+        {"type": "formula", "as": "SegmentFull", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment"},
+        {"type": "formula", "as": "SubsegmentFull", "expr": "null"},
+        {"type": "formula", "as": "ItemFull", "expr": "null"},
+        {"type": "formula", "as": "Level", "expr": "3"},
+        {"type": "formula", "as": "RankSubsegment", "expr": "0"},
+        {"type": "formula", "as": "RankItem", "expr": "0"},
+        {"type": "formula", "as": "Subsegment", "expr": "null"},
+        {"type": "formula", "as": "Item", "expr": "null"},
+        {"type": "formula", "as": "Color", "expr": "null"},
+        {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 3 ? datum.Legend : datum.Segment"},
+        {"type": "formula", "as": "Milestone", "expr": "0"},
+        {"type": "formula", "as": "Shape", "expr": "null"}
+      ]
+    },
+    {
+      "name": "SegmentsDirect",
+      "source": "data",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.Segment != null && datum.Segment != ''"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.maxLevel == 3"
+        },
+        {"type": "formula", "as": "Id", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment"},
+        {"type": "formula", "as": "DisplayText", "expr": "datum.Segment"},
+        {"type": "formula", "as": "SubcategoryFull", "expr": "datum.Category + '_' + datum.Subcategory"},
+        {"type": "formula", "as": "SegmentFull", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment"},
+        {"type": "formula", "as": "SubsegmentFull", "expr": "null"},
+        {"type": "formula", "as": "ItemFull", "expr": "null"},
+        {"type": "formula", "as": "Level", "expr": "3"},
+        {"type": "formula", "as": "RankSubsegment", "expr": "0"},
+        {"type": "formula", "as": "RankItem", "expr": "0"},
+        {"type": "formula", "as": "Subsegment", "expr": "null"},
+        {"type": "formula", "as": "Item", "expr": "null"},
+        {"type": "formula", "as": "Color", "expr": "datum.Color"},
+        {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 3 ? datum.Legend : datum.Segment"},
+        {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
+        {"type": "formula", "as": "Shape", "expr": "datum.Shape"}
+      ]
+    },
+    {
+      // Creation of level 4 lines | Création des lignes de niveau 4 //
+      "name": "Subsegments",
+      "source": "data",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.Subsegment != null && datum.Subsegment != ''"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.maxLevel != 4"
+        },
+        {
+          "type": "aggregate",
+          "groupby": ["Category", "Subcategory", "Segment", "Subsegment", "RankCategory", "RankSubcategory", "RankSegment", "RankSubsegment", "maxLevel"],
+          "fields": ["Start", "End"],
+          "ops": ["min", "max"],
+          "as": ["Start", "End"]
+        },
+        {"type": "formula", "as": "Id", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment + '_' + datum.Subsegment"},
+        {"type": "formula", "as": "DisplayText", "expr": "datum.Subsegment"},
+        {"type": "formula", "as": "SubcategoryFull", "expr": "datum.Category + '_' + datum.Subcategory"},
+        {"type": "formula", "as": "SegmentFull", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment"},
+        {"type": "formula", "as": "SubsegmentFull", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment + '_' + datum.Subsegment"},
+        {"type": "formula", "as": "ItemFull", "expr": "null"},
+        {"type": "formula", "as": "Level", "expr": "4"},
+        {"type": "formula", "as": "RankItem", "expr": "0"},
+        {"type": "formula", "as": "Item", "expr": "null"},
+        {"type": "formula", "as": "Color", "expr": "null"},
+        {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 4 ? datum.Legend : datum.Subsegment"},
+        {"type": "formula", "as": "Milestone", "expr": "0"},
+        {"type": "formula", "as": "Shape", "expr": "null"}
+      ]
+    },
+    {
+      "name": "SubsegmentsDirect",
+      "source": "data",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.Subsegment != null && datum.Subsegment != ''"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.maxLevel == 4"
+        },
+        {"type": "formula", "as": "Id", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment + '_' + datum.Subsegment"},
+        {"type": "formula", "as": "DisplayText", "expr": "datum.Subsegment"},
+        {"type": "formula", "as": "SubcategoryFull", "expr": "datum.Category + '_' + datum.Subcategory"},
+        {"type": "formula", "as": "SegmentFull", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment"},
+        {"type": "formula", "as": "SubsegmentFull", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment + '_' + datum.Subsegment"},
+        {"type": "formula", "as": "ItemFull", "expr": "null"},
+        {"type": "formula", "as": "Level", "expr": "4"},
+        {"type": "formula", "as": "RankItem", "expr": "0"},
+        {"type": "formula", "as": "Item", "expr": "null"},
+        {"type": "formula", "as": "Color", "expr": "datum.Color"},
+        {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 4 ? datum.Legend : datum.Subsegment"},
+        {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
+        {"type": "formula", "as": "Shape", "expr": "datum.Shape"}
+      ]
+    },
+    {
+      // Creation of level 5 lines | Création des lignes de niveau 5 //
+      "name": "Items",
+      "source": "data",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.Item != null && datum.Item != ''"
+        },
+        {"type": "formula", "as": "Id", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment + '_' + datum.Subsegment + '_' + datum.Item"},
+        {"type": "formula", "as": "DisplayText", "expr": "datum.Item"},
+        {"type": "formula", "as": "SubcategoryFull", "expr": "datum.Category + '_' + datum.Subcategory"},
+        {"type": "formula", "as": "SegmentFull", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment"},
+        {"type": "formula", "as": "SubsegmentFull", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment + '_' + datum.Subsegment"},
+        {"type": "formula", "as": "ItemFull", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment + '_' + datum.Subsegment + '_' + datum.Item"},
+        {"type": "formula", "as": "Color", "expr": "datum.Color"},
+        {"type": "formula", "as": "Level", "expr": "5"},
+        {"type": "formula", "as": "Legend", "expr": "datum.Legend"},
+        {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
+        {"type": "formula", "as": "Shape", "expr": "datum.Shape"}
+      ]
+    },
+    {
+      // We group all the levels with their rank to make a single table | On regroupe tous les niveaux avec leur rank pour en faire une seule table //
+      "name": "Database",
+      "source": ["Categories", "CategoriesDirect", "SubCategories", "SubCategoriesDirect", "Segments", "SegmentsDirect", "Subsegments", "SubsegmentsDirect", "Items"],
+      "transform": [
+        {
+          "type": "collect", 
+          "sort": {
+            "field": ["RankCategory", "RankSubcategory", "RankSegment", "RankSubsegment", "RankItem"], 
+            "order": ["ascending", "ascending", "ascending", "ascending", "ascending"]
+          }
+        },
+        {
+          "type": "window",
+          "ops": ["row_number"],
+          "as": ["IndexRankFull"] // Final Rank of all rows according to the sort mode you decided in the "Data" table | Rank final de toutes les lignes selon le mode de tri que vous avez décidé dans la table "Data" //
+        }
+      ]
+    },
+
+    // ===================================================== //
+    // ========== DYNAMIC PART | PARTIE DYNAMIQUE ========== //
+    // ===================================================== //
+
+    {
+      // Table that manages the user click on the elements, if I click on a line in the Gantt then the same line will be at 1 (or at 0 if it was at 1). Start of the Dynamic part | Table qui gère le clic utilisateur sur les éléments, si je clique sur une ligne dans le Gantt alors la même ligne sera à 1 (ou à 0 si elle était à 1). Début de la partie Dynamique //
+		  "name": "Development",
+		  "source": "Database",
+		  "transform": [
+		    {
+		      "type": "formula",
+		      "as": "collapsed",
+		      "expr": "0"
+		    },
+		    {
+		      "type": "formula",
+		      "as": "collapsed",
+		      "expr": "slicerMode ? (datum.Level >= development ? 0 : 1) : (clickTrigger >= 0 && datum.Id == clickedId ? 1 - (datum.collapsed || 0) : (datum.collapsed || 0))" // If the user moves the slicer, then this table assigns 1s or 0s to the appropriate rows; otherwise, it toggles (1 or 0) the rows if they have been clicked by the user | Si l'utilisateur bouge le slicer alors cette table met des 1 ou des 0 aux lignes adéquates sinon Toggle (1 ou 0) des lignes si elles ont été cliquées par l'utilisateur //
+		    },
+		    {
+		      "type": "project",
+		      "fields": ["Id", "collapsed", "Level"]
+		    }
+		  ]
+		},
+    {
+      // Table that manages the memory of the paths already opened and the visibility of the elements according to the previous table | Table qui gère la mémoire les chemins déjà ouvert et la visibilité des éléments en fonction de la table précédente //
+      "name": "ActiveViewTable",
+      "source": "Database",
+      "transform": [
+        {
+          "type": "lookup",
+          "from": "Development",
+          "key": "Id",
+          "fields": ["Category"],
+          "values": ["collapsed"],
+          "as": ["CategoryCollapsed"]
+        },
+        {
+          "type": "lookup",
+          "from": "Development",
+          "key": "Id",
+          "fields": ["SubcategoryFull"],
+          "values": ["collapsed"],
+          "as": ["SubcategoryCollapsed"]
+        },
+        {
+          "type": "lookup",
+          "from": "Development",
+          "key": "Id",
+          "fields": ["SegmentFull"],
+          "values": ["collapsed"],
+          "as": ["SegmentCollapsed"]
+        },
+        {
+          "type": "lookup",
+          "from": "Development",
+          "key": "Id",
+          "fields": ["SubsegmentFull"],
+          "values": ["collapsed"],
+          "as": ["SubsegmentCollapsed"]
+        },
+        // Creation of the visibility matrix, it is thanks to this matrix that we can memorize the elements developed or not | Création de la matrice de visibilité, c'est grâce à cette matrice que l'on peut mémoriser les éléments développés ou non //
+        {
+          "type": "formula",
+          "as": "VC",
+          "expr": 1
+        },
+        {
+          "type": "formula",
+          "as": "VSC",
+          "expr": "datum.Level <= 1 ? 1 : datum.CategoryCollapsed"
+        },
+        {
+          "type": "formula",
+          "as": "VS",
+          "expr": "datum.Level <= 2 ? 1 : datum.SubcategoryCollapsed"
+        },
+        {
+          "type": "formula",
+          "as": "VSS",
+          "expr": "datum.Level <= 3 ? 1 : datum.SegmentCollapsed"
+        },
+        {
+          "type": "formula",
+          "as": "VI",
+          "expr": "datum.Level <= 4 ? 1 : datum.SubsegmentCollapsed"
+        },
+        {
+          "type": "formula",
+          "as": "V",
+          "expr": "datum.VC*datum.VSC*datum.VS*datum.VSS*datum.VI" // Calculation to get only the lines where all its parents are expanded | Calcul pour obtenir uniquement les lignes où tous ses parents sont développés //
+        }
+      ]
+    },
+    {
+      // Table that calculates the maximum visible depth reached by each branch | Table qui calcule la profondeur maximale visible atteinte par chaque branche //
+      "name": "Depth",
+      "source": "ActiveViewTable",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.V === 1"
+        },
+        {
+          "type": "lookup",
+          "from": "Database",
+          "key": "Id",
+          "fields": ["Id"],
+          "values": ["Category", "SubcategoryFull", "SegmentFull", "SubsegmentFull", "ItemFull", "Level"]
+        },
+        {
+          "type": "joinaggregate",
+          "groupby": ["Category"],
+          "fields": ["Level"],
+          "ops": ["max"],
+          "as": ["DepthCategory"]
+        },
+        {
+          "type": "joinaggregate",
+          "groupby": ["Category", "SubcategoryFull"],
+          "fields": ["Level"],
+          "ops": ["max"],
+          "as": ["DepthSubcategory"]
+        },
+        {
+          "type": "joinaggregate",
+          "groupby": ["Category", "SubcategoryFull", "SegmentFull"],
+          "fields": ["Level"],
+          "ops": ["max"],
+          "as": ["DepthSegment"]
+        },
+        {
+          "type": "joinaggregate",
+          "groupby": ["Category", "SubcategoryFull", "SegmentFull", "SubsegmentFull"],
+          "fields": ["Level"],
+          "ops": ["max"],
+          "as": ["DepthSubsegment"]
+        },
+        {
+          "type": "formula",
+          "as": "Depth",
+          "expr": "datum.Level === 1 ? datum.DepthCategory : datum.Level === 2 ? datum.DepthSubcategory : datum.Level === 3 ? datum.DepthSegment : datum.Level === 4 ? datum.DepthSubsegment : datum.Level"
+        },
+        {
+          "type": "project",
+          "fields": ["Id", "Depth"]
+        }
+      ]
+    },
+    {
+      // A table which, based on the DisplayRectangles and DisplayMilestones tables, dictates what each visible line should display (which children? Itself?) | Table qui en fonction des tables DisplayRectangles et DisplayMilestones dicte ce que chaque ligne visible doit afficher (quels enfants ? Lui même ?) //
+      "name": "Filtering",
+      "source": "ActiveViewTable",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.V === 1"
+        },
+        {
+          "type": "lookup",
+          "from": "Depth",
+          "key": "Id",
+          "fields": ["Id"],
+          "values": ["Depth"],
+          "as": ["Depth"]
+        },
+        {
+          "type": "lookup",
+          "from": "DisplayRectangles",
+          "key": "Level",
+          "fields": ["Level"],
+          "values": ["Depth 1", "Depth 2", "Depth 3", "Depth 4", "Depth 5"],
+          "as": ["LR1", "LR2", "LR3", "LR4", "LR5"]
+        },
+        {
+          "type": "lookup",
+          "from": "DisplayMilestones",
+          "key": "Level",
+          "fields": ["Level"],
+          "values": ["Depth 1", "Depth 2", "Depth 3", "Depth 4", "Depth 5"],
+          "as": ["LM1", "LM2", "LM3", "LM4", "LM5"]
+        },
+        {
+          "type": "formula",
+          "as": "RMode",
+          "expr": "datum['LR' + datum.Depth]"
+        },
+        {
+          "type": "formula",
+          "as": "MMode",
+          "expr": "datum['LM' + datum.Depth]"
+        },
+        {
+          "type": "project",
+          "fields": ["Id", "Level", "RMode", "MMode", "V", "DisplayText", "IndexRankFull"]
+        }
+      ]
+    },
+    {
+      // Using the Filtering table, this table marks the visible or non-visible lines that should be displayed on the visible lines | Grâce à la table Filtering, cette table marque les lignes visibles ou non qui doivent s'afficher sur les lignes visibles //
+      "name": "AllRectangles",
+      "source": "Database",
+      "transform": [
+        {
+          "type": "lookup",
+          "from": "Filtering",
+          "key": "Id",
+          "fields": ["Category"],
+          "values": ["RMode", "MMode"],
+          "as": ["CMode", "CMMode"]
+        },
+        {
+          "type": "lookup",
+          "from": "Filtering",
+          "key": "Id",
+          "fields": ["SubcategoryFull"],
+          "values": ["RMode", "MMode"],
+          "as": ["SCMode", "SCMMode"]
+        },
+        {
+          "type": "lookup",
+          "from": "Filtering",
+          "key": "Id",
+          "fields": ["SegmentFull"],
+          "values": ["RMode", "MMode"],
+          "as": ["SMode","SMMode"]
+        },
+        {
+          "type": "lookup",
+          "from": "Filtering",
+          "key": "Id",
+          "fields": ["SubsegmentFull"],
+          "values": ["RMode", "MMode"],
+          "as": ["SSMode", "SSMMode"]
+        },
+        {
+          "type": "lookup",
+          "from": "Filtering",
+          "key": "Id",
+          "fields": ["ItemFull"],
+          "values": ["RMode", "MMode"],
+          "as": ["IMode", "IMMode"]
+        },
+        {
+          "type": "lookup",
+          "from": "Color",
+          "key": "Legend",
+          "fields": ["Legend"],
+          "values": ["Color"],
+          "as": ["LColor"]
+        },
+        {
+          "type": "formula",
+          "as": "VC",
+          "expr": "datum.Milestone == 0 ? (datum.Level === datum.CMode ? 1 : 0) : (datum.Level === datum.CMMode ? 1 : 0)"
+        },
+        {
+          "type": "formula",
+          "as": "VSC",
+          "expr": "datum.Milestone == 0 ? (datum.Level === datum.SCMode ? 1 : 0) : (datum.Level === datum.SCMMode ? 1 : 0)"
+        },
+        {
+          "type": "formula",
+          "as": "VS",
+          "expr": "datum.Milestone == 0 ? (datum.Level === datum.SMode ? 1 : 0) : (datum.Level === datum.SMMode ? 1 : 0)"
+        },
+        {
+          "type": "formula",
+          "as": "VSS",
+          "expr": "datum.Milestone == 0 ? (datum.Level === datum.SSMode ? 1 : 0) : (datum.Level === datum.SSMMode ? 1 : 0)"
+        },
+        {
+          "type": "formula",
+          "as": "VI",
+          "expr": "datum.Milestone == 0 ? (datum.Level === datum.IMode ? 1 : 0) : (datum.Level === datum.IMMode ? 1 : 0)"
+        },
+        {
+          "type": "formula",
+          "as": "VColor",
+          "expr": "(isDefined(datum.Color) && datum.Color != null && datum.Color != 'null') ? datum.Color : ((isDefined(datum.LColor) && datum.LColor != null && datum.LColor != 'null') ? datum.LColor : null)"
+        },
+        {
+          "type": "project",
+          "fields": ["Id", "Start", "End", "Category", "SubcategoryFull", "SegmentFull", "SubsegmentFull", "ItemFull", "VC", "VSC", "VS", "VSS", "VI", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "VColor", "Milestone", "Shape"]
+        }
+      ]
+    },
+    {
+      // Using the marking of the previous table, this table gives the ID of the row where each row must be displayed to be able to be placed on the Y axis of the Gantt | Grâce au marquage de la table précédente, cette table donne l'ID de la ligne où chaque ligne doit s'afficher pour pouvoir se placer sur l'axe Y du Gantt //
+      "name": "VisibleElements",
+      "source": "AllRectangles",
+      "transform": [
+        {
+          "type": "formula",
+          "as": "columns",
+          "expr": "[{col: 'Category', val: datum.Category, vis: datum.VC}, {col: 'Subcategory', val: datum.SubcategoryFull, vis: datum.VSC}, {col: 'Segment', val: datum.SegmentFull, vis: datum.VS}, {col: 'Subsegment', val: datum.SubsegmentFull, vis: datum.VSS}, {col: 'Item', val: datum.ItemFull, vis: datum.VI}]"
+        },
+        {
+          "type": "flatten",
+          "fields": ["columns"],
+          "as": ["column_data"]
+        },
+        {
+          "type": "filter",
+          "expr": "datum.column_data.vis == 1"
+        },
+        {
+          "type": "formula",
+          "as": "Id",
+          "expr": "datum.column_data.val"
+        },
+        {
+          "type": "project",
+          "fields": ["Id", "Start", "End", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Milestone", "Shape"]
+        }
+      ]
+    },
+    {
+      // Table containing all the rectangles to be displayed | Table qui contient tous les rectangles à afficher //
+      "name": "VisibleRectangles",
+      "source": "VisibleElements",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.Milestone == 0"
+        },
+        {
+          "type": "project",
+          "fields": ["Id", "Start", "End", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor"]
+        }
+      ]
+    },
+    {
+      // Table containing all the milestones to be displayed | Table qui contient tous les milestones à afficher //
+      "name": "VisibleMilestones",
+      "source": "VisibleElements",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.Milestone == 1"
+        },
+        {
+          "type": "project",
+          "fields": ["Id", "Start", "End", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Shape"]
+        }
+      ]
+    },
+    {
+      // Table containing all the colors that will be displayed, along with their labels | Table contenant toutes les couleurs qui vont être affichées ainsi que leur libellé //
+      "name": "LegendColors",
+      "source": ["VisibleRectangles", "VisibleMilestones"],
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": ["Legend"],
+          "ops": ["max"],
+          "fields": ["VColor"],
+          "as": ["VColor"]
+        },
+        {
+          "type": "formula",
+          "as": "Color",
+          "expr": "(isDefined(datum.VColor) && datum.VColor != null && datum.VColor != 'null' && datum.VColor != '') ? datum.VColor : scale('colorScale', datum.Legend)"
+        }
+      ]
+    },
+    {
+      // Creating the Y axis (stacking the IDs in the correct order). End of the Dynamics section | Création de l'axe Y (empilement des Id dans l'ordre adéquat). Fin de la partie Dynamique //
+      "name": "OfficialID",
+      "source": "Filtering",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": ["Id"]
+        },
+        {
+          "type": "lookup",
+          "from": "Filtering",
+          "key": "Id",
+          "fields": ["Id"],
+          "values": ["DisplayText", "Level", "IndexRankFull"]
+        },
+        {
+          "type": "collect", 
+          "sort": {
+            "field": ["IndexRankFull"], 
+            "order": ["ascending"]
+          }
+        },
+        {
+          "type": "project",
+          "fields": ["Id", "DisplayText", "Level"]
+        }
+      ]
+    },
+    {
+      // Calculate the total date range of your data based on your data | Calcul en fonction de vos données la plage de dates totale de vos données //
+      "name": "GanttDomain",
+      "source": "Database",
+      "transform": [
+        {"type": "aggregate", "fields": ["Start", "End"], "ops": ["min", "max"], "as": ["xMin", "xMax"]}
+      ]
+    },
+    {
+      // Creating Weekend Objects | Création des objets Weekends //
+      "name": "weekends",
+      "transform": [
+        {
+          "type": "sequence",
+          "start": {"signal": "initialDomain[0]"},
+          "stop": {"signal": "initialDomain[1]"},
+          "step": 86400000,
+          "as": "timestamp"
+        },
+        {
+          "type": "formula",
+          "as": "dayOfWeek",
+          "expr": "day(datum.timestamp)"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.dayOfWeek === 6"
+        },
+        {
+          "type": "formula",
+          "as": "start",
+          "expr": "datetime(year(datum.timestamp), month(datum.timestamp), date(datum.timestamp), 0, 1, 0)"
+        },
+        {
+          "type": "formula",
+          "as": "end",
+          "expr": "datetime(year(datum.timestamp), month(datum.timestamp), date(datum.timestamp) + 1, 23, 59, 59)"
+        }
+      ]
+    },
+    {
+      // Creating French Holiday Objects | Création des objets Jours Fériés //
+      "name": "BankHollidays",
+      "values": 
+      [
+        {"start":-631155540000,"end":-631069260000},{"start":-620787540000,"end":-620701260000},{"start":-620182740000,"end":-620096460000},{"start":-614393940000,"end":-614307660000},{"start":-611629140000,"end":-611542860000},{"start":-604889940000,"end":-604803660000},{"start":-604025940000,"end":-603939660000},{"start":-600224340000,"end":-600138060000},{"start":-622601940000,"end":-622515660000},{"start":-619318740000,"end":-619232460000},{"start":-618368340000,"end":-618282060000},{"start":-599619540000,"end":-599533260000},{"start":-589251540000,"end":-589165260000},{"start":-588646740000,"end":-588560460000},{"start":-582857940000,"end":-582771660000},{"start":-580093140000,"end":-580006860000},{"start":-573353940000,"end":-573267660000},{"start":-572489940000,"end":-572403660000},{"start":-568688340000,"end":-568602060000},{"start":-592361940000,"end":-592275660000},{"start":-589078740000,"end":-588992460000},{"start":-588128340000,"end":-588042060000},{"start":-568083540000,"end":-567997260000},{"start":-557629140000,"end":-557542860000},{"start":-557024340000,"end":-556938060000},{"start":-551235540000,"end":-551149260000},{"start":-548470740000,"end":-548384460000},{"start":-541731540000,"end":-541645260000},{"start":-540867540000,"end":-540781260000},{"start":-537065940000,"end":-536979660000},{"start":-559097940000,"end":-559011660000},{"start":-555814740000,"end":-555728460000},{"start":-554864340000,"end":-554778060000},{"start":-536461140000,"end":-536374860000},{"start":-526093140000,"end":-526006860000},{"start":-525488340000,"end":-525402060000},{"start":-519699540000,"end":-519613260000},{"start":-516934740000,"end":-516848460000},{"start":-510195540000,"end":-510109260000},{"start":-509331540000,"end":-509245260000},{"start":-505529940000,"end":-505443660000},{"start":-528253140000,"end":-528166860000},{"start":-524969940000,"end":-524883660000},{"start":-524019540000,"end":-523933260000},{"start":-504925140000,"end":-504838860000},{"start":-494557140000,"end":-494470860000},{"start":-493952340000,"end":-493866060000},{"start":-488163540000,"end":-488077260000},{"start":-485398740000,"end":-485312460000},{"start":-478659540000,"end":-478573260000},{"start":-477795540000,"end":-477709260000},{"start":-473993940000,"end":-473907660000},{"start":-495593940000,"end":-495507660000},{"start":-492310740000,"end":-492224460000},{"start":-491360340000,"end":-491274060000},{"start":-473389140000,"end":-473302860000},{"start":-463021140000,"end":-462934860000},{"start":-462416340000,"end":-462330060000},{"start":-456627540000,"end":-456541260000},{"start":-453862740000,"end":-453776460000},{"start":-447123540000,"end":-447037260000},{"start":-446259540000,"end":-446173260000},{"start":-442457940000,"end":-442371660000},{"start":-464749140000,"end":-464662860000},{"start":-461465940000,"end":-461379660000},{"start":-460515540000,"end":-460429260000},{"start":-441853140000,"end":-441766860000},{"start":-431398740000,"end":-431312460000},{"start":-430793940000,"end":-430707660000},{"start":-425005140000,"end":-424918860000},{"start":-422240340000,"end":-422154060000},{"start":-415501140000,"end":-415414860000},{"start":-414637140000,"end":-414550860000},{"start":-410835540000,"end":-410749260000},{"start":-433904340000,"end":-433818060000},{"start":-430621140000,"end":-430534860000},{"start":-429670740000,"end":-429584460000},{"start":-410230740000,"end":-410144460000},{"start":-399862740000,"end":-399776460000},{"start":-399257940000,"end":-399171660000},{"start":-393469140000,"end":-393382860000},{"start":-390704340000,"end":-390618060000},{"start":-383965140000,"end":-383878860000},{"start":-383101140000,"end":-383014860000},{"start":-379299540000,"end":-379213260000},{"start":-400640340000,"end":-400554060000},{"start":-397357140000,"end":-397270860000},{"start":-396406740000,"end":-396320460000},{"start":-378694740000,"end":-378608460000},{"start":-368326740000,"end":-368240460000},{"start":-367721940000,"end":-367635660000},{"start":-361933140000,"end":-361846860000},{"start":-359168340000,"end":-359082060000},{"start":-352429140000,"end":-352342860000},{"start":-351565140000,"end":-351478860000},{"start":-347763540000,"end":-347677260000},{"start":-370400340000,"end":-370314060000},{"start":-367117140000,"end":-367030860000},{"start":-366166740000,"end":-366080460000},{"start":-347158740000,"end":-347072460000},{"start":-336790740000,"end":-336704460000},{"start":-336185940000,"end":-336099660000},{"start":-330397140000,"end":-330310860000},{"start":-327632340000,"end":-327546060000},{"start":-320893140000,"end":-320806860000},{"start":-320029140000,"end":-319942860000},{"start":-316227540000,"end":-316141260000},{"start":-339555540000,"end":-339469260000},{"start":-336272340000,"end":-336186060000},{"start":-335321940000,"end":-335235660000},{"start":-315622740000,"end":-315536460000},{"start":-305168340000,"end":-305082060000},{"start":-304563540000,"end":-304477260000},{"start":-298774740000,"end":-298688460000},{"start":-296009940000,"end":-295923660000},{"start":-289270740000,"end":-289184460000},{"start":-288406740000,"end":-288320460000},{"start":-284605140000,"end":-284518860000},{"start":-306291540000,"end":-306205260000},{"start":-303008340000,"end":-302922060000},{"start":-302057940000,"end":-301971660000},{"start":-284000340000,"end":-283914060000},{"start":-273632340000,"end":-273546060000},{"start":-273027540000,"end":-272941260000},{"start":-267238740000,"end":-267152460000},{"start":-264473940000,"end":-264387660000},{"start":-257734740000,"end":-257648460000},{"start":-256870740000,"end":-256784460000},{"start":-253069140000,"end":-252982860000},{"start":-276051540000,"end":-275965260000},{"start":-272768340000,"end":-272682060000},{"start":-271817940000,"end":-271731660000},{"start":-252464340000,"end":-252378060000},{"start":-242096340000,"end":-242010060000},{"start":-241491540000,"end":-241405260000},{"start":-235702740000,"end":-235616460000},{"start":-232937940000,"end":-232851660000},{"start":-226198740000,"end":-226112460000},{"start":-225334740000,"end":-225248460000},{"start":-221533140000,"end":-221446860000},{"start":-242787540000,"end":-242701260000},{"start":-239504340000,"end":-239418060000},{"start":-238553940000,"end":-238467660000},{"start":-220928340000,"end":-220842060000},{"start":-210560340000,"end":-210474060000},{"start":-209955540000,"end":-209869260000},{"start":-204166740000,"end":-204080460000},{"start":-201401940000,"end":-201315660000},{"start":-194662740000,"end":-194576460000},{"start":-193798740000,"end":-193712460000},{"start":-189997140000,"end":-189910860000},{"start":-211942740000,"end":-211856460000},{"start":-208659540000,"end":-208573260000},{"start":-207709140000,"end":-207622860000},{"start":-189392340000,"end":-189306060000},{"start":-178937940000,"end":-178851660000},{"start":-178333140000,"end":-178246860000},{"start":-172544340000,"end":-172458060000},{"start":-169779540000,"end":-169693260000},{"start":-163040340000,"end":-162954060000},{"start":-162176340000,"end":-162090060000},{"start":-158374740000,"end":-158288460000},{"start":-181702740000,"end":-181616460000},{"start":-178419540000,"end":-178333260000},{"start":-177469140000,"end":-177382860000},{"start":-157769940000,"end":-157683660000},{"start":-147401940000,"end":-147315660000},{"start":-146797140000,"end":-146710860000},{"start":-141008340000,"end":-140922060000},{"start":-138243540000,"end":-138157260000},{"start":-131504340000,"end":-131418060000},{"start":-130640340000,"end":-130554060000},{"start":-126838740000,"end":-126752460000},{"start":-148438740000,"end":-148352460000},{"start":-145155540000,"end":-145069260000},{"start":-144205140000,"end":-144118860000},{"start":-126233940000,"end":-126147660000},{"start":-115865940000,"end":-115779660000},{"start":-115261140000,"end":-115174860000},{"start":-109472340000,"end":-109386060000},{"start":-106707540000,"end":-106621260000},{"start":-99968340000,"end":-99882060000},{"start":-99104340000,"end":-99018060000},{"start":-95302740000,"end":-95216460000},{"start":-117593940000,"end":-117507660000},{"start":-114310740000,"end":-114224460000},{"start":-113360340000,"end":-113274060000},{"start":-94697940000,"end":-94611660000},{"start":-84329940000,"end":-84243660000},{"start":-83725140000,"end":-83638860000},{"start":-77936340000,"end":-77850060000},{"start":-75171540000,"end":-75085260000},{"start":-68432340000,"end":-68346060000},{"start":-67568340000,"end":-67482060000},{"start":-63766740000,"end":-63680460000},{"start":-87353940000,"end":-87267660000},{"start":-84070740000,"end":-83984460000},{"start":-83120340000,"end":-83034060000},{"start":-63161940000,"end":-63075660000},{"start":-52707540000,"end":-52621260000},{"start":-52102740000,"end":-52016460000},{"start":-46313940000,"end":-46227660000},{"start":-43549140000,"end":-43462860000},{"start":-36809940000,"end":-36723660000},{"start":-35945940000,"end":-35859660000},{"start":-32144340000,"end":-32058060000},{"start":-54089940000,"end":-54003660000},{"start":-50806740000,"end":-50720460000},{"start":-49856340000,"end":-49770060000},{"start":-31539540000,"end":-31453260000},{"start":-21171540000,"end":-21085260000},{"start":-20566740000,"end":-20480460000},{"start":-14777940000,"end":-14691660000},{"start":-12013140000,"end":-11926860000},{"start":-5273940000,"end":-5187660000},{"start":-4409940000,"end":-4323660000},{"start":-608340000,"end":-522060000},{"start":-23245140000,"end":-23158860000},{"start":-19961940000,"end":-19875660000},{"start":-19011540000,"end":-18925260000},{"start":-3540000,"end":82740000},{"start":10364460000,"end":10450740000},{"start":10969260000,"end":11055540000},{"start":16758060000,"end":16844340000},{"start":19522860000,"end":19609140000},{"start":26262060000,"end":26348340000},{"start":27126060000,"end":27212340000},{"start":30927660000,"end":31013940000},{"start":7599660000,"end":7685940000},{"start":10882860000,"end":10969140000},{"start":11833260000,"end":11919540000},{"start":31532460000,"end":31618740000},{"start":41900460000,"end":41986740000},{"start":42505260000,"end":42591540000},{"start":48294060000,"end":48380340000},{"start":51058860000,"end":51145140000},{"start":57798060000,"end":57884340000},{"start":58662060000,"end":58748340000},{"start":62463660000,"end":62549940000},{"start":40258860000,"end":40345140000},{"start":43542060000,"end":43628340000},{"start":44492460000,"end":44578740000},{"start":63068460000,"end":63154740000},{"start":73522860000,"end":73609140000},{"start":74127660000,"end":74213940000},{"start":79916460000,"end":80002740000},{"start":82681260000,"end":82767540000},{"start":89420460000,"end":89506740000},{"start":90284460000,"end":90370740000},{"start":94086060000,"end":94172340000},{"start":71103660000,"end":71189940000},{"start":74386860000,"end":74473140000},{"start":75337260000,"end":75423540000},{"start":94690860000,"end":94777140000},{"start":105058860000,"end":105145140000},{"start":105663660000,"end":105749940000},{"start":111452460000,"end":111538740000},{"start":114217260000,"end":114303540000},{"start":120956460000,"end":121042740000},{"start":121820460000,"end":121906740000},{"start":125622060000,"end":125708340000},{"start":104367660000,"end":104453940000},{"start":107650860000,"end":107737140000},{"start":108601260000,"end":108687540000},{"start":126226860000,"end":126313140000},{"start":136594860000,"end":136681140000},{"start":137199660000,"end":137285940000},{"start":142988460000,"end":143074740000},{"start":145753260000,"end":145839540000},{"start":152492460000,"end":152578740000},{"start":153356460000,"end":153442740000},{"start":157158060000,"end":157244340000},{"start":135212460000,"end":135298740000},{"start":138495660000,"end":138581940000},{"start":139446060000,"end":139532340000},{"start":157762860000,"end":157849140000},{"start":168130860000,"end":168217140000},{"start":168735660000,"end":168821940000},{"start":174524460000,"end":174610740000},{"start":177289260000,"end":177375540000},{"start":184028460000,"end":184114740000},{"start":184892460000,"end":184978740000},{"start":188694060000,"end":188780340000},{"start":165452460000,"end":165538740000},{"start":168735660000,"end":168821940000},{"start":169686060000,"end":169772340000},{"start":189298860000,"end":189385140000},{"start":199753260000,"end":199839540000},{"start":200358060000,"end":200444340000},{"start":206146860000,"end":206233140000},{"start":208911660000,"end":208997940000},{"start":215650860000,"end":215737140000},{"start":216514860000,"end":216601140000},{"start":220316460000,"end":220402740000},{"start":198716460000,"end":198802740000},{"start":201999660000,"end":202085940000},{"start":202950060000,"end":203036340000},{"start":220921260000,"end":221007540000},{"start":231289260000,"end":231375540000},{"start":231894060000,"end":231980340000},{"start":237682860000,"end":237769140000},{"start":240447660000,"end":240533940000},{"start":247186860000,"end":247273140000},{"start":248050860000,"end":248137140000},{"start":251852460000,"end":251938740000},{"start":229561260000,"end":229647540000},{"start":232844460000,"end":232930740000},{"start":233794860000,"end":233881140000},{"start":252457260000,"end":252543540000},{"start":262825260000,"end":262911540000},{"start":263430060000,"end":263516340000},{"start":269218860000,"end":269305140000},{"start":271983660000,"end":272069940000},{"start":278722860000,"end":278809140000},{"start":279586860000,"end":279673140000},{"start":283388460000,"end":283474740000},{"start":259801260000,"end":259887540000},{"start":263084460000,"end":263170740000},{"start":264034860000,"end":264121140000},{"start":283993260000,"end":284079540000},{"start":294361260000,"end":294447540000},{"start":294966060000,"end":295052340000},{"start":300754860000,"end":300841140000},{"start":303519660000,"end":303605940000},{"start":310258860000,"end":310345140000},{"start":311122860000,"end":311209140000},{"start":314924460000,"end":315010740000},{"start":293065260000,"end":293151540000},{"start":296348460000,"end":296434740000},{"start":297298860000,"end":297385140000},{"start":315529260000,"end":315615540000},{"start":325983660000,"end":326069940000},{"start":326588460000,"end":326674740000},{"start":332377260000,"end":332463540000},{"start":335142060000,"end":335228340000},{"start":341881260000,"end":341967540000},{"start":342745260000,"end":342831540000},{"start":346546860000,"end":346633140000},{"start":323910060000,"end":323996340000},{"start":327193260000,"end":327279540000},{"start":328143660000,"end":328229940000},{"start":347151660000,"end":347237940000},{"start":357519660000,"end":357605940000},{"start":358124460000,"end":358210740000},{"start":363913260000,"end":363999540000},{"start":366678060000,"end":366764340000},{"start":373417260000,"end":373503540000},{"start":374281260000,"end":374367540000},{"start":378082860000,"end":378169140000},{"start":356569260000,"end":356655540000},{"start":359852460000,"end":359938740000},{"start":360802860000,"end":360889140000},{"start":378687660000,"end":378773940000},{"start":389055660000,"end":389141940000},{"start":389660460000,"end":389746740000},{"start":395449260000,"end":395535540000},{"start":398214060000,"end":398300340000},{"start":404953260000,"end":405039540000},{"start":405817260000,"end":405903540000},{"start":409618860000,"end":409705140000},{"start":387414060000,"end":387500340000},{"start":390697260000,"end":390783540000},{"start":391647660000,"end":391733940000},{"start":410223660000,"end":410309940000},{"start":420591660000,"end":420677940000},{"start":421196460000,"end":421282740000},{"start":426985260000,"end":427071540000},{"start":429750060000,"end":429836340000},{"start":436489260000,"end":436575540000},{"start":437353260000,"end":437439540000},{"start":441154860000,"end":441241140000},{"start":418258860000,"end":418345140000},{"start":421542060000,"end":421628340000},{"start":422492460000,"end":422578740000},{"start":441759660000,"end":441845940000},{"start":452214060000,"end":452300340000},{"start":452818860000,"end":452905140000},{"start":458607660000,"end":458693940000},{"start":461372460000,"end":461458740000},{"start":468111660000,"end":468197940000},{"start":468975660000,"end":469061940000},{"start":472777260000,"end":472863540000},{"start":451522860000,"end":451609140000},{"start":454806060000,"end":454892340000},{"start":455756460000,"end":455842740000},{"start":473382060000,"end":473468340000},{"start":483750060000,"end":483836340000},{"start":484354860000,"end":484441140000},{"start":490143660000,"end":490229940000},{"start":492908460000,"end":492994740000},{"start":499647660000,"end":499733940000},{"start":500511660000,"end":500597940000},{"start":504313260000,"end":504399540000},{"start":481762860000,"end":481849140000},{"start":485046060000,"end":485132340000},{"start":485996460000,"end":486082740000},{"start":504918060000,"end":505004340000},{"start":515286060000,"end":515372340000},{"start":515890860000,"end":515977140000},{"start":521679660000,"end":521765940000},{"start":524444460000,"end":524530740000},{"start":531183660000,"end":531269940000},{"start":532047660000,"end":532133940000},{"start":535849260000,"end":535935540000},{"start":512607660000,"end":512693940000},{"start":515890860000,"end":515977140000},{"start":516841260000,"end":516927540000},{"start":536454060000,"end":536540340000},{"start":546822060000,"end":546908340000},{"start":547426860000,"end":547513140000},{"start":553215660000,"end":553301940000},{"start":555980460000,"end":556066740000},{"start":562719660000,"end":562805940000},{"start":563583660000,"end":563669940000},{"start":567385260000,"end":567471540000},{"start":545871660000,"end":545957940000},{"start":549154860000,"end":549241140000},{"start":550105260000,"end":550191540000},{"start":567990060000,"end":568076340000},{"start":578444460000,"end":578530740000},{"start":579049260000,"end":579135540000},{"start":584838060000,"end":584924340000},{"start":587602860000,"end":587689140000},{"start":594342060000,"end":594428340000},{"start":595206060000,"end":595292340000},{"start":599007660000,"end":599093940000},{"start":576111660000,"end":576197940000},{"start":579394860000,"end":579481140000},{"start":580345260000,"end":580431540000},{"start":599612460000,"end":599698740000},{"start":609980460000,"end":610066740000},{"start":610585260000,"end":610671540000},{"start":616374060000,"end":616460340000},{"start":619138860000,"end":619225140000},{"start":625878060000,"end":625964340000},{"start":626742060000,"end":626828340000},{"start":630543660000,"end":630629940000},{"start":606956460000,"end":607042740000},{"start":610239660000,"end":610325940000},{"start":611190060000,"end":611276340000},{"start":631148460000,"end":631234740000},{"start":641516460000,"end":641602740000},{"start":642121260000,"end":642207540000},{"start":647910060000,"end":647996340000},{"start":650674860000,"end":650761140000},{"start":657414060000,"end":657500340000},{"start":658278060000,"end":658364340000},{"start":662079660000,"end":662165940000},{"start":640220460000,"end":640306740000},{"start":643503660000,"end":643589940000},{"start":644454060000,"end":644540340000},{"start":662684460000,"end":662770740000},{"start":673052460000,"end":673138740000},{"start":673657260000,"end":673743540000},{"start":679446060000,"end":679532340000},{"start":682210860000,"end":682297140000},{"start":688950060000,"end":689036340000},{"start":689814060000,"end":689900340000},{"start":693615660000,"end":693701940000},{"start":670460460000,"end":670546740000},{"start":673743660000,"end":673829940000},{"start":674694060000,"end":674780340000},{"start":694220460000,"end":694306740000},{"start":704674860000,"end":704761140000},{"start":705279660000,"end":705365940000},{"start":711068460000,"end":711154740000},{"start":713833260000,"end":713919540000},{"start":720572460000,"end":720658740000},{"start":721436460000,"end":721522740000},{"start":725238060000,"end":725324340000},{"start":703724460000,"end":703810740000},{"start":707007660000,"end":707093940000},{"start":707958060000,"end":708044340000},{"start":725842860000,"end":725929140000},{"start":736210860000,"end":736297140000},{"start":736815660000,"end":736901940000},{"start":742604460000,"end":742690740000},{"start":745369260000,"end":745455540000},{"start":752108460000,"end":752194740000},{"start":752972460000,"end":753058740000},{"start":756774060000,"end":756860340000},{"start":734569260000,"end":734655540000},{"start":737852460000,"end":737938740000},{"start":738802860000,"end":738889140000},{"start":757378860000,"end":757465140000},{"start":767746860000,"end":767833140000},{"start":768351660000,"end":768437940000},{"start":774140460000,"end":774226740000},{"start":776905260000,"end":776991540000},{"start":783644460000,"end":783730740000},{"start":784508460000,"end":784594740000},{"start":788310060000,"end":788396340000},{"start":765414060000,"end":765500340000},{"start":768697260000,"end":768783540000},{"start":769647660000,"end":769733940000},{"start":788914860000,"end":789001140000},{"start":799282860000,"end":799369140000},{"start":799887660000,"end":799973940000},{"start":805676460000,"end":805762740000},{"start":808441260000,"end":808527540000},{"start":815180460000,"end":815266740000},{"start":816044460000,"end":816130740000},{"start":819846060000,"end":819932340000},{"start":798073260000,"end":798159540000},{"start":801356460000,"end":801442740000},{"start":802306860000,"end":802393140000},{"start":820450860000,"end":820537140000},{"start":830905260000,"end":830991540000},{"start":831510060000,"end":831596340000},{"start":837298860000,"end":837385140000},{"start":840063660000,"end":840149940000},{"start":846802860000,"end":846889140000},{"start":847666860000,"end":847753140000},{"start":851468460000,"end":851554740000},{"start":828918060000,"end":829004340000},{"start":832201260000,"end":832287540000},{"start":833151660000,"end":833237940000},{"start":852073260000,"end":852159540000},{"start":862441260000,"end":862527540000},{"start":863046060000,"end":863132340000},{"start":868834860000,"end":868921140000},{"start":871599660000,"end":871685940000},{"start":878338860000,"end":878425140000},{"start":879202860000,"end":879289140000},{"start":883004460000,"end":883090740000},{"start":859762860000,"end":859849140000},{"start":863046060000,"end":863132340000},{"start":863996460000,"end":864082740000},{"start":883609260000,"end":883695540000},{"start":893977260000,"end":894063540000},{"start":894582060000,"end":894668340000},{"start":900370860000,"end":900457140000},{"start":903135660000,"end":903221940000},{"start":909874860000,"end":909961140000},{"start":910738860000,"end":910825140000},{"start":914540460000,"end":914626740000},{"start":892422060000,"end":892508340000},{"start":895705260000,"end":895791540000},{"start":896655660000,"end":896741940000},{"start":915145260000,"end":915231540000},{"start":925513260000,"end":925599540000},{"start":926118060000,"end":926204340000},{"start":931906860000,"end":931993140000},{"start":934671660000,"end":934757940000},{"start":941410860000,"end":941497140000},{"start":942274860000,"end":942361140000},{"start":946076460000,"end":946162740000},{"start":923266860000,"end":923353140000},{"start":926550060000,"end":926636340000},{"start":927500460000,"end":927586740000},{"start":946681260000,"end":946767540000},{"start":957135660000,"end":957221940000},{"start":957740460000,"end":957826740000},{"start":963529260000,"end":963615540000},{"start":966294060000,"end":966380340000},{"start":973033260000,"end":973119540000},{"start":973897260000,"end":973983540000},{"start":977698860000,"end":977785140000},{"start":956530860000,"end":956617140000},{"start":959814060000,"end":959900340000},{"start":960764460000,"end":960850740000},{"start":978303660000,"end":978389940000},{"start":988671660000,"end":988757940000},{"start":989276460000,"end":989362740000},{"start":995065260000,"end":995151540000},{"start":997830060000,"end":997916340000},{"start":1004569260000,"end":1004655540000},{"start":1005433260000,"end":1005519540000},{"start":1009234860000,"end":1009321140000},{"start":987375660000,"end":987461940000},{"start":990658860000,"end":990745140000},{"start":991609260000,"end":991695540000},{"start":1009839660000,"end":1009925940000},{"start":1020207660000,"end":1020293940000},{"start":1020812460000,"end":1020898740000},{"start":1026601260000,"end":1026687540000},{"start":1029366060000,"end":1029452340000},{"start":1036105260000,"end":1036191540000},{"start":1036969260000,"end":1037055540000},{"start":1040770860000,"end":1040857140000},{"start":1017615660000,"end":1017701940000},{"start":1020898860000,"end":1020985140000},{"start":1021849260000,"end":1021935540000},{"start":1041375660000,"end":1041461940000},{"start":1051743660000,"end":1051829940000},{"start":1052348460000,"end":1052434740000},{"start":1058137260000,"end":1058223540000},{"start":1060902060000,"end":1060988340000},{"start":1067641260000,"end":1067727540000},{"start":1068505260000,"end":1068591540000},{"start":1072306860000,"end":1072393140000},{"start":1050879660000,"end":1050965940000},{"start":1054162860000,"end":1054249140000},{"start":1055113260000,"end":1055199540000},{"start":1072911660000,"end":1072997940000},{"start":1083366060000,"end":1083452340000},{"start":1083970860000,"end":1084057140000},{"start":1089759660000,"end":1089845940000},{"start":1092524460000,"end":1092610740000},{"start":1099263660000,"end":1099349940000},{"start":1100127660000,"end":1100213940000},{"start":1103929260000,"end":1104015540000},{"start":1081724460000,"end":1081810740000},{"start":1085007660000,"end":1085093940000},{"start":1085958060000,"end":1086044340000},{"start":1104534060000,"end":1104620340000},{"start":1114902060000,"end":1114988340000},{"start":1115506860000,"end":1115593140000},{"start":1121295660000,"end":1121381940000},{"start":1124060460000,"end":1124146740000},{"start":1130799660000,"end":1130885940000},{"start":1131663660000,"end":1131749940000},{"start":1135465260000,"end":1135551540000},{"start":1111964460000,"end":1112050740000},{"start":1115247660000,"end":1115333940000},{"start":1116198060000,"end":1116284340000},{"start":1136070060000,"end":1136156340000},{"start":1146438060000,"end":1146524340000},{"start":1147042860000,"end":1147129140000},{"start":1152831660000,"end":1152917940000},{"start":1155596460000,"end":1155682740000},{"start":1162335660000,"end":1162421940000},{"start":1163199660000,"end":1163285940000},{"start":1167001260000,"end":1167087540000},{"start":1145228460000,"end":1145314740000},{"start":1148511660000,"end":1148597940000},{"start":1149462060000,"end":1149548340000},{"start":1167606060000,"end":1167692340000},{"start":1177974060000,"end":1178060340000},{"start":1178578860000,"end":1178665140000},{"start":1184367660000,"end":1184453940000},{"start":1187132460000,"end":1187218740000},{"start":1193871660000,"end":1193957940000},{"start":1194735660000,"end":1194821940000},{"start":1198537260000,"end":1198623540000},{"start":1176073260000,"end":1176159540000},{"start":1179356460000,"end":1179442740000},{"start":1180306860000,"end":1180393140000},{"start":1199142060000,"end":1199228340000},{"start":1209596460000,"end":1209682740000},{"start":1210201260000,"end":1210287540000},{"start":1215990060000,"end":1216076340000},{"start":1218754860000,"end":1218841140000},{"start":1225494060000,"end":1225580340000},{"start":1226358060000,"end":1226444340000},{"start":1230159660000,"end":1230245940000},{"start":1206313260000,"end":1206399540000},{"start":1209596460000,"end":1209682740000},{"start":1210546860000,"end":1210633140000},{"start":1230764460000,"end":1230850740000},{"start":1241132460000,"end":1241218740000},{"start":1241737260000,"end":1241823540000},{"start":1247526060000,"end":1247612340000},{"start":1250290860000,"end":1250377140000},{"start":1257030060000,"end":1257116340000},{"start":1257894060000,"end":1257980340000},{"start":1261695660000,"end":1261781940000},{"start":1239577260000,"end":1239663540000},{"start":1242860460000,"end":1242946740000},{"start":1243810860000,"end":1243897140000},{"start":1262300460000,"end":1262386740000},{"start":1272668460000,"end":1272754740000},{"start":1273273260000,"end":1273359540000},{"start":1279062060000,"end":1279148340000},{"start":1281826860000,"end":1281913140000},{"start":1288566060000,"end":1288652340000},{"start":1289430060000,"end":1289516340000},{"start":1293231660000,"end":1293317940000},{"start":1270422060000,"end":1270508340000},{"start":1273705260000,"end":1273791540000},{"start":1274655660000,"end":1274741940000},{"start":1293836460000,"end":1293922740000},{"start":1304204460000,"end":1304290740000},{"start":1304809260000,"end":1304895540000},{"start":1310598060000,"end":1310684340000},{"start":1313362860000,"end":1313449140000},{"start":1320102060000,"end":1320188340000},{"start":1320966060000,"end":1321052340000},{"start":1324767660000,"end":1324853940000},{"start":1303686060000,"end":1303772340000},{"start":1306969260000,"end":1307055540000},{"start":1307919660000,"end":1308005940000},{"start":1325372460000,"end":1325458740000},{"start":1335826860000,"end":1335913140000},{"start":1336431660000,"end":1336517940000},{"start":1342220460000,"end":1342306740000},{"start":1344985260000,"end":1345071540000},{"start":1351724460000,"end":1351810740000},{"start":1352588460000,"end":1352674740000},{"start":1356390060000,"end":1356476340000},{"start":1333926060000,"end":1334012340000},{"start":1337209260000,"end":1337295540000},{"start":1338159660000,"end":1338245940000},{"start":1356994860000,"end":1357081140000},{"start":1367362860000,"end":1367449140000},{"start":1367967660000,"end":1368053940000},{"start":1373756460000,"end":1373842740000},{"start":1376521260000,"end":1376607540000},{"start":1383260460000,"end":1383346740000},{"start":1384124460000,"end":1384210740000},{"start":1387926060000,"end":1388012340000},{"start":1364770860000,"end":1364857140000},{"start":1368054060000,"end":1368140340000},{"start":1369004460000,"end":1369090740000},{"start":1388530860000,"end":1388617140000},{"start":1398898860000,"end":1398985140000},{"start":1399503660000,"end":1399589940000},{"start":1405292460000,"end":1405378740000},{"start":1408057260000,"end":1408143540000},{"start":1414796460000,"end":1414882740000},{"start":1415660460000,"end":1415746740000},{"start":1419462060000,"end":1419548340000},{"start":1398034860000,"end":1398121140000},{"start":1401318060000,"end":1401404340000},{"start":1402268460000,"end":1402354740000},{"start":1420066860000,"end":1420153140000},{"start":1430434860000,"end":1430521140000},{"start":1431039660000,"end":1431125940000},{"start":1436828460000,"end":1436914740000},{"start":1439593260000,"end":1439679540000},{"start":1446332460000,"end":1446418740000},{"start":1447196460000,"end":1447282740000},{"start":1450998060000,"end":1451084340000},{"start":1428274860000,"end":1428361140000},{"start":1431558060000,"end":1431644340000},{"start":1432508460000,"end":1432594740000},{"start":1451602860000,"end":1451689140000},{"start":1462057260000,"end":1462143540000},{"start":1462662060000,"end":1462748340000},{"start":1468450860000,"end":1468537140000},{"start":1471215660000,"end":1471301940000},{"start":1477954860000,"end":1478041140000},{"start":1478818860000,"end":1478905140000},{"start":1482620460000,"end":1482706740000},{"start":1459119660000,"end":1459205940000},{"start":1462402860000,"end":1462489140000},{"start":1463353260000,"end":1463439540000},{"start":1483225260000,"end":1483311540000},{"start":1493593260000,"end":1493679540000},{"start":1494198060000,"end":1494284340000},{"start":1499986860000,"end":1500073140000},{"start":1502751660000,"end":1502837940000},{"start":1509490860000,"end":1509577140000},{"start":1510354860000,"end":1510441140000},{"start":1514156460000,"end":1514242740000},{"start":1492383660000,"end":1492469940000},{"start":1495666860000,"end":1495753140000},{"start":1496617260000,"end":1496703540000},{"start":1514761260000,"end":1514847540000},{"start":1525129260000,"end":1525215540000},{"start":1525734060000,"end":1525820340000},{"start":1531522860000,"end":1531609140000},{"start":1534287660000,"end":1534373940000},{"start":1541026860000,"end":1541113140000},{"start":1541890860000,"end":1541977140000},{"start":1545692460000,"end":1545778740000},{"start":1522623660000,"end":1522709940000},{"start":1525906860000,"end":1525993140000},{"start":1526857260000,"end":1526943540000},{"start":1546297260000,"end":1546383540000},{"start":1556665260000,"end":1556751540000},{"start":1557270060000,"end":1557356340000},{"start":1563058860000,"end":1563145140000},{"start":1565823660000,"end":1565909940000},{"start":1572562860000,"end":1572649140000},{"start":1573426860000,"end":1573513140000},{"start":1577228460000,"end":1577314740000},{"start":1555887660000,"end":1555973940000},{"start":1559170860000,"end":1559257140000},{"start":1560121260000,"end":1560207540000},{"start":1577833260000,"end":1577919540000},{"start":1588287660000,"end":1588373940000},{"start":1588892460000,"end":1588978740000},{"start":1594681260000,"end":1594767540000},{"start":1597446060000,"end":1597532340000},{"start":1604185260000,"end":1604271540000},{"start":1605049260000,"end":1605135540000},{"start":1608850860000,"end":1608937140000},{"start":1586732460000,"end":1586818740000},{"start":1590015660000,"end":1590101940000},{"start":1590966060000,"end":1591052340000},{"start":1609455660000,"end":1609541940000},{"start":1619823660000,"end":1619909940000},{"start":1620428460000,"end":1620514740000},{"start":1626217260000,"end":1626303540000},{"start":1628982060000,"end":1629068340000},{"start":1635721260000,"end":1635807540000},{"start":1636585260000,"end":1636671540000},{"start":1640386860000,"end":1640473140000},{"start":1617577260000,"end":1617663540000},{"start":1620860460000,"end":1620946740000},{"start":1621810860000,"end":1621897140000},{"start":1640991660000,"end":1641077940000},{"start":1651359660000,"end":1651445940000},{"start":1651964460000,"end":1652050740000},{"start":1657753260000,"end":1657839540000},{"start":1660518060000,"end":1660604340000},{"start":1667257260000,"end":1667343540000},{"start":1668121260000,"end":1668207540000},{"start":1671922860000,"end":1672009140000},{"start":1650236460000,"end":1650322740000},{"start":1653519660000,"end":1653605940000},{"start":1654470060000,"end":1654556340000},{"start":1672527660000,"end":1672613940000},{"start":1682895660000,"end":1682981940000},{"start":1683500460000,"end":1683586740000},{"start":1689289260000,"end":1689375540000},{"start":1692054060000,"end":1692140340000},{"start":1698793260000,"end":1698879540000},{"start":1699657260000,"end":1699743540000},{"start":1703458860000,"end":1703545140000},{"start":1681081260000,"end":1681167540000},{"start":1684364460000,"end":1684450740000},{"start":1685314860000,"end":1685401140000},{"start":1704063660000,"end":1704149940000},{"start":1714518060000,"end":1714604340000},{"start":1715122860000,"end":1715209140000},{"start":1720911660000,"end":1720997940000},{"start":1723676460000,"end":1723762740000},{"start":1730415660000,"end":1730501940000},{"start":1731279660000,"end":1731365940000},{"start":1735081260000,"end":1735167540000},{"start":1711926060000,"end":1712012340000},{"start":1715209260000,"end":1715295540000},{"start":1716159660000,"end":1716245940000},{"start":1735686060000,"end":1735772340000},{"start":1746054060000,"end":1746140340000},{"start":1746658860000,"end":1746745140000},{"start":1752447660000,"end":1752533940000},{"start":1755212460000,"end":1755298740000},{"start":1761951660000,"end":1762037940000},{"start":1762815660000,"end":1762901940000},{"start":1766617260000,"end":1766703540000},{"start":1745190060000,"end":1745276340000},{"start":1748473260000,"end":1748559540000},{"start":1749423660000,"end":1749509940000},{"start":1767222060000,"end":1767308340000},{"start":1777590060000,"end":1777676340000},{"start":1778194860000,"end":1778281140000},{"start":1783983660000,"end":1784069940000},{"start":1786748460000,"end":1786834740000},{"start":1793487660000,"end":1793573940000},{"start":1794351660000,"end":1794437940000},{"start":1798153260000,"end":1798239540000},{"start":1775430060000,"end":1775516340000},{"start":1778713260000,"end":1778799540000},{"start":1779663660000,"end":1779749940000},{"start":1798758060000,"end":1798844340000},{"start":1809126060000,"end":1809212340000},{"start":1809730860000,"end":1809817140000},{"start":1815519660000,"end":1815605940000},{"start":1818284460000,"end":1818370740000},{"start":1825023660000,"end":1825109940000},{"start":1825887660000,"end":1825973940000},{"start":1829689260000,"end":1829775540000},{"start":1806274860000,"end":1806361140000},{"start":1809558060000,"end":1809644340000},{"start":1810508460000,"end":1810594740000},{"start":1830294060000,"end":1830380340000},{"start":1840748460000,"end":1840834740000},{"start":1841353260000,"end":1841439540000},{"start":1847142060000,"end":1847228340000},{"start":1849906860000,"end":1849993140000},{"start":1856646060000,"end":1856732340000},{"start":1857510060000,"end":1857596340000},{"start":1861311660000,"end":1861397940000},{"start":1839538860000,"end":1839625140000},{"start":1842822060000,"end":1842908340000},{"start":1843772460000,"end":1843858740000},{"start":1861916460000,"end":1862002740000},{"start":1872284460000,"end":1872370740000},{"start":1872889260000,"end":1872975540000},{"start":1878678060000,"end":1878764340000},{"start":1881442860000,"end":1881529140000},{"start":1888182060000,"end":1888268340000},{"start":1889046060000,"end":1889132340000},{"start":1892847660000,"end":1892933940000},{"start":1869778860000,"end":1869865140000},{"start":1873062060000,"end":1873148340000},{"start":1874012460000,"end":1874098740000},{"start":1893452460000,"end":1893538740000},{"start":1903820460000,"end":1903906740000},{"start":1904425260000,"end":1904511540000},{"start":1910214060000,"end":1910300340000},{"start":1912978860000,"end":1913065140000},{"start":1919718060000,"end":1919804340000},{"start":1920582060000,"end":1920668340000},{"start":1924383660000,"end":1924469940000},{"start":1903042860000,"end":1903129140000},{"start":1906326060000,"end":1906412340000},{"start":1907276460000,"end":1907362740000},{"start":1924988460000,"end":1925074740000},{"start":1935356460000,"end":1935442740000},{"start":1935961260000,"end":1936047540000},{"start":1941750060000,"end":1941836340000},{"start":1944514860000,"end":1944601140000},{"start":1951254060000,"end":1951340340000},{"start":1952118060000,"end":1952204340000},{"start":1955919660000,"end":1956005940000},{"start":1933887660000,"end":1933973940000},{"start":1937170860000,"end":1937257140000},{"start":1938121260000,"end":1938207540000},{"start":1956524460000,"end":1956610740000},{"start":1966978860000,"end":1967065140000},{"start":1967583660000,"end":1967669940000},{"start":1973372460000,"end":1973458740000},{"start":1976137260000,"end":1976223540000},{"start":1982876460000,"end":1982962740000},{"start":1983740460000,"end":1983826740000},{"start":1987542060000,"end":1987628340000},{"start":1964127660000,"end":1964213940000},{"start":1967410860000,"end":1967497140000},{"start":1968361260000,"end":1968447540000},{"start":1988146860000,"end":1988233140000},{"start":1998514860000,"end":1998601140000},{"start":1999119660000,"end":1999205940000},{"start":2004908460000,"end":2004994740000},{"start":2007673260000,"end":2007759540000},{"start":2014412460000,"end":2014498740000},{"start":2015276460000,"end":2015362740000},{"start":2019078060000,"end":2019164340000},{"start":1997391660000,"end":1997477940000},{"start":2000674860000,"end":2000761140000},{"start":2001625260000,"end":2001711540000},{"start":2019682860000,"end":2019769140000},{"start":2030050860000,"end":2030137140000},{"start":2030655660000,"end":2030741940000},{"start":2036444460000,"end":2036530740000},{"start":2039209260000,"end":2039295540000},{"start":2045948460000,"end":2046034740000},{"start":2046812460000,"end":2046898740000},{"start":2050614060000,"end":2050700340000},{"start":2028236460000,"end":2028322740000},{"start":2031519660000,"end":2031605940000},{"start":2032470060000,"end":2032556340000},{"start":2051218860000,"end":2051305140000},{"start":2061586860000,"end":2061673140000},{"start":2062191660000,"end":2062277940000},{"start":2067980460000,"end":2068066740000},{"start":2070745260000,"end":2070831540000},{"start":2077484460000,"end":2077570740000},{"start":2078348460000,"end":2078434740000},{"start":2082150060000,"end":2082236340000},{"start":2058476460000,"end":2058562740000},{"start":2061759660000,"end":2061845940000},{"start":2062710060000,"end":2062796340000},{"start":2082754860000,"end":2082841140000},{"start":2093209260000,"end":2093295540000},{"start":2093814060000,"end":2093900340000},{"start":2099602860000,"end":2099689140000},{"start":2102367660000,"end":2102453940000},{"start":2109106860000,"end":2109193140000},{"start":2109970860000,"end":2110057140000},{"start":2113772460000,"end":2113858740000},{"start":2091740460000,"end":2091826740000},{"start":2095023660000,"end":2095109940000},{"start":2095974060000,"end":2096060340000},{"start":2114377260000,"end":2114463540000},{"start":2124745260000,"end":2124831540000},{"start":2125350060000,"end":2125436340000},{"start":2131138860000,"end":2131225140000},{"start":2133903660000,"end":2133989940000},{"start":2140642860000,"end":2140729140000},{"start":2141506860000,"end":2141593140000},{"start":2145308460000,"end":2145394740000},{"start":2122585260000,"end":2122671540000},{"start":2125868460000,"end":2125954740000},{"start":2126818860000,"end":2126905140000},{"start":2145913260000,"end":2145999540000},{"start":2156281260000,"end":2156367540000},{"start":2156886060000,"end":2156972340000},{"start":2162674860000,"end":2162761140000},{"start":2165439660000,"end":2165525940000},{"start":2172178860000,"end":2172265140000},{"start":2173042860000,"end":2173129140000},{"start":2176844460000,"end":2176930740000},{"start":2155849260000,"end":2155935540000},{"start":2159132460000,"end":2159218740000},{"start":2160082860000,"end":2160169140000},{"start":2177449260000,"end":2177535540000},{"start":2187817260000,"end":2187903540000},{"start":2188422060000,"end":2188508340000},{"start":2194210860000,"end":2194297140000},{"start":2196975660000,"end":2197061940000},{"start":2203714860000,"end":2203801140000},{"start":2204578860000,"end":2204665140000},{"start":2208380460000,"end":2208466740000},{"start":2186089260000,"end":2186175540000},{"start":2189372460000,"end":2189458740000},{"start":2190322860000,"end":2190409140000},{"start":2208985260000,"end":2209071540000},{"start":2219439660000,"end":2219525940000},{"start":2220044460000,"end":2220130740000},{"start":2225833260000,"end":2225919540000},{"start":2228598060000,"end":2228684340000},{"start":2235337260000,"end":2235423540000},{"start":2236201260000,"end":2236287540000},{"start":2240002860000,"end":2240089140000},{"start":2216934060000,"end":2217020340000},{"start":2220217260000,"end":2220303540000},{"start":2221167660000,"end":2221253940000},{"start":2240607660000,"end":2240693940000},{"start":2250975660000,"end":2251061940000},{"start":2251580460000,"end":2251666740000},{"start":2257369260000,"end":2257455540000},{"start":2260134060000,"end":2260220340000},{"start":2266873260000,"end":2266959540000},{"start":2267737260000,"end":2267823540000},{"start":2271538860000,"end":2271625140000},{"start":2250198060000,"end":2250284340000},{"start":2253481260000,"end":2253567540000},{"start":2254431660000,"end":2254517940000},{"start":2272143660000,"end":2272229940000},{"start":2282511660000,"end":2282597940000},{"start":2283116460000,"end":2283202740000},{"start":2288905260000,"end":2288991540000},{"start":2291670060000,"end":2291756340000},{"start":2298409260000,"end":2298495540000},{"start":2299273260000,"end":2299359540000},{"start":2303074860000,"end":2303161140000},{"start":2280438060000,"end":2280524340000},{"start":2283721260000,"end":2283807540000},{"start":2284671660000,"end":2284757940000},{"start":2303679660000,"end":2303765940000},{"start":2314047660000,"end":2314133940000},{"start":2314652460000,"end":2314738740000},{"start":2320441260000,"end":2320527540000},{"start":2323206060000,"end":2323292340000},{"start":2329945260000,"end":2330031540000},{"start":2330809260000,"end":2330895540000},{"start":2334610860000,"end":2334697140000},{"start":2311282860000,"end":2311369140000},{"start":2314566060000,"end":2314652340000},{"start":2315516460000,"end":2315602740000},{"start":2335215660000,"end":2335301940000},{"start":2345670060000,"end":2345756340000},{"start":2346274860000,"end":2346361140000},{"start":2352063660000,"end":2352149940000},{"start":2354828460000,"end":2354914740000},{"start":2361567660000,"end":2361653940000},{"start":2362431660000,"end":2362517940000},{"start":2366233260000,"end":2366319540000},{"start":2344546860000,"end":2344633140000},{"start":2347830060000,"end":2347916340000},{"start":2348780460000,"end":2348866740000},{"start":2366838060000,"end":2366924340000},{"start":2377206060000,"end":2377292340000},{"start":2377810860000,"end":2377897140000},{"start":2383599660000,"end":2383685940000},{"start":2386364460000,"end":2386450740000},{"start":2393103660000,"end":2393189940000},{"start":2393967660000,"end":2394053940000},{"start":2397769260000,"end":2397855540000},{"start":2375391660000,"end":2375477940000},{"start":2378674860000,"end":2378761140000},{"start":2379625260000,"end":2379711540000},{"start":2398374060000,"end":2398460340000},{"start":2408742060000,"end":2408828340000},{"start":2409346860000,"end":2409433140000},{"start":2415135660000,"end":2415221940000},{"start":2417900460000,"end":2417986740000},{"start":2424639660000,"end":2424725940000},{"start":2425503660000,"end":2425589940000},{"start":2429305260000,"end":2429391540000},{"start":2405631660000,"end":2405717940000},{"start":2408914860000,"end":2409001140000},{"start":2409865260000,"end":2409951540000},{"start":2429910060000,"end":2429996340000},{"start":2440278060000,"end":2440364340000},{"start":2440882860000,"end":2440969140000},{"start":2446671660000,"end":2446757940000},{"start":2449436460000,"end":2449522740000},{"start":2456175660000,"end":2456261940000},{"start":2457039660000,"end":2457125940000},{"start":2460841260000,"end":2460927540000},{"start":2438895660000,"end":2438981940000},{"start":2442178860000,"end":2442265140000},{"start":2443129260000,"end":2443215540000},{"start":2461446060000,"end":2461532340000},{"start":2471900460000,"end":2471986740000},{"start":2472505260000,"end":2472591540000},{"start":2478294060000,"end":2478380340000},{"start":2481058860000,"end":2481145140000},{"start":2487798060000,"end":2487884340000},{"start":2488662060000,"end":2488748340000},{"start":2492463660000,"end":2492549940000},{"start":2469740460000,"end":2469826740000},{"start":2473023660000,"end":2473109940000},{"start":2473974060000,"end":2474060340000},{"start":2493068460000,"end":2493154740000},{"start":2503436460000,"end":2503522740000},{"start":2504041260000,"end":2504127540000},{"start":2509830060000,"end":2509916340000},{"start":2512594860000,"end":2512681140000},{"start":2519334060000,"end":2519420340000},{"start":2520198060000,"end":2520284340000},{"start":2523999660000,"end":2524085940000},{"start":2502399660000,"end":2502485940000},{"start":2505682860000,"end":2505769140000},{"start":2506633260000,"end":2506719540000},{"start":2524604460000,"end":2524690740000},{"start":2534972460000,"end":2535058740000},{"start":2535577260000,"end":2535663540000},{"start":2541366060000,"end":2541452340000},{"start":2544130860000,"end":2544217140000},{"start":2550870060000,"end":2550956340000},{"start":2551734060000,"end":2551820340000},{"start":2555535660000,"end":2555621940000},{"start":2533244460000,"end":2533330740000},{"start":2536527660000,"end":2536613940000},{"start":2537478060000,"end":2537564340000},{"start":2556140460000,"end":2556226740000},{"start":2566508460000,"end":2566594740000},{"start":2567113260000,"end":2567199540000},{"start":2572902060000,"end":2572988340000},{"start":2575666860000,"end":2575753140000},{"start":2582406060000,"end":2582492340000},{"start":2583270060000,"end":2583356340000},{"start":2587071660000,"end":2587157940000},{"start":2564089260000,"end":2564175540000},{"start":2567372460000,"end":2567458740000},{"start":2568322860000,"end":2568409140000},{"start":2587676460000,"end":2587762740000},{"start":2598130860000,"end":2598217140000},{"start":2598735660000,"end":2598821940000},{"start":2604524460000,"end":2604610740000},{"start":2607289260000,"end":2607375540000},{"start":2614028460000,"end":2614114740000},{"start":2614892460000,"end":2614978740000},{"start":2618694060000,"end":2618780340000},{"start":2597353260000,"end":2597439540000},{"start":2600636460000,"end":2600722740000},{"start":2601586860000,"end":2601673140000},{"start":2619298860000,"end":2619385140000},{"start":2629666860000,"end":2629753140000},{"start":2630271660000,"end":2630357940000},{"start":2636060460000,"end":2636146740000},{"start":2638825260000,"end":2638911540000},{"start":2645564460000,"end":2645650740000},{"start":2646428460000,"end":2646514740000},{"start":2650230060000,"end":2650316340000},{"start":2627593260000,"end":2627679540000},{"start":2630876460000,"end":2630962740000},{"start":2631826860000,"end":2631913140000},{"start":2650834860000,"end":2650921140000},{"start":2661202860000,"end":2661289140000},{"start":2661807660000,"end":2661893940000},{"start":2667596460000,"end":2667682740000},{"start":2670361260000,"end":2670447540000},{"start":2677100460000,"end":2677186740000},{"start":2677964460000,"end":2678050740000},{"start":2681766060000,"end":2681852340000},{"start":2658438060000,"end":2658524340000},{"start":2661721260000,"end":2661807540000},{"start":2662671660000,"end":2662757940000},{"start":2682370860000,"end":2682457140000},{"start":2692738860000,"end":2692825140000},{"start":2693343660000,"end":2693429940000},{"start":2699132460000,"end":2699218740000},{"start":2701897260000,"end":2701983540000},{"start":2708636460000,"end":2708722740000},{"start":2709500460000,"end":2709586740000},{"start":2713302060000,"end":2713388340000},{"start":2691702060000,"end":2691788340000},{"start":2694985260000,"end":2695071540000},{"start":2695935660000,"end":2696021940000},{"start":2713906860000,"end":2713993140000},{"start":2724361260000,"end":2724447540000},{"start":2724966060000,"end":2725052340000},{"start":2730754860000,"end":2730841140000},{"start":2733519660000,"end":2733605940000},{"start":2740258860000,"end":2740345140000},{"start":2741122860000,"end":2741209140000},{"start":2744924460000,"end":2745010740000},{"start":2721942060000,"end":2722028340000},{"start":2725225260000,"end":2725311540000},{"start":2726175660000,"end":2726261940000},{"start":2745529260000,"end":2745615540000},{"start":2755897260000,"end":2755983540000},{"start":2756502060000,"end":2756588340000},{"start":2762290860000,"end":2762377140000},{"start":2765055660000,"end":2765141940000},{"start":2771794860000,"end":2771881140000},{"start":2772658860000,"end":2772745140000},{"start":2776460460000,"end":2776546740000},{"start":2755206060000,"end":2755292340000},{"start":2758489260000,"end":2758575540000},{"start":2759439660000,"end":2759525940000},{"start":2777065260000,"end":2777151540000},{"start":2787433260000,"end":2787519540000},{"start":2788038060000,"end":2788124340000},{"start":2793826860000,"end":2793913140000},{"start":2796591660000,"end":2796677940000},{"start":2803330860000,"end":2803417140000},{"start":2804194860000,"end":2804281140000},{"start":2807996460000,"end":2808082740000},{"start":2786050860000,"end":2786137140000},{"start":2789334060000,"end":2789420340000},{"start":2790284460000,"end":2790370740000},{"start":2808601260000,"end":2808687540000},{"start":2818969260000,"end":2819055540000},{"start":2819574060000,"end":2819660340000},{"start":2825362860000,"end":2825449140000},{"start":2828127660000,"end":2828213940000},{"start":2834866860000,"end":2834953140000},{"start":2835730860000,"end":2835817140000},{"start":2839532460000,"end":2839618740000},{"start":2816290860000,"end":2816377140000},{"start":2819574060000,"end":2819660340000},{"start":2820524460000,"end":2820610740000},{"start":2840137260000,"end":2840223540000},{"start":2850591660000,"end":2850677940000},{"start":2851196460000,"end":2851282740000},{"start":2856985260000,"end":2857071540000},{"start":2859750060000,"end":2859836340000},{"start":2866489260000,"end":2866575540000},{"start":2867353260000,"end":2867439540000},{"start":2871154860000,"end":2871241140000},{"start":2849554860000,"end":2849641140000},{"start":2852838060000,"end":2852924340000},{"start":2853788460000,"end":2853874740000},{"start":2871759660000,"end":2871845940000},{"start":2882127660000,"end":2882213940000},{"start":2882732460000,"end":2882818740000},{"start":2888521260000,"end":2888607540000},{"start":2891286060000,"end":2891372340000},{"start":2898025260000,"end":2898111540000},{"start":2898889260000,"end":2898975540000},{"start":2902690860000,"end":2902777140000},{"start":2880399660000,"end":2880485940000},{"start":2883682860000,"end":2883769140000},{"start":2884633260000,"end":2884719540000},{"start":2903295660000,"end":2903381940000},{"start":2913663660000,"end":2913749940000},{"start":2914268460000,"end":2914354740000},{"start":2920057260000,"end":2920143540000},{"start":2922822060000,"end":2922908340000},{"start":2929561260000,"end":2929647540000},{"start":2930425260000,"end":2930511540000},{"start":2934226860000,"end":2934313140000},{"start":2910639660000,"end":2910725940000},{"start":2913922860000,"end":2914009140000},{"start":2914873260000,"end":2914959540000},{"start":2934831660000,"end":2934917940000},{"start":2945199660000,"end":2945285940000},{"start":2945804460000,"end":2945890740000},{"start":2951593260000,"end":2951679540000},{"start":2954358060000,"end":2954444340000},{"start":2961097260000,"end":2961183540000},{"start":2961961260000,"end":2962047540000},{"start":2965762860000,"end":2965849140000},{"start":2943903660000,"end":2943989940000},{"start":2947186860000,"end":2947273140000},{"start":2948137260000,"end":2948223540000},{"start":2966367660000,"end":2966453940000},{"start":2976822060000,"end":2976908340000},{"start":2977426860000,"end":2977513140000},{"start":2983215660000,"end":2983301940000},{"start":2985980460000,"end":2986066740000},{"start":2992719660000,"end":2992805940000},{"start":2993583660000,"end":2993669940000},{"start":2997385260000,"end":2997471540000},{"start":2974748460000,"end":2974834740000},{"start":2978031660000,"end":2978117940000},{"start":2978982060000,"end":2979068340000},{"start":2997990060000,"end":2998076340000},{"start":3008358060000,"end":3008444340000},{"start":3008962860000,"end":3009049140000},{"start":3014751660000,"end":3014837940000},{"start":3017516460000,"end":3017602740000},{"start":3024255660000,"end":3024341940000},{"start":3025119660000,"end":3025205940000},{"start":3028921260000,"end":3029007540000},{"start":3005593260000,"end":3005679540000},{"start":3008876460000,"end":3008962740000},{"start":3009826860000,"end":3009913140000},{"start":3029526060000,"end":3029612340000},{"start":3039894060000,"end":3039980340000},{"start":3040498860000,"end":3040585140000},{"start":3046287660000,"end":3046373940000},{"start":3049052460000,"end":3049138740000},{"start":3055791660000,"end":3055877940000},{"start":3056655660000,"end":3056741940000},{"start":3060457260000,"end":3060543540000},{"start":3038252460000,"end":3038338740000},{"start":3041535660000,"end":3041621940000},{"start":3042486060000,"end":3042572340000},{"start":3061062060000,"end":3061148340000},{"start":3071430060000,"end":3071516340000},{"start":3072034860000,"end":3072121140000},{"start":3077823660000,"end":3077909940000},{"start":3080588460000,"end":3080674740000},{"start":3087327660000,"end":3087413940000},{"start":3088191660000,"end":3088277940000},{"start":3091993260000,"end":3092079540000},{"start":3069097260000,"end":3069183540000},{"start":3072380460000,"end":3072466740000},{"start":3073330860000,"end":3073417140000},{"start":3092598060000,"end":3092684340000},{"start":3103052460000,"end":3103138740000},{"start":3103657260000,"end":3103743540000},{"start":3109446060000,"end":3109532340000},{"start":3112210860000,"end":3112297140000},{"start":3118950060000,"end":3119036340000},{"start":3119814060000,"end":3119900340000},{"start":3123615660000,"end":3123701940000},{"start":3102361260000,"end":3102447540000},{"start":3105644460000,"end":3105730740000},{"start":3106594860000,"end":3106681140000},{"start":3124220460000,"end":3124306740000},{"start":3134588460000,"end":3134674740000},{"start":3135193260000,"end":3135279540000},{"start":3140982060000,"end":3141068340000},{"start":3143746860000,"end":3143833140000},{"start":3150486060000,"end":3150572340000},{"start":3151350060000,"end":3151436340000},{"start":3155151660000,"end":3155237940000},{"start":3133206060000,"end":3133292340000},{"start":3136489260000,"end":3136575540000},{"start":3137439660000,"end":3137525940000},{"start":3155756460000,"end":3155842740000},{"start":3166124460000,"end":3166210740000},{"start":3166729260000,"end":3166815540000},{"start":3172518060000,"end":3172604340000},{"start":3175282860000,"end":3175369140000},{"start":3182022060000,"end":3182108340000},{"start":3182886060000,"end":3182972340000},{"start":3186687660000,"end":3186773940000},{"start":3163446060000,"end":3163532340000},{"start":3166729260000,"end":3166815540000},{"start":3167679660000,"end":3167765940000},{"start":3187292460000,"end":3187378740000},{"start":3197660460000,"end":3197746740000},{"start":3198265260000,"end":3198351540000},{"start":3204054060000,"end":3204140340000},{"start":3206818860000,"end":3206905140000},{"start":3213558060000,"end":3213644340000},{"start":3214422060000,"end":3214508340000},{"start":3218223660000,"end":3218309940000},{"start":3196710060000,"end":3196796340000},{"start":3199993260000,"end":3200079540000},{"start":3200943660000,"end":3201029940000},{"start":3218828460000,"end":3218914740000},{"start":3229282860000,"end":3229369140000},{"start":3229887660000,"end":3229973940000},{"start":3235676460000,"end":3235762740000},{"start":3238441260000,"end":3238527540000},{"start":3245180460000,"end":3245266740000},{"start":3246044460000,"end":3246130740000},{"start":3249846060000,"end":3249932340000},{"start":3227554860000,"end":3227641140000},{"start":3230838060000,"end":3230924340000},{"start":3231788460000,"end":3231874740000},{"start":3250450860000,"end":3250537140000},{"start":3260818860000,"end":3260905140000},{"start":3261423660000,"end":3261509940000},{"start":3267212460000,"end":3267298740000},{"start":3269977260000,"end":3270063540000},{"start":3276716460000,"end":3276802740000},{"start":3277580460000,"end":3277666740000},{"start":3281382060000,"end":3281468340000},{"start":3257794860000,"end":3257881140000},{"start":3261078060000,"end":3261164340000},{"start":3262028460000,"end":3262114740000},{"start":3281986860000,"end":3282073140000},{"start":3292354860000,"end":3292441140000},{"start":3292959660000,"end":3293045940000},{"start":3298748460000,"end":3298834740000},{"start":3301513260000,"end":3301599540000},{"start":3308252460000,"end":3308338740000},{"start":3309116460000,"end":3309202740000},{"start":3312918060000,"end":3313004340000},{"start":3291058860000,"end":3291145140000},{"start":3294342060000,"end":3294428340000},{"start":3295292460000,"end":3295378740000},{"start":3313522860000,"end":3313609140000},{"start":3323890860000,"end":3323977140000},{"start":3324495660000,"end":3324581940000},{"start":3330284460000,"end":3330370740000},{"start":3333049260000,"end":3333135540000},{"start":3339788460000,"end":3339874740000},{"start":3340652460000,"end":3340738740000},{"start":3344454060000,"end":3344540340000},{"start":3321903660000,"end":3321989940000},{"start":3325186860000,"end":3325273140000},{"start":3326137260000,"end":3326223540000},{"start":3345058860000,"end":3345145140000},{"start":3355513260000,"end":3355599540000},{"start":3356118060000,"end":3356204340000},{"start":3361906860000,"end":3361993140000},{"start":3364671660000,"end":3364757940000},{"start":3371410860000,"end":3371497140000},{"start":3372274860000,"end":3372361140000},{"start":3376076460000,"end":3376162740000},{"start":3354562860000,"end":3354649140000},{"start":3357846060000,"end":3357932340000},{"start":3358796460000,"end":3358882740000},{"start":3376681260000,"end":3376767540000},{"start":3387049260000,"end":3387135540000},{"start":3387654060000,"end":3387740340000},{"start":3393442860000,"end":3393529140000},{"start":3396207660000,"end":3396293940000},{"start":3402946860000,"end":3403033140000},{"start":3403810860000,"end":3403897140000},{"start":3407612460000,"end":3407698740000},{"start":3385407660000,"end":3385493940000},{"start":3388690860000,"end":3388777140000},{"start":3389641260000,"end":3389727540000},{"start":3408217260000,"end":3408303540000},{"start":3418585260000,"end":3418671540000},{"start":3419190060000,"end":3419276340000},{"start":3424978860000,"end":3425065140000},{"start":3427743660000,"end":3427829940000},{"start":3434482860000,"end":3434569140000},{"start":3435346860000,"end":3435433140000},{"start":3439148460000,"end":3439234740000},{"start":3416252460000,"end":3416338740000},{"start":3419535660000,"end":3419621940000},{"start":3420486060000,"end":3420572340000},{"start":3439753260000,"end":3439839540000},{"start":3450121260000,"end":3450207540000},{"start":3450726060000,"end":3450812340000},{"start":3456514860000,"end":3456601140000},{"start":3459279660000,"end":3459365940000},{"start":3466018860000,"end":3466105140000},{"start":3466882860000,"end":3466969140000},{"start":3470684460000,"end":3470770740000},{"start":3449516460000,"end":3449602740000},{"start":3452799660000,"end":3452885940000},{"start":3453750060000,"end":3453836340000},{"start":3471289260000,"end":3471375540000},{"start":3481743660000,"end":3481829940000},{"start":3482348460000,"end":3482434740000},{"start":3488137260000,"end":3488223540000},{"start":3490902060000,"end":3490988340000},{"start":3497641260000,"end":3497727540000},{"start":3498505260000,"end":3498591540000},{"start":3502306860000,"end":3502393140000},{"start":3479756460000,"end":3479842740000},{"start":3483039660000,"end":3483125940000},{"start":3483990060000,"end":3484076340000},{"start":3502911660000,"end":3502997940000},{"start":3513279660000,"end":3513365940000},{"start":3513884460000,"end":3513970740000},{"start":3519673260000,"end":3519759540000},{"start":3522438060000,"end":3522524340000},{"start":3529177260000,"end":3529263540000},{"start":3530041260000,"end":3530127540000},{"start":3533842860000,"end":3533929140000},{"start":3510601260000,"end":3510687540000},{"start":3513884460000,"end":3513970740000},{"start":3514834860000,"end":3514921140000},{"start":3534447660000,"end":3534533940000},{"start":3544815660000,"end":3544901940000},{"start":3545420460000,"end":3545506740000},{"start":3551209260000,"end":3551295540000},{"start":3553974060000,"end":3554060340000},{"start":3560713260000,"end":3560799540000},{"start":3561577260000,"end":3561663540000},{"start":3565378860000,"end":3565465140000},{"start":3543865260000,"end":3543951540000},{"start":3547148460000,"end":3547234740000},{"start":3548098860000,"end":3548185140000},{"start":3565983660000,"end":3566069940000},{"start":3576351660000,"end":3576437940000},{"start":3576956460000,"end":3577042740000},{"start":3582745260000,"end":3582831540000},{"start":3585510060000,"end":3585596340000},{"start":3592249260000,"end":3592335540000},{"start":3593113260000,"end":3593199540000},{"start":3596914860000,"end":3597001140000},{"start":3574105260000,"end":3574191540000},{"start":3577388460000,"end":3577474740000},{"start":3578338860000,"end":3578425140000},{"start":3597519660000,"end":3597605940000},{"start":3607974060000,"end":3608060340000},{"start":3608578860000,"end":3608665140000},{"start":3614367660000,"end":3614453940000},{"start":3617132460000,"end":3617218740000},{"start":3623871660000,"end":3623957940000},{"start":3624735660000,"end":3624821940000},{"start":3628537260000,"end":3628623540000},{"start":3604950060000,"end":3605036340000},{"start":3608233260000,"end":3608319540000},{"start":3609183660000,"end":3609269940000},{"start":3629142060000,"end":3629228340000},{"start":3639510060000,"end":3639596340000},{"start":3640114860000,"end":3640201140000},{"start":3645903660000,"end":3645989940000},{"start":3648668460000,"end":3648754740000},{"start":3655407660000,"end":3655493940000},{"start":3656271660000,"end":3656357940000},{"start":3660073260000,"end":3660159540000},{"start":3638214060000,"end":3638300340000},{"start":3641497260000,"end":3641583540000},{"start":3642447660000,"end":3642533940000},{"start":3660678060000,"end":3660764340000},{"start":3671046060000,"end":3671132340000},{"start":3671650860000,"end":3671737140000},{"start":3677439660000,"end":3677525940000},{"start":3680204460000,"end":3680290740000},{"start":3686943660000,"end":3687029940000},{"start":3687807660000,"end":3687893940000},{"start":3691609260000,"end":3691695540000},{"start":3668454060000,"end":3668540340000},{"start":3671737260000,"end":3671823540000},{"start":3672687660000,"end":3672773940000},{"start":3692214060000,"end":3692300340000},{"start":3702582060000,"end":3702668340000},{"start":3703186860000,"end":3703273140000},{"start":3708975660000,"end":3709061940000},{"start":3711740460000,"end":3711826740000},{"start":3718479660000,"end":3718565940000},{"start":3719343660000,"end":3719429940000},{"start":3723145260000,"end":3723231540000},{"start":3701718060000,"end":3701804340000},{"start":3705001260000,"end":3705087540000},{"start":3705951660000,"end":3706037940000},{"start":3723750060000,"end":3723836340000},{"start":3734204460000,"end":3734290740000},{"start":3734809260000,"end":3734895540000},{"start":3740598060000,"end":3740684340000},{"start":3743362860000,"end":3743449140000},{"start":3750102060000,"end":3750188340000},{"start":3750966060000,"end":3751052340000},{"start":3754767660000,"end":3754853940000},{"start":3732562860000,"end":3732649140000},{"start":3735846060000,"end":3735932340000},{"start":3736796460000,"end":3736882740000},{"start":3755372460000,"end":3755458740000},{"start":3765740460000,"end":3765826740000},{"start":3766345260000,"end":3766431540000},{"start":3772134060000,"end":3772220340000},{"start":3774898860000,"end":3774985140000},{"start":3781638060000,"end":3781724340000},{"start":3782502060000,"end":3782588340000},{"start":3786303660000,"end":3786389940000},{"start":3763407660000,"end":3763493940000},{"start":3766690860000,"end":3766777140000},{"start":3767641260000,"end":3767727540000},{"start":3786908460000,"end":3786994740000},{"start":3797276460000,"end":3797362740000},{"start":3797881260000,"end":3797967540000},{"start":3803670060000,"end":3803756340000},{"start":3806434860000,"end":3806521140000},{"start":3813174060000,"end":3813260340000},{"start":3814038060000,"end":3814124340000},{"start":3817839660000,"end":3817925940000},{"start":3796066860000,"end":3796153140000},{"start":3799350060000,"end":3799436340000},{"start":3800300460000,"end":3800386740000},{"start":3818444460000,"end":3818530740000},{"start":3828812460000,"end":3828898740000},{"start":3829417260000,"end":3829503540000},{"start":3835206060000,"end":3835292340000},{"start":3837970860000,"end":3838057140000},{"start":3844710060000,"end":3844796340000},{"start":3845574060000,"end":3845660340000},{"start":3849375660000,"end":3849461940000},{"start":3826911660000,"end":3826997940000},{"start":3830194860000,"end":3830281140000},{"start":3831145260000,"end":3831231540000},{"start":3849980460000,"end":3850066740000},{"start":3860434860000,"end":3860521140000},{"start":3861039660000,"end":3861125940000},{"start":3866828460000,"end":3866914740000},{"start":3869593260000,"end":3869679540000},{"start":3876332460000,"end":3876418740000},{"start":3877196460000,"end":3877282740000},{"start":3880998060000,"end":3881084340000},{"start":3857756460000,"end":3857842740000},{"start":3861039660000,"end":3861125940000},{"start":3861990060000,"end":3862076340000},{"start":3881602860000,"end":3881689140000},{"start":3891970860000,"end":3892057140000},{"start":3892575660000,"end":3892661940000},{"start":3898364460000,"end":3898450740000},{"start":3901129260000,"end":3901215540000},{"start":3907868460000,"end":3907954740000},{"start":3908732460000,"end":3908818740000},{"start":3912534060000,"end":3912620340000},{"start":3890415660000,"end":3890501940000},{"start":3893698860000,"end":3893785140000},{"start":3894649260000,"end":3894735540000},{"start":3913138860000,"end":3913225140000},{"start":3923506860000,"end":3923593140000},{"start":3924111660000,"end":3924197940000},{"start":3929900460000,"end":3929986740000},{"start":3932665260000,"end":3932751540000},{"start":3939404460000,"end":3939490740000},{"start":3940268460000,"end":3940354740000},{"start":3944070060000,"end":3944156340000},{"start":3921260460000,"end":3921346740000},{"start":3924543660000,"end":3924629940000},{"start":3925494060000,"end":3925580340000},{"start":3944674860000,"end":3944761140000},{"start":3955042860000,"end":3955129140000},{"start":3955647660000,"end":3955733940000},{"start":3961436460000,"end":3961522740000},{"start":3964201260000,"end":3964287540000},{"start":3970940460000,"end":3971026740000},{"start":3971804460000,"end":3971890740000},{"start":3975606060000,"end":3975692340000},{"start":3954524460000,"end":3954610740000},{"start":3957807660000,"end":3957893940000},{"start":3958758060000,"end":3958844340000},{"start":3976210860000,"end":3976297140000},{"start":3986665260000,"end":3986751540000},{"start":3987270060000,"end":3987356340000},{"start":3993058860000,"end":3993145140000},{"start":3995823660000,"end":3995909940000},{"start":4002562860000,"end":4002649140000},{"start":4003426860000,"end":4003513140000},{"start":4007228460000,"end":4007314740000},{"start":3985369260000,"end":3985455540000},{"start":3988652460000,"end":3988738740000},{"start":3989602860000,"end":3989689140000},{"start":4007833260000,"end":4007919540000},{"start":4018201260000,"end":4018287540000},{"start":4018806060000,"end":4018892340000},{"start":4024594860000,"end":4024681140000},{"start":4027359660000,"end":4027445940000},{"start":4034098860000,"end":4034185140000},{"start":4034962860000,"end":4035049140000},{"start":4038764460000,"end":4038850740000},{"start":4015609260000,"end":4015695540000},{"start":4018892460000,"end":4018978740000},{"start":4019842860000,"end":4019929140000},{"start":4039369260000,"end":4039455540000},{"start":4049737260000,"end":4049823540000},{"start":4050342060000,"end":4050428340000},{"start":4056130860000,"end":4056217140000},{"start":4058895660000,"end":4058981940000},{"start":4065634860000,"end":4065721140000},{"start":4066498860000,"end":4066585140000},{"start":4070300460000,"end":4070386740000},{"start":4048873260000,"end":4048959540000},{"start":4052156460000,"end":4052242740000},{"start":4053106860000,"end":4053193140000},{"start":4070905260000,"end":4070991540000},{"start":4081273260000,"end":4081359540000},{"start":4081878060000,"end":4081964340000},{"start":4087666860000,"end":4087753140000},{"start":4090431660000,"end":4090517940000},{"start":4097170860000,"end":4097257140000},{"start":4098034860000,"end":4098121140000},{"start":4101836460000,"end":4101922740000},{"start":4079718060000,"end":4079804340000},{"start":4083001260000,"end":4083087540000},{"start":4083951660000,"end":4084037940000},{"start":4102441260000,"end":4102527540000},{"start":4112809260000,"end":4112895540000},{"start":4113414060000,"end":4113500340000},{"start":4119202860000,"end":4119289140000},{"start":4121967660000,"end":4122053940000},{"start":4128706860000,"end":4128793140000},{"start":4129570860000,"end":4129657140000},{"start":4133372460000,"end":4133458740000},{"start":4109958060000,"end":4110044340000},{"start":4113241260000,"end":4113327540000},{"start":4114191660000,"end":4114277940000}
+      ]
+    }
+  ],
+  // Part of the settings, user click management | Partie des paramètres, de la gestion des clics de l'utilisateur //
+  "signals": [
+
+    // ===================================================== //
+    // =============== SETTINGS | PARAMETRES =============== //
+    // ===================================================== //
+
+    // General Settings //
+    {"name": "BgColor", "value": "White"},
+    {"name": "MainColor", "value": "#13265C"},
+    {"name": "SecondColor", "value":"#1f77b4"},
+    {"name": "SlicerInit", "value":1},
+
+    // Header Settings //
+    {"name": "headerMarginX", "value": 0},
+    {"name": "headerMarginY", "value": -130},
+    {"name": "headerHeight", "value": 50},
+    {"name": "TitleMarginX", "value": 10},
+    {"name": "Title", "value": "Title : You can change the title if you change the para..."},
+    {"name": "TitleFontSize", "value": 24},
+    {"name": "TitleFontWeight", "value": "bold"},
+    {"name": "ButtonWidth", "value":50},
+    {"name": "ButtonHeight", "value":20},
+    {"name": "ButtonRadius", "value":5},
+    {"name": "SubTitle", "value":"You can change the subtitle if you change the parameter called 'SubTitle' in the code"},
+    {"name": "SubTitleFontSize", "value":12},
+
+    // Controls Settings //
+    {"name": "controlsY", "value": -80},
+    {"name": "controlsPaddingBetweenItems", "value": 50},
+    {"name": "SlicerLenght", "value": 100},
+    {"name": "controlBoxWidth", "update": "showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems + SlicerLenght + 15"},
+    {"name": "controlBoxHeight", "value": 60},
+    {"name": "showLegendPaddingX", "value": 0},
+    {"name": "controlsX", "update": "width - controlBoxWidth"},
+
+    // TaskColumn Settings //
+    {"name": "taskColumnWidth", "value": 250},
+    {"name": "columnHolderMarginX", "value": 0},
+    {"name": "ColumnTaskContainerY", "value":-40},
+    {"name": "ColumnTaskContainerHeight", "value":40},
+    {"name": "ColumnTaskTitleFontSize", "value":16},
+    {"name": "DisplayTextFontOpacity", "value":0.05},
+    {"name": "DisplayTextFontOpacityHoover", "value":0.2},
+    {"name": "DisplayTextFontSizeL1", "value":14},
+    {"name": "DisplayTextFontSizeLX", "value":12},
+    {"name": "TaskColumnWidthSeparatorStrokeWidth", "value":0.5},
+    {"name": "TaskColumnWidthSeparatorOpacity", "value":0.3},
+    {"name": "TaskColumnStrokes", "value":"#e9ecef"},
+    {"name": "TaskColumnStrokesWidth", "value":1},
+    {"name": "ColumnTaskTitle", "value":"Hiérarchie"},
+    {"name": "ShapeSize", "value":200},
+
+    // Gantt Settings //
+    {"name": "oneDay", "update": "1000*60*60*24"},
+    {"name": "ChartWidth", "update": "width - columnHolderMarginX - taskColumnWidth"},
+    {"name": "barHeight", "value":20},
+    {"name": "TodayText", "value":"Today"},
+    {"name": "RectanglesRadius", "value":5},
+    {"name": "RectanglesStrokesWidth", "value":1},
+    {"name": "RectanglesPadding", "value":0.1},
+    {"name": "AxesTitle", "value":"Chronologie"},
+    {"name": "VisibleWeekendsAndBankHollidaysLimit", "value":15552000000},
+    {"name": "GanttRectanglesOpacity", "value":0.5},
+    {"name": "GanttRectanglesOpacityHoover", "value":0.8},
+    {"name": "TodayOpacity", "value":0.9},
+    {"name": "TodayStrokeWidth", "value":2},
+    {"name": "VisibleWeekendsAndBankHollidaysOpacity", "value":0.2},
+    {"name": "PaddingBetweenRectangles", "value":10},
+
+    // Legend Settings //
+    {"name": "LegendGroupWidth", "value":150},
+    {"name": "LegendGroupX", "update":"width - LegendGroupWidth"},
+    {"name": "LegendGroupY", "value":1},
+    {"name": "LegendGroupBorder", "value":"#e9ecef"},
+    {"name": "LegendGroupBorderWidth", "value":1},
+    {"name": "LegendPaddingX", "value":10},
+    {"name": "LegendTitle", "value":"Legend"},
+    {"name": "LegendTitleFontSize", "value":12},
+    {"name": "LegendGroupShapeSize", "value":120},
+    {"name": "LegendGroupShape", "value":"circle"},
+    {"name": "LegendTextPaddingX", "value":22},
+    {"name": "LegendTextFontSize", "value":12},
+    {"name": "LegendTextColor", "value":"#000000"},
+
+    {
+      // The initial domain is the entire domain of your data. | Le domaine initial c'est le domaine entier de vos données //
+      "name": "initialDomain",
+      "init": "[data('GanttDomain')[0] ? data('GanttDomain')[0].xMin : 0, data('GanttDomain')[0] ? data('GanttDomain')[0].xMax : 86400000]"
+    },
+
+    // ===================================================== //
+    // ========= ZOOM MANAGEMENT | GESTION DU ZOOM ========= //
+    // ===================================================== //
+
+    {
+      // We record the position of your cursor when you start zooming in/out. This will be used by Vega to zoom in on your cursor. | On enregistre la position de votre curseur lorsque vous commencez à zoomer/dezoomer. Cela va servir à Vega pour zoomer sur votre curseur //
+      "name": "anchor",
+      "update": "[initialDomain[0], 0]",
+      "on": [
+        {"events": "wheel", "update": "[+invert('xscale', x() - taskColumnWidth), 0]"}
+      ]
+    },
+    {
+      // Zoom control (the more you zoom, the smaller the value of this signal) | Contrôle du zoom (plus vous zoomer plus la valeur de ce signal est petit) //
+      "name": "zoom",
+      "value": 1,
+      "on": [
+        {"events": "wheel!", "update": "clamp(zoom * pow(1.001, event.deltaY), 0.001, 1)"}
+      ]
+    },
+    {
+      // This is the signal that controls the X scale of the Gantt chart | C'est le signal qui contrôle l'échelle X du Gantt //
+      "name": "xdom",
+      "init": "initialDomain", // It is initialized to initialDomain (we see the whole Gantt at the beginning) | Il est initialisé à initialDomain (on voit tout le Gantt au début) //
+      "on": [
+        {
+          // When you zoom in, it changes the xdom | Lorsque vous zoomez, ça change le xdom //
+          "events": "wheel!",
+          "update": "zoom >= 0.999 ? initialDomain : clampRange([anchor[0] + (xdom[0] - anchor[0]) * zoom / prevZoom, anchor[0] + (xdom[1] - anchor[0]) * zoom / prevZoom], initialDomain[0], initialDomain[1])"
+        },
+        {
+          // When you move on the Gantt, it changes the xdom | Lorsque vous vous déplacez sur le Gantt, ça change le xdom //
+          "events": {"signal": "delta"},
+          "update": "clampRange([xCur[0] + span(xCur) * delta[0] / ChartWidth, xCur[1] + span(xCur) * delta[0] / ChartWidth], initialDomain[0], initialDomain[1])"
+        }
+      ]
+    },
+    {
+      // Signal used to calculate the xdom | Signal qui sert à calculer le xdom //
+      "name": "prevZoom",
+      "init": "1",
+      "on": [
+        {"events": "wheel!", "update": "zoom"}
+      ]
+    },
+    {
+      "name": "scaledHeight",
+      "update": "length(data('OfficialID')) * (barHeight + PaddingBetweenRectangles)"
+    },
+    {
+      // Signal that we use to calculate the scaledHeight | Signal qui nous sert à calculer le scaledHeight //
+      "name": "xCur",
+      "on": [{"events": "pointerdown", "update": "slice(xdom)"}]
+    },
+
+    // ===================================================== //
+    // ======= SLICER MANAGEMENT | GESTION DU SLICER ======= //
+    // ===================================================== //
+
+    {
+      // Is the user using the slicer? | Est ce que l'utilisateur utilise le slicer ? //
+      "name": "isDragging",
+      "value": false,
+      "on": [
+        {
+          "events": "@sliderZone:pointerdown, @sliderThumbCustom:pointerdown",
+          "update": "true"
+        },
+        {
+          "events": "window:pointerup",
+          "update": "false"
+        }
+      ]
+    },
+    {
+      // Slicer value | Valeur du slicer //
+      "name": "development",
+      "init": "SlicerInit",
+      "on": [
+        {
+          "events": "@sliderZone:pointerdown, @sliderThumbCustom:pointerdown",
+          "update": "clamp(round(1 + clamp(x() - controlsX - (showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems) , 0, SlicerLenght ) / (SlicerLenght  / 4)), 1, 5)"
+        },
+        {
+          "events": "window:pointermove",
+          "update": "isDragging ? clamp(round(1 + clamp(x() - controlsX - (showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems) , 0, SlicerLenght ) / (SlicerLenght  / 4)), 1, 5) : development"
+        }
+      ]
+    },
+    {
+      // Is the user using the slicer? (Second signal to avoid certain bugs) | Est ce que l'utilisateur utilise le slicer ? (Deuxième signal pour éviter certains bugs) //
+      "name": "slicerMode",
+      "value": true,
+      "on": [
+        {
+          "events": {"signal": "development"},
+          "update": "true"
+        },
+        {
+          "events": "@clickableArea:click, @expandCollapseTriangle:click, @itemText:click",
+          "update": "datum.Level < MaxLevel ? false : slicerMode"
+        }
+      ]
+    },
+
+    // ===================================================== //
+    // ========== PAN MANAGEMENT | GESTION DU PAN ========== //
+    // ===================================================== //
+
+    {
+      // Signal that we use to calculate the scaledHeight | Signal qui nous sert à calculer le scaledHeight //
+      "name": "down",
+      "value": null,
+      "on": [
+        {"events": "pointerdown", "update": "xy()"},
+        {"events": "pointerup", "update": "null"}
+      ]
+    },
+    {
+      // Signal that calculates the difference in position between when you press the mouse and when you release it again | Signal qui calcule la différence de position entre le moment où vous appuyez sur la souris et le moment où vous la relanchez //
+      "name": "delta",
+      "value": [0, 0],
+      "on": [
+        {
+          "events": [
+            {"source": "window", "type": "pointermove", "consume": true, "between": [{"type": "pointerdown"}, {"source": "window", "type": "pointerup"}]},
+            {"type": "touchmove", "consume": true, "filter": "event.touches.length === 1"}
+          ],
+          "update": "(down && !isDragging) ? [down[0]-x(), y()-down[1]] : [0,0]"
+        }
+      ]
+    },
+
+    // ======================================================== //
+    // GANTT HEIGHT MANAGEMENT | GESTION DE LA HAUTEUR DU GANTT //
+    // ======================================================== //
+
+    {
+      // This is the signal that controls the Y scale of the Gantt chart | C'est le signal qui contrôle l'échelle Y du Gantt //
+      "name": "yRange",
+      "update": "[Yanchor, scaledHeight + Yanchor]"
+    },
+    {
+      // This signal determines the Y position of the rectangles and is used in yRange | Permet de déterminer la position en Y des rectangles, ce signal est repris dans yRange //
+      "name": "Yanchor",
+      "value": 0,
+      "on": [
+        {
+          "events": [
+            {"source": "window", "type": "pointermove", "consume": true, "between": [{"type": "pointerdown"}, {"source": "window", "type": "pointerup"}]},
+            {"type": "touchmove", "consume": true, "filter": "event.touches.length === 1"}
+          ],
+          "update": "scaledHeight < height ? clamp(Yanchor + (delta[1] - prevYanchor), 0, height - scaledHeight) : clamp(Yanchor + (delta[1] - prevYanchor), -(scaledHeight - height), 0)"
+        }
+      ]
+    },
+    {
+      "name": "prevYanchor",
+      "value": 0,
+      "on": [
+        {
+          "events": {"type": "pointerdown"},
+          "update": "0"
+        },
+        {
+          "events": [
+            {"source": "window", "type": "pointermove"},
+            {"type": "touchmove"}
+          ],
+          "update": "delta[1]"
+        }
+      ]
+    },
+
+    // ===================================================== //
+    // ======== CLICK MANAGEMENT | GESTION DU CLICK ======== //
+    // ===================================================== //
+    
+    {
+      // In the left column, what ID did the user click on? This signal will be used by Vega to change the development table. | Sur la colonne de gauche, sur quel ID l'utilisateur a t'il cliqué ? Ce signal va servir à Vega pour changer la table development //
+      "name": "clickedId",
+      "value": null,
+      "on": [
+        {
+          "events": "@clickableArea:click, @expandCollapseTriangle:click, @itemText:click",
+          "update": "datum.Level < MaxLevel ? datum.Id : 'VALEURINTERDITE'"
+        }
+      ]
+    },
+    { 
+      // Used by Vega to trigger changes in the Data section | Sert à Vega pour enclencher les changements dans la partie Data //
+      "name": "clickTrigger",
+      "value": 0,
+      "on": [
+        {
+          "events": "@clickableArea:click, @expandCollapseTriangle:click, @itemText:click",
+          "update": "datum.Level < MaxLevel ? clickTrigger + 1 : clickTrigger"
+        }
+      ]
+    },
+
+    // ===================================================== //
+    // =================== Other | Autre =================== //
+    // ===================================================== //
+
+    {
+      // What is the day today ? | Quel jour on est aujourd'hui ? //
+      "name": "today",
+      "update": "+datetime(year(now()),month(now()),date(now()))"
+    },
+    {
+      "name": "todayRule", "update": "timeFormat(today,'%d/%m/%y')"
+    },
+    {
+      // What ID is my cursor on? Used by Vega to highlight the lines your cursor is on. | Sur quel Id mon curseur est ? Sert à Vega pour mettre en surbrillance les lignes sur lesquelles votre curseur se trouve //
+      "name": "hoveredId",
+      "value": null,
+      "on": [
+        {
+          "events": "@clickableArea:mouseover, @expandCollapseTriangle:mouseover, @itemText:mouseover, @GanttRect:mouseover, @GanttMilestone:mouseover, @GanttRectText:mouseover",
+          "update": "datum.Id"
+        },
+        {
+          "events": "rect:mouseout, text:mouseout",
+          "update": "null"
+        }
+      ]
+    },
+    {
+      // MaxLevel's Signal | Signal du MaxLevel //
+      "name": "MaxLevel",
+      "update": "data('Database')[0] ? data('Database')[0].maxLevel : 0"
+    },
+    {
+      "name": "showLegend",
+      "value": true,
+      "on": [
+        {
+          "events": "@checkboxZone:click, @checkboxToggle:click",
+          "update": "!showLegend"
+        }
+      ]
+    },
+    {
+      "name": "showMilestone",
+      "value": true,
+      "on": [
+        {
+          "events": "@checkboxZoneMilestone:click, @checkboxToggleMilestone:click",
+          "update": "!showMilestone"
+        }
+      ]
+    },
+    {
+      "name": "showInfos",
+      "value": true,
+      "on": [
+        {
+          "events": "@checkboxZoneInfos:click, @checkboxToggleInfos:click",
+          "update": "!showInfos"
+        }
+      ]
+    },
+    {
+      "name": "legendCount",
+      "update": "length(data('LegendColors'))"
+    },
+    {
+      "name": "legendRange",
+      "update": "[0,legendCount*20]"
+    }
+  ],
+  // Part of the element display | Partie de l'affichage des éléments //
+  "marks": [
+
+    // ====================================================== //
+    // ================== Header | EN-TÊTE ================== //
+    // ====================================================== //
+
+    {
+      "type": "group",
+      "name": "header",
+      "encode": {
+        "enter": {
+          "x": {"signal": "headerMarginX"},
+          "y": {"signal": "headerMarginY"},
+          "width": {"signal": "width/2"},
+          "height": {"signal": "headerHeight"}, 
+          "fill": {"signal": "BgColor"}, 
+          "cornerRadius": {"value": 5},
+          "zindex": {"value": 100}
+        }
+      },
+      "marks": [
+        {
+          // Title | Titre //
+          "type": "text",
+          "encode": {
+            "enter": {
+              "x": {"signal": "TitleMarginX"}, 
+              "y": {"signal": "headerHeight/2"}, 
+              "text": {"signal": "Title"}, 
+              "fill": {"signal": "MainColor"},
+              "fontSize": {"signal": "TitleFontSize "}, 
+              "fontWeight": {"value": "bold"}, 
+              "baseline": {"value": "middle"},
+              "zindex": {"value": 100}
+            }
+          }
+        },
+        {
+          // Subtitle | Sous Titre //
+          "type": "text",
+          "encode": {
+            "enter": {
+              "x": {"signal": "TitleMarginX"}, 
+              "y": {"signal": "headerHeight/2 + 30"}, 
+              "text": {"signal": "SubTitle"}, 
+              "fill": {"signal": "SecondColor "}, 
+              "fontSize": {"signal": "SubTitleFontSize"},
+              "fontWeight": {"value": "normal"},
+              "baseline": {"value": "middle"},
+              "zindex": {"value": 100}
+            }
+          }
+        }
+      ]
+    },
+
+    // ====================================================== //
+    // ================ CONTROLS | CONTRÔLES ================ //
+    // ====================================================== //
+
+    {
+      "type": "group",
+      "name": "controlsGroup",
+      "encode": {
+        "update": {
+          "x": {"signal": "controlsX"},
+          "y": {"signal": "controlsY"},
+          "width": {"signal": "controlBoxWidth"},
+          "height": {"signal": "controlBoxHeight"}
+        }
+      },
+      "marks": [
+
+        {
+          "type": "text",
+          "encode": {
+            "update": {
+              "x": {"signal": "showLegendPaddingX"},
+              "y": {"value": 0},
+              "text": {"value": "Légendes"},
+              "fill": {"signal": "MainColor"},
+              "fontSize": {"value": 12},
+              "align": {"value": "left"}
+            }
+          }
+        },
+        {
+          "type": "rect",
+          "name": "checkboxZone",
+          "encode": {
+            "update": {
+              "x": {"signal": "showLegendPaddingX"},
+              "y": {"value": 10},
+              "width": {"value": 35},
+              "height": {"value": 18},
+              "fill": {"signal": "showLegend ? MainColor : '#e9ecef'"},
+              "cornerRadius": {"value": 9},
+              "cursor": {"value": "pointer"}
+            },
+            "hover": {
+              "fillOpacity": {"value": 0.8}
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "name": "checkboxToggle",
+          "encode": {
+            "update": {
+              "x": {"signal": "showLegend ? showLegendPaddingX + 26 : showLegendPaddingX + 9"},
+              "y": {"value": 19},
+              "size": {"value": 120},
+              "shape": {"value": "circle"},
+              "fill": {"value": "white"},
+              "stroke": {"value": "none"},
+              "cursor": {"value": "pointer"}
+            }
+          }
+        },
+
+        {
+          "type": "text",
+          "encode": {
+            "update": {
+              "x": {"signal": "showLegendPaddingX + 35 + controlsPaddingBetweenItems"},
+              "y": {"value": 0},
+              "text": {"value": "Infos"},
+              "fill": {"signal": "MainColor"},
+              "fontSize": {"value": 12},
+              "align": {"value": "left"}
+            }
+          }
+        },
+        {
+          "type": "rect",
+          "name": "checkboxZoneInfos",
+          "encode": {
+            "update": {
+              "x": {"signal": "showLegendPaddingX + 35 + controlsPaddingBetweenItems"},
+              "y": {"value": 10},
+              "width": {"value": 35},
+              "height": {"value": 18},
+              "fill": {"signal": "showInfos ? MainColor : '#e9ecef'"},
+              "cornerRadius": {"value": 9},
+              "cursor": {"value": "pointer"}
+            },
+            "hover": {
+              "fillOpacity": {"value": 0.8}
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "name": "checkboxToggleInfos",
+          "encode": {
+            "update": {
+              "x": {"signal": "showInfos ? showLegendPaddingX + 61 + controlsPaddingBetweenItems : showLegendPaddingX + 44 + controlsPaddingBetweenItems"},
+              "y": {"value": 19},
+              "size": {"value": 120},
+              "shape": {"value": "circle"},
+              "fill": {"value": "white"},
+              "stroke": {"value": "none"},
+              "cursor": {"value": "pointer"}
+            }
+          }
+        },
+
+        {
+          "type": "text",
+          "encode": {
+            "update": {
+              "x": {"signal": "showLegendPaddingX + 70 + 2*controlsPaddingBetweenItems"},
+              "y": {"value": 0},
+              "text": {"value": "Milestones"},
+              "fill": {"signal": "MainColor"},
+              "fontSize": {"value": 12},
+              "align": {"value": "left"}
+            }
+          }
+        },
+        {
+          "type": "rect",
+          "name": "checkboxZoneMilestone",
+          "encode": {
+            "update": {
+              "x": {"signal": "showLegendPaddingX + 70 + 2*controlsPaddingBetweenItems"},
+              "y": {"value": 10},
+              "width": {"value": 35},
+              "height": {"value": 18},
+              "fill": {"signal": "showMilestone ? MainColor : '#e9ecef'"},
+              "cornerRadius": {"value": 9},
+              "cursor": {"value": "pointer"}
+            },
+            "hover": {
+              "fillOpacity": {"value": 0.8}
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "name": "checkboxToggleMilestone",
+          "encode": {
+            "update": {
+              "x": {"signal": "showMilestone ? showLegendPaddingX + 96 + 2*controlsPaddingBetweenItems : showLegendPaddingX + 79 + 2*controlsPaddingBetweenItems"},
+              "y": {"value": 19},
+              "size": {"value": 120},
+              "shape": {"value": "circle"},
+              "fill": {"value": "white"},
+              "stroke": {"value": "none"},
+              "cursor": {"value": "pointer"}
+            }
+          }
+        },
+
+        {
+          "type": "text",
+          "encode": {
+            "update": {
+              "x": {"signal": "showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems"},
+              "y": {"value": 0},
+              "text": {"value": "Niveau de détail"},
+              "fill": {"signal": "MainColor"},
+              "fontSize": {"value": 12},
+              "align": {"value": "left"}
+            }
+          }
+        },
+        {
+          "type": "rect",
+          "name": "sliderZone",
+          "encode": {
+            "update": {
+              "x": {"signal": "showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems"},
+              "y": {"value": 13},
+              "width": {"signal": "SlicerLenght "},
+              "height": {"value": 8},
+              "fill": {"value": "transparent"},
+              "cursor": {"value": "pointer"}
+            }
+          }
+        },
+        {
+          "type": "rect",
+          "name": "sliderTrack",
+          "encode": {
+            "update": {
+              "x": {"signal": "showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems"},
+              "y": {"value": 16},
+              "width": {"signal": "SlicerLenght "},
+              "height": {"value": 4},
+              "fill": {"value": "#e9ecef"},
+              "cornerRadius": {"value": 2}
+            }
+          }
+        },
+        {
+          "type": "rect",
+          "name": "sliderFill",
+          "encode": {
+            "update": {
+              "x": {"signal": "showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems"},
+              "y": {"value": 16},
+              "width": {"signal": "(development - 1) * (SlicerLenght / 4)"},
+              "height": {"value": 4},
+              "fill": {"signal": "MainColor"},
+              "cornerRadius": {"value": 2}
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "name": "sliderThumbCustom",
+          "encode": {
+            "update": {
+              "x": {"signal": "showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems  + (development - 1) * (SlicerLenght / 4)"},
+              "y": {"value": 18},
+              "size": {"value": 180},
+              "shape": {"value": "circle"},
+              "fill": {"signal": "MainColor"},
+              "stroke": {"value": "white"},
+              "strokeWidth": {"value": 2.5},
+              "cursor": {"value": "pointer"}
+            },
+            "hover": {
+              "size": {"value": 220}
+            }
+          }
+        },
+        {
+          "type": "text",
+          "encode": {
+            "update": {
+              "x": {"signal": "showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems + SlicerLenght + 15"},
+              "y": {"value": 20},
+              "text": {"signal": "development"},
+              "fill": {"signal": "MainColor"},
+              "fontSize": {"value": 11},
+              "fontWeight": {"value": "bold"},
+              "align": {"value": "right"}
+            }
+          }
+        }
+      ]
+    },
+
+    // ======================================================= //
+    // =========== LEFT COLUMN | COLONNE DE GAUCHE =========== //
+    // ======================================================= //
+
+    {
+      "type": "group",
+      "name": "TaskTitleContainer",
+      "encode": {
+        "enter": {
+          "x": {"signal": "columnHolderMarginX"},
+          "y": {"signal": "ColumnTaskContainerY"},
+          "width": {"signal": "taskColumnWidth"},
+          "height": {"signal": "ColumnTaskContainerHeight"},
+          "stroke": {"signal": "TaskColumnStrokes"},
+          "strokeWidth": {"signal": "TaskColumnStrokesWidth"},
+          "cornerRadius": {"signal": "ButtonRadius"},
+          "zindex": {"value": 150}
+        }
+      },
+      "marks": [
+        {
+          // Title of this column | Titre de cette colonne //
+          "type": "text",
+          "encode": {
+            "enter": {
+              "x": {"signal": "taskColumnWidth / 2"},
+              "y": {"signal": "ColumnTaskContainerHeight/2"},
+              "text": {"signal": "ColumnTaskTitle"},
+              "fill": {"signal": "MainColor"},
+              "fontSize": {"signal": "ColumnTaskTitleFontSize"},
+              "fontWeight": {"value": "bold"},
+              "baseline": {"value": "middle"},
+              "align": {"value": "center"},
+              "zindex": {"value": 151}
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "encode": {
+        "enter": {
+          "x": {"signal": "columnHolderMarginX"},
+          "width": {"signal": "taskColumnWidth"},
+          "fill": {"signal":"BgColor"},
+          "height": {"signal": "height"},
+          "clip": {"value": true},
+          "stroke": {"signal": "TaskColumnStrokes"},
+          "strokeWidth": {"signal": "TaskColumnStrokesWidth"}
+        }
+      },
+      "marks": [
+        {
+          "type": "group",
+          "name": "taskColumn",
+          "encode": {
+            "enter": {
+              "width": {"signal": "taskColumnWidth"},
+              "height": {"signal": "height"}
+            }
+          },
+          "marks": [
+            {
+              // Rectangle of each element | Rectangle de chaque élément //
+              "type": "rect",
+              "name": "clickableArea",
+              "from": {"data": "OfficialID"},
+              "encode": {
+                "update": {
+                  "x": {"value": 0},
+                  "y": {"signal": "scale('yscale', datum.Id)"},
+                  "width": {"signal": "taskColumnWidth"},
+                  "height": {"signal": "bandwidth('yscale')"},
+                  "fill": {"signal": "datum.Level === 1 ? MainColor:SecondColor"},
+                  "opacity": {
+                    "signal": "hoveredId === datum.Id ? DisplayTextFontOpacityHoover : DisplayTextFontOpacity" // If my cursor passes over an element then it is highlighted | Si mon curseur passe sur un élément alors on le met en surbrillance //
+                  },
+                  "cursor": {"signal": "datum.Level < MaxLevel ? 'pointer' : 'normal'"} // If the line level = MaxLevel then this line has no children so there is no need to put the cursor in pointer mode | Si le niveau de la ligne = MaxLevel alors cette ligne n'a pas d'enfants donc inutile de mettre le curseur en mode pointeur //
+                }
+              }
+            },
+            {
+              // Triangle of each element except for the last levels | Triangle de chaque élément sauf pour les derniers niveaux //
+              "type": "symbol",
+              "name": "expandCollapseTriangle",
+              "from": {"data": "OfficialID"},
+              "encode": {
+                "update": {
+                  "x": {"signal": "15 * datum.Level"},
+                  "yc": {"signal": "scale('yscale', datum.Id) + bandwidth('yscale') / 2"},
+                  "size": {"signal": "ShapeSize"},
+                  "shape": {
+                    "signal": "datum.Level < MaxLevel ? (data('Development')[indexof(pluck(data('Development'), 'Id'), datum.Id)].collapsed == 1 ? 'triangle-down' : 'triangle-right') : ''" // If the element has been expanded then we change the orientation of the triangle | Si l'élément a été développé alors on change l'orientation du triangle //
+                  },
+                  "cursor": {"signal": "datum.Level < MaxLevel ? 'pointer' : 'normal'"}, // If the line level = MaxLevel then this line has no children so there is no need to put the cursor in pointer mode | Si le niveau de la ligne = MaxLevel alors cette ligne n'a pas d'enfants donc inutile de mettre le curseur en mode pointeur //
+                  "opacity": {"signal": "datum.Level < MaxLevel ? 1 : 0"}, // If the line level = MaxLevel then this line has no children so there is no need to display the development triangle //
+                  "fill": {"signal": "MainColor"}
+                }
+              }
+            },
+            {
+              // Text of each element | Texte de chaque élément //
+              "type": "text",
+              "name": "itemText",
+              "from": {"data": "OfficialID"},
+              "encode": {
+                "update": {
+                  "x": {"signal": "(50 + (datum.Level - 1) * 15)"},
+                  "y": {"signal": "scale('yscale', datum.Id) + bandwidth('yscale') / 2"},
+                  "text": {"signal": "datum.DisplayText"},
+                  "baseline": {"value": "middle"},
+                  "align": {"value": "left"},
+                  "fontSize": {"signal": "datum.Level === 1 ? DisplayTextFontSizeL1 : DisplayTextFontSizeLX"},
+                  "fontWeight": {"signal": "datum.Level === 1 ? 'bold' : 'normal'"},
+                  "fill": {"signal": "MainColor"},
+                  "limit": {"signal": "taskColumnWidth - (35 + datum.Level * 15)"},
+                  "cursor": {"signal": "datum.Level < MaxLevel ? 'pointer' : 'normal'"},
+                  "tooltip": {"signal": "datum.DisplayText"} // Bubble info | Infos bulles //
+                }
+              }
+            },
+            {
+              // Separator between each element | Séparateur entre chaque élément //
+              "type": "rule",
+              "name": "rowSeparator",
+              "from": {"data": "OfficialID"},
+              "encode": {
+                "update": {
+                  "x": {"value": 10},
+                  "x2": {"signal": "taskColumnWidth - 20"},
+                  "y": {"signal": "scale('yscale', datum.Id) + bandwidth('yscale')"},
+                  "stroke": {"signal": "datum.Level == 1 ? BgColor : MainColor"}, // Only displayed if the item level is not equal to 1 | S'affiche que si le niveau de l'élément n'est pas égal à 1 //
+                  "strokeWidth": {"signal": "TaskColumnWidthSeparatorStrokeWidth"},
+                  "opacity": {"signal": "TaskColumnWidthSeparatorOpacity"}
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+
+    // ===================================================== //
+    // =================== GANTT | GANTT =================== //
+    // ===================================================== //
+
+    {
+      "type": "group",
+      "name": "GanttContainer",
+      "encode": {
+        "enter": {
+          "x": {"signal": "taskColumnWidth"},
+          "width": {"signal": "ChartWidth"},
+          "height": {"signal": "height"},
+          "clip": {"value": true}
+        }
+      },
+      "marks": [
+        {
+          // Displaying Weekends Rectangles | Affichage des rectangles Weekends //
+          "type": "rect",
+          "from": {"data": "weekends"},
+          "encode": {
+            "enter": {
+              "fill": {"signal": "SecondColor"}
+            },
+            "update": {
+              "x": {"scale": "xscale", "field": "start"},
+              "x2": {"scale": "xscale", "field": "end"},
+              "y": {"value": 1},
+              "y2": {"signal": "height"},
+              "opacity": {
+                "signal": "span(xdom) <= VisibleWeekendsAndBankHollidaysLimit ? VisibleWeekendsAndBankHollidaysOpacity : 0" // Weekend rectangles are only displayed if the user has zoomed in far enough | On affiche les rectangles de Weekends que si l'utilisateur a suffisamment zoomé //
+              }
+            }
+          }
+        },
+        {
+          // Displaying Holiday Rectangles | Affichage des rectangles Jours Fériés //
+          "type": "rect",
+          "from": {"data": "BankHollidays"},
+          "encode": {
+            "enter": {
+              "fill": {"signal": "MainColor"}
+            },
+            "update": {
+              "x": {"scale": "xscale", "field": "start"},
+              "x2": {"scale": "xscale", "field": "end"},
+              "y": {"value": 0},
+              "y2": {"signal": "height"},
+              "opacity": {
+                "signal": "span(xdom) <= VisibleWeekendsAndBankHollidaysLimit ? VisibleWeekendsAndBankHollidaysOpacity : 0" // Holiday rectangles are only displayed if the user has zoomed in far enough | On affiche les rectangles de Weekends que si l'utilisateur a suffisamment zoomé //
+              }
+            }
+          }
+        },
+        {
+          // Displaying Gantt rectangles | Affichage des rectangles du Gantt //
+          "type": "rect",
+          "name": "GanttRect",
+          "from": {"data": "VisibleRectangles"},
+          "encode": {
+            "enter": {
+              "x": {"scale": "xscale", "field": "Start"},
+              "x2": {"scale": "xscale", "field": "End"},
+              "y": {"signal": "scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2"},
+              "height": {"signal": "barHeight"},
+              "fill": {
+                "signal": "(isDefined(datum.VColor) && datum.VColor != null && datum.VColor != 'null' && datum.VColor != '') ? datum.VColor : scale('colorScale', datum.Legend)" // We put the color that the user defined according to his Legend | On met la couleur que l'utilisateur a définie en fonction de sa Legend //
+              },
+              "stroke": {"signal": "BgColor"},
+              "strokeWidth": {"signal": "RectanglesStrokesWidth"},
+              "cornerRadius": {"signal": "RectanglesRadius"},
+              "opacity": {
+                "signal": "hoveredId === datum.Id ? GanttRectanglesOpacityHoover : GanttRectanglesOpacity" //If my cursor passes over an element then it is highlighted | Si mon curseur passe sur un élément alors on le met en surbrillance //
+              }
+            },
+            "update": {
+              "x": {"scale": "xscale", "field": "Start"},
+              "x2": {"scale": "xscale", "field": "End"},
+              "y": {"signal": "scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2"},
+              "tooltip": {
+                // Bubble info | Infos bulles //
+                "signal": "datum.Level == 1?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 2?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 3?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 4?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Sous-Segment': datum.Subsegment, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Sous-Segment': datum.Subsegment, 'Item': datum.Item, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}"
+              },
+              "opacity": {
+                "signal": "hoveredId === datum.Id ? GanttRectanglesOpacityHoover : GanttRectanglesOpacity"
+              }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "name": "GanttRectText",
+          "from": {"data": "VisibleRectangles"},
+          "encode": {
+            "enter": {
+              "x": {"scale": "xscale", "field": "Start"},
+              "y": {"signal": "scale('yscale', datum.Id) + bandwidth('yscale')/2"},
+              "text": {"signal": "datum.DisplayText"},
+              "fontSize": {"value": 12},
+              "baseline": {"value": "middle"},
+              "align": {"value": "left"},
+              "dx": {"value": 5},
+              "limit": {
+                "signal": "max(0, scale('xscale', datum.End) - scale('xscale', datum.Start) - 20)"
+              },
+              "fill": {
+                "signal": "luminance(datum.VColor) > 0.5 ? 'black' : 'white'"
+              },
+              "opacity": {
+                "signal": "showInfos?1:0"
+              }
+            },
+            "update": {
+              "x": {"scale": "xscale", "field": "Start"},
+              "y": {"signal": "scale('yscale', datum.Id) + bandwidth('yscale')/2"},
+              "limit": {
+                "signal": "max(0, scale('xscale', datum.End) - scale('xscale', datum.Start) - 20)"
+              },
+              "fill": {
+                "signal": "luminance(datum.VColor) > 0.5 ? 'black' : 'white'"
+              },
+              "tooltip": {
+                // Bubble info | Infos bulles //
+                "signal": "datum.Level == 1?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 2?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 3?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 4?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Sous-Segment': datum.Subsegment, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Sous-Segment': datum.Subsegment, 'Item': datum.Item, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}"
+              },
+              "opacity": {
+                "signal": "showInfos?1:0"
+              }
+            }
+          }
+        },
+        {
+          // Displaying Gantt milestones | Affichage des milestones du Gantt //
+          "type": "symbol",
+          "name": "GanttMilestone",
+          "from": {"data": "VisibleMilestones"},
+          "encode": {
+            "enter": {
+              "x": {"scale": "xscale", "field": "Start"},
+              "y": {"signal": "scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2 + barHeight / 2"},
+              "shape": {
+                "signal": "(isDefined(datum.Shape) && datum.Shape != null && datum.Shape != 'null' && datum.Shape != '') ? datum.Shape : 'diamond'"
+              },
+              "size": {
+                "signal": "(isDefined(datum.Shape) && isDefined(data('Shape')[indexof(pluck(data('Shape'), 'Shape'), datum.Shape)])) ? +data('Shape')[indexof(pluck(data('Shape'), 'Shape'), datum.Shape)].Size : 500"
+              },
+              "fill": {
+                "signal": "(isDefined(datum.VColor) && datum.VColor != null && datum.VColor != 'null' && datum.VColor != '') ? datum.VColor : scale('colorScale', datum.Legend)"
+              },
+              "stroke": {"signal": "BgColor"},
+              "strokeWidth": {"signal": "RectanglesStrokesWidth"},
+              "opacity": {
+                "signal": "!showMilestone ? 0 : hoveredId === datum.Id ? GanttRectanglesOpacityHoover : GanttRectanglesOpacity"
+              }
+            },
+            "update": {
+              "x": {"scale": "xscale", "field": "Start"},
+              "y": {"signal": "scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2 + barHeight / 2"},
+              "tooltip": {
+                "signal": "datum.Level == 1?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Début': timeFormat(datum.Start, '%d/%m/%Y')}:datum.Level == 2?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Début': timeFormat(datum.Start, '%d/%m/%Y')}:datum.Level == 3?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Début': timeFormat(datum.Start, '%d/%m/%Y')}:datum.Level == 4?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Sous-Segment': datum.Subsegment, 'Début': timeFormat(datum.Start, '%d/%m/%Y')}:{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Sous-Segment': datum.Subsegment, 'Item': datum.Item, 'Début': timeFormat(datum.Start, '%d/%m/%Y')}"
+              },
+              "opacity": {
+                "signal": "!showMilestone ? 0 : (hoveredId === datum.Id ? GanttRectanglesOpacityHoover : GanttRectanglesOpacity)"
+              }
+            }
+          }
+        },
+        {
+          // Today line display | Affichage de la ligne Today //
+          "name": "todayRule",
+          "description": "Today rule",
+          "type": "rule",
+          "data": [{}],
+          "encode": {
+            "update": {
+              "x": {"scale": "xscale", "signal": "today"},
+              "y2": {"signal": "height"},
+              "strokeWidth": {"signal": "TodayStrokeWidth"},
+              "stroke": {"signal": "MainColor"},
+              "strokeDash": {"value": [2, 2]},
+              "opacity": {"signal": "TodayOpacity"}
+            }
+          }
+        },
+        {
+          // Text of the Today line | Texte de la ligne du Today //
+          "name": "todayText",
+          "description": "Today text",
+          "type": "text",
+          "data": [{}],
+          "encode": {
+            "update": {
+              "x": {"scale": "xscale", "signal": "today"},
+              "fill": {"signal": "MainColor"},
+              "text": {"signal": "TodayText"},
+              "angle": {"signal": "90"},
+              "baseline": {"value": "bottom"},
+              "dx": {"value": 10},
+              "dy": {"value": -4},
+              "opacity": {"signal": "TodayOpacity"}
+            }
+          }
+        }
+      ]
+    },
+
+    // ==================================================== //
+    // ================= LEGEND | LEGENDE ================= //
+    // ==================================================== //
+
+    {
+      // Legends Container | Conteneur des légendes //
+      "type": "group",
+      "name": "LegendGroup",
+      "encode": {
+        "enter": {
+          "x": {"signal": "LegendGroupX"},
+          "y": {"signal": "LegendGroupY"},
+          "width": {"signal": "LegendGroupWidth"},
+          "height": {"signal": "legendRange[1] + 35"},
+          "fill": {"signal": "BgColor"},
+          "stroke": {"signal": "LegendGroupBorder"},
+          "strokewidth": {"signal": "LegendGroupBorderWidth"},
+          "cornerRadius": {"value": 10}
+        },
+        "update": 
+        {
+          "opacity": {"signal": "showLegend ? 1 : 0"},
+          "height": {"signal": "legendRange[1] + 35"}
+        }
+      },
+      "marks": [
+        {
+          // Legend Title | Titre des légendes //
+          "type": "text",
+          "name": "LegendText",
+          "encode": {
+            "update": {
+              "x": {"signal": "LegendPaddingX"},
+              "y": {"value": 15},
+              "text": {"signal": "LegendTitle"},
+              "baseline": {"value": "middle"},
+              "align": {"value": "left"},
+              "fontSize": {"signal": "LegendTitleFontSize"},
+              "fontWeight": {"value": "bold"},
+              "fill": {"signal": "MainColor"},
+              "opacity": {"signal": "showLegend ? 1 : 0"}
+            }
+          }
+        },
+        {
+          // Symbols for Legends | Symboles pour les légendes //
+          "type": "symbol",
+          "from": {"data": "LegendColors"},
+          "encode": {
+            "enter": {
+              "size": {"signal": "LegendGroupShapeSize"},
+              "x": {"signal": "LegendPaddingX"},
+              "y": {"signal": "scale('LegendScale', datum.Legend) + 40"},
+              "height": {"signal": "bandwidth('LegendScale')"},
+              "shape": {"signal": "LegendGroupShape"},
+              "fill": {"field": "Color"}
+            },
+            "update": {
+              "y": {"signal": "scale('LegendScale', datum.Legend) + 40"},
+              "height": {"signal": "bandwidth('LegendScale')"},
+              "opacity": {"signal": "showLegend ? 1 : 0"}
+            }
+          }
+        },
+        {
+          // Color of Legends | Couleurs des légendes //
+          "type": "text",
+          "from": {"data": "LegendColors"},
+          "encode": {
+            "enter": {
+              "x": {"signal": "LegendTextPaddingX"},
+              "y": {"signal": "scale('LegendScale', datum.Legend) + 40"},
+              "height": {"signal": "bandwidth('LegendScale')"},
+              "dy": {"value": 4},
+              "text": {"field": "Legend"},
+              "fontSize": {"signal": "LegendTextFontSize"},
+              "fill": {"signal": "LegendTextColor"}
+            },
+            "update": {
+              "y": {"signal": "scale('LegendScale', datum.Legend) + 40"},
+              "height": {"signal": "bandwidth('LegendScale')"},
+              "opacity": {"signal": "showLegend ? 1 : 0"}
+            }
+          }
+        }
+      ]
+    }
+  ],
+  // Part: Gantt Scale | Partie : Échelle du Gantt //
+  "scales": [
+    {
+      // X scale (controlled by xdom signal) | Échelle X (contrôlée par le signal xdom) //
+      "name": "xscale",
+      "type": "time",
+      "domain": {"signal": "xdom"},
+      "range": [0, {"signal": "ChartWidth"}]
+    },
+    {
+      // Y scale (controlled by the yRange signal) | Échelle Y (contrôlée par le signal yRange) //
+      "name": "yscale",
+      "type": "band",
+      "domain": {"data": "OfficialID", "field": "Id"},
+      "range": {"signal": "yRange"},
+      "padding": {"signal": "RectanglesPadding"}
+    },
+    {
+      // Color scale for Legends (if you have not defined a color for your Legends) | Échelle de couleur pour les Legend (si vous n'avez pas défini de couleur pour vos Legend) //
+      "name": "colorScale",
+      "type": "ordinal",
+      "domain": {"data": "Database", "field": "Legend"},
+      "range": {"scheme": "category20"}
+    },
+    {
+      "name": "LegendScale",
+      "type": "band",
+      "domain": {"data": "LegendColors", "field": "Legend"},
+      "range": {"signal": "legendRange"}
+    }
+  ],
+  // Part: Managing Gantt axes | Partie : Gestion des axes du Gantt //
+  "axes": [
+    {
+      "ticks": true,
+      "orient": "top",
+      "scale": "xscale",
+      "grid": true,
+      "title": {"signal": "AxesTitle"},
+      "position": {"signal": "taskColumnWidth"},
+      "format": {
+        "signal": "span(xdom) < (1000*60*60*24*365) ? '%d/%m/%y' : '%m/%y'"
+      },
+      "tickCount": {
+        "signal": "span(xdom) < (1000*60*60*24*180) ? max(5, min(9, ceil(span(xdom) / (1000*60*60*24)))) : max(2, min(9, ceil(span(xdom) / (1000*60*60*24*30))))"
+      },
+      "encode": {
+        "labels": {
+          "update": {
+            "text": {
+              "signal": "span(xdom) < (1000*60*60*24*120) ? (month(datum.value) == 0 && date(datum.value) == 1 ? timeFormat(datum.value, '%d/%m/%y') : timeFormat(datum.value, '%d/%m')) : timeFormat(datum.value, span(xdom) < (1000*60*60*24*365) ? '%d/%m/%y' : '%m/%y')"
+            },
+            "fontWeight": {
+              "signal": "month(datum.value) == 0 && date(datum.value) == 1 ? 'bold' : 'normal'"
+            }
+          }
+        },
+        "ticks": {
+          "update": {
+            "strokeWidth": {
+              "signal": "month(datum.value) == 0 && date(datum.value) == 1 ? 2 : 1"
+            },
+            "stroke": {
+              "signal": "month(datum.value) == 0 && date(datum.value) == 1 ? 'black' : '#888'"
+            }
+          }
+        },
+        "grid": {
+          "update": {
+            "strokeWidth": {
+              "signal": "month(datum.value) == 0 && date(datum.value) == 1 ? 2 : 1"
+            },
+            "stroke": {
+              "signal": "month(datum.value) == 0 && date(datum.value) == 1 ? 'black' : '#ddd'"
+            }
+          }
+        }
+      }
+    }
+  ]
+}
