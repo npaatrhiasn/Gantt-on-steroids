@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "width": 1200,
-  "height": 600,
+  "height": 630,
   "padding": 5,
   "description": "Made by Nathan BODIN, ispired by Davide BACCI and Madison GIAMMARIA. You can contact me on Linkedin : Nathan BODIN and on Instagram : @nathanbod1. Every comments that you will find in this code have two parts. The first one is English version and the last one is French version of the comment.",
 
@@ -295,8 +295,7 @@
       "name": "Color",
       "values": [
         {"Legend": "Development","Color": "#00008B"},
-        {"Legend": "Research","Color": "#800020"},
-        {"Legend": "Division B","Color": "white"}
+        {"Legend": "Research","Color": "#800020"}
       ]
     },
     {
@@ -1074,27 +1073,27 @@
         {
           "type": "formula",
           "as": "VC",
-          "expr": "datum.Milestone == 0 ? (datum.Level === datum.CMode ? 1 : 0) : (datum.Level === datum.CMMode ? 1 : 0)"
+          "expr": "!isDefined(datum.Milestone) || datum.Milestone == 0 ? (datum.Level === datum.CMode ? 1 : 0) : (datum.Level === datum.CMMode ? 1 : 0)"
         },
         {
           "type": "formula",
           "as": "VSC",
-          "expr": "datum.Milestone == 0 ? (datum.Level === datum.SCMode ? 1 : 0) : (datum.Level === datum.SCMMode ? 1 : 0)"
+          "expr": "!isDefined(datum.Milestone) || datum.Milestone == 0 ? (datum.Level === datum.SCMode ? 1 : 0) : (datum.Level === datum.SCMMode ? 1 : 0)"
         },
         {
           "type": "formula",
           "as": "VS",
-          "expr": "datum.Milestone == 0 ? (datum.Level === datum.SMode ? 1 : 0) : (datum.Level === datum.SMMode ? 1 : 0)"
+          "expr": "!isDefined(datum.Milestone) || datum.Milestone == 0 ? (datum.Level === datum.SMode ? 1 : 0) : (datum.Level === datum.SMMode ? 1 : 0)"
         },
         {
           "type": "formula",
           "as": "VSS",
-          "expr": "datum.Milestone == 0 ? (datum.Level === datum.SSMode ? 1 : 0) : (datum.Level === datum.SSMMode ? 1 : 0)"
+          "expr": "!isDefined(datum.Milestone) || datum.Milestone == 0 ? (datum.Level === datum.SSMode ? 1 : 0) : (datum.Level === datum.SSMMode ? 1 : 0)"
         },
         {
           "type": "formula",
           "as": "VI",
-          "expr": "datum.Milestone == 0 ? (datum.Level === datum.IMode ? 1 : 0) : (datum.Level === datum.IMMode ? 1 : 0)"
+          "expr": "!isDefined(datum.Milestone) || datum.Milestone == 0 ? (datum.Level === datum.IMode ? 1 : 0) : (datum.Level === datum.IMMode ? 1 : 0)"
         },
         {
           "type": "formula",
@@ -1103,7 +1102,7 @@
         },
         {
           "type": "project",
-          "fields": ["Id", "Start", "End", "Category", "SubcategoryFull", "SegmentFull", "SubsegmentFull", "ItemFull", "VC", "VSC", "VS", "VSS", "VI", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "VColor", "Milestone", "Shape"]
+          "fields": ["Id", "Start", "End", "Category", "SubcategoryFull", "SegmentFull", "SubsegmentFull", "ItemFull", "VC", "VSC", "VS", "VSS", "VI", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "VColor", "Milestone", "Shape", "CMode"]
         }
       ]
     },
@@ -1144,7 +1143,7 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.Milestone == 0"
+          "expr": "!isDefined(datum.Milestone) || datum.Milestone == 0"
         },
         {
           "type": "project",
@@ -1278,22 +1277,33 @@
     {"name": "SlicerInit", "value":1},
 
     // Header Settings //
+    {"name": "ShowHeader", "value": true},
     {"name": "headerMarginX", "value": 0},
-    {"name": "headerMarginY", "value": -130},
+    {"name": "headerMarginY", "update": "ShowHeader ? -130 : 0"},
     {"name": "headerHeight", "value": 50},
     {"name": "TitleMarginX", "value": 10},
-    {"name": "Title", "value": "Title that you can change"},
+    {"name": "Title", "update": "ShowHeader ? 'Title that you can change' : ''"},
     {"name": "TitleFontSize", "value": 24},
     {"name": "TitleFontWeight", "value": "bold"},
     {"name": "ButtonWidth", "value":50},
     {"name": "ButtonHeight", "value":20},
     {"name": "ButtonRadius", "value":5},
-    {"name": "SubTitle", "value":"You can change the subtitle if you change the parameter called 'SubTitle' in the code"},
+    {"name": "SubTitle", "update":"ShowHeader ? 'You can change the subtitle if you change the parameter called SubTitle in the code' : ''"},
     {"name": "SubTitleFontSize", "value":12},
 
     // Controls Settings //
-    {"name": "controlsY", "value": -80},
+    {"name": "ShowControls", "value": true},
+    {"name": "controlsY", "update": "ShowControls ? -60 : 0"},
     {"name": "controlsPaddingBetweenItems", "value": 50},
+    {"name": "controlsClickPadingY", "value": 10},
+    {"name": "ControlsFontSize", "value": 12},
+    {"name": "CheckboxWidth", "value": 35},
+    {"name": "CheckboxHeight", "value": 18},
+    {"name": "CheckboxToggleSize", "value": 120},
+    {"name": "ControlsLegendText", "value": "Legends"},
+    {"name": "ControlsInfosText", "value": "Infos"},
+    {"name": "ControlsMilestonesText", "value": "Milestones"},
+    {"name": "ControlsLevelText", "value": "Level of details"},
     {"name": "SlicerLenght", "value": 100},
     {"name": "controlBoxWidth", "update": "showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems + SlicerLenght + 15"},
     {"name": "controlBoxHeight", "value": 60},
@@ -1318,6 +1328,9 @@
     {"name": "ShapeSize", "value":200},
 
     // Gantt Settings //
+    {"name": "ShowSeparator", "value": true},
+    {"name": "ShowWeekends", "value": true},
+    {"name": "ShowBankHolidays", "value": true},
     {"name": "oneDay", "update": "1000*60*60*24"},
     {"name": "ChartWidth", "update": "width - columnHolderMarginX - taskColumnWidth"},
     {"name": "barHeight", "value":20},
@@ -1436,11 +1449,11 @@
       "on": [
         {
           "events": "@sliderZone:pointerdown, @sliderThumbCustom:pointerdown",
-          "update": "clamp(round(1 + clamp(x() - controlsX - (showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems) , 0, SlicerLenght ) / (SlicerLenght  / 4)), 1, 5)"
+          "update": "clamp(round(1 + clamp(x() - controlsX - (showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems) , 0, SlicerLenght ) / (SlicerLenght  / 4)), 1, 5)"
         },
         {
           "events": "window:pointermove",
-          "update": "isDragging ? clamp(round(1 + clamp(x() - controlsX - (showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems) , 0, SlicerLenght ) / (SlicerLenght  / 4)), 1, 5) : development"
+          "update": "isDragging ? clamp(round(1 + clamp(x() - controlsX - (showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems) , 0, SlicerLenght ) / (SlicerLenght  / 4)), 1, 5) : development"
         }
       ]
     },
@@ -1643,7 +1656,7 @@
           "y": {"signal": "headerMarginY"},
           "width": {"signal": "width/2"},
           "height": {"signal": "headerHeight"}, 
-          "fill": {"signal": "BgColor"}, 
+          "fill": {"signal": "ShowHeader ? BgColor : 'transparent'"}, 
           "cornerRadius": {"value": 5},
           "zindex": {"value": 100}
         }
@@ -1689,6 +1702,7 @@
     // ====================================================== //
 
     {
+      // Controls Zone | Zone des controls //
       "type": "group",
       "name": "controlsGroup",
       "encode": {
@@ -1696,39 +1710,40 @@
           "x": {"signal": "controlsX"},
           "y": {"signal": "controlsY"},
           "width": {"signal": "controlBoxWidth"},
-          "height": {"signal": "controlBoxHeight"}
+          "height": {"signal": "controlBoxHeight"},
+          "opacity": {"signal": "ShowControls ? 1 : 0"}
         }
       },
       "marks": [
-
         {
+          // Text of the checkbox that controls the visibility of the legend | Texte de la checkbox qui gère la visibilité de la légende //
           "type": "text",
           "encode": {
             "update": {
               "x": {"signal": "showLegendPaddingX"},
               "y": {"value": 0},
-              "text": {"value": "Legends"},
+              "text": {"signal": "ControlsLegendText"},
               "fill": {"signal": "MainColor"},
-              "fontSize": {"value": 12},
-              "align": {"value": "left"}
+              "fontSize": {"signal": "ControlsFontSize"},
+              "align": {"value": "left"},
+              "opacity": {"signal": "ShowControls ? 1 : 0"}
             }
           }
         },
         {
+          // Checkbox background | Fond de la checkbox //
           "type": "rect",
           "name": "checkboxZone",
           "encode": {
             "update": {
               "x": {"signal": "showLegendPaddingX"},
-              "y": {"value": 10},
-              "width": {"value": 35},
-              "height": {"value": 18},
+              "y": {"signal": "controlsClickPadingY"},
+              "width": {"signal": "CheckboxWidth"},
+              "height": {"signal": "CheckboxHeight"},
               "fill": {"signal": "showLegend ? MainColor : '#e9ecef'"},
               "cornerRadius": {"value": 9},
-              "cursor": {"value": "pointer"}
-            },
-            "hover": {
-              "fillOpacity": {"value": 0.8}
+              "cursor": {"value": "pointer"},
+              "opacity": {"signal": "ShowControls ? 1 : 0"}
             }
           }
         },
@@ -1737,45 +1752,46 @@
           "name": "checkboxToggle",
           "encode": {
             "update": {
-              "x": {"signal": "showLegend ? showLegendPaddingX + 26 : showLegendPaddingX + 9"},
-              "y": {"value": 19},
-              "size": {"value": 120},
+              "x": {"signal": "showLegend ? showLegendPaddingX + CheckboxWidth - 9 : showLegendPaddingX + 9"},
+              "y": {"signal": "controlsClickPadingY + CheckboxHeight/2"},
+              "size": {"signal": "CheckboxToggleSize"},
               "shape": {"value": "circle"},
               "fill": {"value": "white"},
               "stroke": {"value": "none"},
-              "cursor": {"value": "pointer"}
+              "cursor": {"value": "pointer"},
+              "opacity": {"signal": "ShowControls ? 1 : 0"}
             }
           }
         },
-
         {
+          // Text of the checkbox that controls the visibility of the informations | Texte de la checkbox qui gère la visibilité des informations //
           "type": "text",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 35 + controlsPaddingBetweenItems"},
+              "x": {"signal": "showLegendPaddingX + CheckboxWidth + controlsPaddingBetweenItems"},
               "y": {"value": 0},
-              "text": {"value": "Infos"},
+              "text": {"signal": "ControlsInfosText"},
               "fill": {"signal": "MainColor"},
-              "fontSize": {"value": 12},
-              "align": {"value": "left"}
+              "fontSize": {"signal": "ControlsFontSize"},
+              "align": {"value": "left"},
+              "opacity": {"signal": "ShowControls ? 1 : 0"}
             }
           }
         },
         {
+          // Checkbox background | Fond de la checkbox //
           "type": "rect",
           "name": "checkboxZoneInfos",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 35 + controlsPaddingBetweenItems"},
-              "y": {"value": 10},
-              "width": {"value": 35},
-              "height": {"value": 18},
+              "x": {"signal": "showLegendPaddingX + CheckboxWidth + controlsPaddingBetweenItems"},
+              "y": {"signal": "controlsClickPadingY"},
+              "width": {"signal": "CheckboxWidth"},
+              "height": {"signal": "CheckboxHeight"},
               "fill": {"signal": "showInfos ? MainColor : '#e9ecef'"},
               "cornerRadius": {"value": 9},
-              "cursor": {"value": "pointer"}
-            },
-            "hover": {
-              "fillOpacity": {"value": 0.8}
+              "cursor": {"value": "pointer"},
+              "opacity": {"signal": "ShowControls ? 1 : 0"}
             }
           }
         },
@@ -1784,45 +1800,46 @@
           "name": "checkboxToggleInfos",
           "encode": {
             "update": {
-              "x": {"signal": "showInfos ? showLegendPaddingX + 61 + controlsPaddingBetweenItems : showLegendPaddingX + 44 + controlsPaddingBetweenItems"},
-              "y": {"value": 19},
-              "size": {"value": 120},
+              "x": {"signal": "showInfos ? showLegendPaddingX + 2*CheckboxWidth - 9 + controlsPaddingBetweenItems : showLegendPaddingX + CheckboxWidth + 9 + controlsPaddingBetweenItems"},
+              "y": {"signal": "controlsClickPadingY + CheckboxHeight/2"},
+              "size": {"signal": "CheckboxToggleSize"},
               "shape": {"value": "circle"},
               "fill": {"value": "white"},
               "stroke": {"value": "none"},
-              "cursor": {"value": "pointer"}
+              "cursor": {"value": "pointer"},
+              "opacity": {"signal": "ShowControls ? 1 : 0"}
             }
           }
         },
-
         {
+          // Text of the checkbox that controls the visibility of the Milestone | Texte de la checkbox qui gère la visibilité des jalons //
           "type": "text",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 70 + 2*controlsPaddingBetweenItems"},
+              "x": {"signal": "showLegendPaddingX + 2*CheckboxWidth + 2*controlsPaddingBetweenItems"},
               "y": {"value": 0},
-              "text": {"value": "Milestones"},
+              "text": {"signal": "ControlsMilestonesText"},
               "fill": {"signal": "MainColor"},
-              "fontSize": {"value": 12},
-              "align": {"value": "left"}
+              "fontSize": {"signal": "ControlsFontSize"},
+              "align": {"value": "left"},
+              "opacity": {"signal": "ShowControls ? 1 : 0"}
             }
           }
         },
         {
+          // Checkbox background | Fond de la checkbox //
           "type": "rect",
           "name": "checkboxZoneMilestone",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 70 + 2*controlsPaddingBetweenItems"},
-              "y": {"value": 10},
-              "width": {"value": 35},
-              "height": {"value": 18},
+              "x": {"signal": "showLegendPaddingX + 2*CheckboxWidth + 2*controlsPaddingBetweenItems"},
+              "y": {"signal": "controlsClickPadingY"},
+              "width": {"signal": "CheckboxWidth"},
+              "height": {"signal": "CheckboxHeight"},
               "fill": {"signal": "showMilestone ? MainColor : '#e9ecef'"},
               "cornerRadius": {"value": 9},
-              "cursor": {"value": "pointer"}
-            },
-            "hover": {
-              "fillOpacity": {"value": 0.8}
+              "cursor": {"value": "pointer"},
+              "opacity": {"signal": "ShowControls ? 1 : 0"}
             }
           }
         },
@@ -1831,27 +1848,29 @@
           "name": "checkboxToggleMilestone",
           "encode": {
             "update": {
-              "x": {"signal": "showMilestone ? showLegendPaddingX + 96 + 2*controlsPaddingBetweenItems : showLegendPaddingX + 79 + 2*controlsPaddingBetweenItems"},
-              "y": {"value": 19},
-              "size": {"value": 120},
+              "x": {"signal": "showMilestone ? showLegendPaddingX + 3*CheckboxWidth - 9 + 2*controlsPaddingBetweenItems : showLegendPaddingX + 2*CheckboxWidth + 9 + 2*controlsPaddingBetweenItems"},
+              "y": {"signal": "controlsClickPadingY + CheckboxHeight/2"},
+              "size": {"signal": "CheckboxToggleSize"},
               "shape": {"value": "circle"},
               "fill": {"value": "white"},
               "stroke": {"value": "none"},
-              "cursor": {"value": "pointer"}
+              "cursor": {"value": "pointer"},
+              "opacity": {"signal": "ShowControls ? 1 : 0"}
             }
           }
         },
-
         {
+          // Text from the slicer that manages the level of detail | Texte du slicer qui gère le niveau de détails //
           "type": "text",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems"},
+              "x": {"signal": "showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems"},
               "y": {"value": 0},
-              "text": {"value": "Level of details"},
+              "text": {"signal": "ControlsLevelText"},
               "fill": {"signal": "MainColor"},
-              "fontSize": {"value": 12},
-              "align": {"value": "left"}
+              "fontSize": {"signal": "ControlsFontSize"},
+              "align": {"value": "left"},
+              "opacity": {"signal": "ShowControls ? 1 : 0"}
             }
           }
         },
@@ -1860,12 +1879,13 @@
           "name": "sliderZone",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems"},
+              "x": {"signal": "showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems"},
               "y": {"value": 13},
-              "width": {"signal": "SlicerLenght "},
+              "width": {"signal": "SlicerLenght"},
               "height": {"value": 8},
               "fill": {"value": "transparent"},
-              "cursor": {"value": "pointer"}
+              "cursor": {"value": "pointer"},
+              "opacity": {"signal": "ShowControls ? 1 : 0"}
             }
           }
         },
@@ -1874,12 +1894,13 @@
           "name": "sliderTrack",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems"},
+              "x": {"signal": "showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems"},
               "y": {"value": 16},
-              "width": {"signal": "SlicerLenght "},
+              "width": {"signal": "SlicerLenght"},
               "height": {"value": 4},
               "fill": {"value": "#e9ecef"},
-              "cornerRadius": {"value": 2}
+              "cornerRadius": {"value": 2},
+              "opacity": {"signal": "ShowControls ? 1 : 0"}
             }
           }
         },
@@ -1888,12 +1909,13 @@
           "name": "sliderFill",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems"},
+              "x": {"signal": "showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems"},
               "y": {"value": 16},
               "width": {"signal": "(development - 1) * (SlicerLenght / 4)"},
               "height": {"value": 4},
               "fill": {"signal": "MainColor"},
-              "cornerRadius": {"value": 2}
+              "cornerRadius": {"value": 2},
+              "opacity": {"signal": "ShowControls ? 1 : 0"}
             }
           }
         },
@@ -1902,14 +1924,15 @@
           "name": "sliderThumbCustom",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems  + (development - 1) * (SlicerLenght / 4)"},
+              "x": {"signal": "showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems  + (development - 1) * (SlicerLenght / 4)"},
               "y": {"value": 18},
               "size": {"value": 180},
               "shape": {"value": "circle"},
               "fill": {"signal": "MainColor"},
               "stroke": {"value": "white"},
               "strokeWidth": {"value": 2.5},
-              "cursor": {"value": "pointer"}
+              "cursor": {"value": "pointer"},
+              "opacity": {"signal": "ShowControls ? 1 : 0"}
             },
             "hover": {
               "size": {"value": 220}
@@ -1920,13 +1943,14 @@
           "type": "text",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems + SlicerLenght + 15"},
+              "x": {"signal": "showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems + SlicerLenght + 15"},
               "y": {"value": 20},
               "text": {"signal": "development"},
               "fill": {"signal": "MainColor"},
               "fontSize": {"value": 11},
               "fontWeight": {"value": "bold"},
-              "align": {"value": "right"}
+              "align": {"value": "right"},
+              "opacity": {"signal": "ShowControls ? 1 : 0"}
             }
           }
         }
@@ -2106,7 +2130,7 @@
               "y": {"value": 1},
               "y2": {"signal": "height"},
               "opacity": {
-                "signal": "span(xdom) <= VisibleWeekendsAndBankHollidaysLimit ? VisibleWeekendsAndBankHollidaysOpacity : 0" // Weekend rectangles are only displayed if the user has zoomed in far enough | On affiche les rectangles de Weekends que si l'utilisateur a suffisamment zoomé //
+                "signal": "ShowWeekends && span(xdom) <= VisibleWeekendsAndBankHollidaysLimit ? VisibleWeekendsAndBankHollidaysOpacity : 0" // Weekend rectangles are only displayed if the user has zoomed in far enough | On affiche les rectangles de Weekends que si l'utilisateur a suffisamment zoomé //
               }
             }
           }
@@ -2125,7 +2149,7 @@
               "y": {"value": 0},
               "y2": {"signal": "height"},
               "opacity": {
-                "signal": "span(xdom) <= VisibleWeekendsAndBankHollidaysLimit ? VisibleWeekendsAndBankHollidaysOpacity : 0" // Holiday rectangles are only displayed if the user has zoomed in far enough | On affiche les rectangles de Weekends que si l'utilisateur a suffisamment zoomé //
+                "signal": "ShowBankHolidays && span(xdom) <= VisibleWeekendsAndBankHollidaysLimit ? VisibleWeekendsAndBankHollidaysOpacity : 0" // Holiday rectangles are only displayed if the user has zoomed in far enough | On affiche les rectangles de Weekends que si l'utilisateur a suffisamment zoomé //
               }
             }
           }
@@ -2166,6 +2190,7 @@
           }
         },
         {
+          // Displaying labels in rectangles | Affichage des labels dans les rectangles //
           "type": "text",
           "name": "GanttRectText",
           "from": {"data": "VisibleRectangles"},
@@ -2240,6 +2265,26 @@
               "opacity": {
                 "signal": "!showMilestone ? 0 : (hoveredId === datum.Id ? GanttRectanglesOpacityHoover : GanttRectanglesOpacity)"
               }
+            }
+          }
+        },
+        {
+          // Séparateurs entre les lignes | Line separators //
+          "type": "rule",
+          "name": "LineSeparators",
+          "from": {"data": "OfficialID"},
+          "encode": {
+            "enter": {
+              "x": {"signal": "0"},
+              "x2": {"signal": "width"},
+              "y": {"signal": "scale('yscale', datum.Id) + bandwidth('yscale')"},
+              "stroke": {"signal": "MainColor"},
+              "strokeWidth": {"value": 1},
+              "strokeDash": {"value": [4, 4]},
+              "opacity": {"signal": "ShowSeparator ? 0.3 : 0"}
+            },
+            "update": {
+              "y": {"signal": "scale('yscale', datum.Id) + bandwidth('yscale')"}
             }
           }
         },
