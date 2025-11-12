@@ -1,9 +1,9 @@
 {
-  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
   "width": 1200,
   "height": 630,
   "padding": 5,
-  "description": "Made by Nathan BODIN, ispired by Davide BACCI and Madison GIAMMARIA. You can contact me on Linkedin : Nathan BODIN and on Instagram : @nathanbod1. Every comments that you will find in this code have two parts. The first one is English version and the last one is French version of the comment.",
+  "description": "Made by Nathan BODIN, inspired by Davide BACCI and Madison GIAMMARIA. You can contact me on Linkedin : Nathan BODIN and on Instagram : @nathanbod1. Every comments that you will find in this code have two parts. The first one is English version and the last one is French version of the comment.",
 
   // Data part: this is where vega receives the raw data and transforms it to output the three datasets that vega needs to display the Gantt (OfficialId, VisibleRectangles and VisibleMilestones) | Partie data : c'est ici que vega reçoit les données brutes et les transforme pour sortir les 3 datasets dont vega à besoin pour afficher le Gantt (OfficialId, VisibleRectangles et VisibleMilestones) //
   "data": [
@@ -884,7 +884,7 @@
         {
           "type": "formula",
           "as": "VC",
-          "expr": 1
+          "expr": "1"
         },
         {
           "type": "formula",
@@ -1293,6 +1293,13 @@
 
     // Controls Settings //
     {"name": "ShowControls", "value": true},
+    {"name": "ShowLegendsControl", "value": true},
+    {"name": "ShowInfosControl", "value": true},
+    {"name": "ShowMilestoneControl", "value": true},
+    {
+      "name": "TrueCountControl",
+      "update": "(ShowLegendsControl ? 1 : 0) + (ShowInfosControl ? 1 : 0) + (ShowMilestoneControl ? 1 : 0)"
+    },
     {"name": "controlsY", "update": "ShowControls ? -60 : 0"},
     {"name": "controlsPaddingBetweenItems", "value": 50},
     {"name": "controlsClickPadingY", "value": 10},
@@ -1305,7 +1312,6 @@
     {"name": "ControlsMilestonesText", "value": "Milestones"},
     {"name": "ControlsLevelText", "value": "Level of details"},
     {"name": "SlicerLenght", "value": 100},
-    {"name": "controlBoxWidth", "update": "showLegendPaddingX + 105 + 3*controlsPaddingBetweenItems + SlicerLenght + 15"},
     {"name": "controlBoxHeight", "value": 60},
     {"name": "showLegendPaddingX", "value": 0},
     {"name": "controlsX", "update": "width - controlBoxWidth"},
@@ -1361,6 +1367,27 @@
     {"name": "LegendTextPaddingX", "value":22},
     {"name": "LegendTextFontSize", "value":12},
     {"name": "LegendTextColor", "value":"#000000"},
+
+    {
+      "name": "legendControlX",
+      "update": "showLegendPaddingX"
+    },
+    {
+      "name": "infosControlX",
+      "update": "ShowLegendsControl ? (showLegendPaddingX + CheckboxWidth + controlsPaddingBetweenItems) : showLegendPaddingX"
+    },
+    {
+      "name": "milestoneControlX",
+      "update": "(ShowLegendsControl ? (showLegendPaddingX + CheckboxWidth + controlsPaddingBetweenItems) : showLegendPaddingX) + (ShowInfosControl ? (CheckboxWidth + controlsPaddingBetweenItems) : 0)"
+    },
+    {
+      "name": "sliderControlX",
+      "update": "(ShowLegendsControl ? (showLegendPaddingX + CheckboxWidth + controlsPaddingBetweenItems) : showLegendPaddingX) + (ShowInfosControl ? (CheckboxWidth + controlsPaddingBetweenItems) : 0) + (ShowMilestoneControl ? (CheckboxWidth + controlsPaddingBetweenItems) : 0)"
+    },
+    {
+      "name": "controlBoxWidth",
+      "update": "sliderControlX + SlicerLenght + 15"
+    },
 
     {
       // The initial domain is the entire domain of your data. | Le domaine initial c'est le domaine entier de vos données //
@@ -1449,11 +1476,11 @@
       "on": [
         {
           "events": "@sliderZone:pointerdown, @sliderThumbCustom:pointerdown",
-          "update": "clamp(round(1 + clamp(x() - controlsX - (showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems) , 0, SlicerLenght ) / (SlicerLenght  / 4)), 1, 5)"
+          "update": "clamp(round(1 + clamp(x() - controlsX - (showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems), 0, SlicerLenght) / (SlicerLenght / (MaxLevel - 1))), 1, MaxLevel)"
         },
         {
           "events": "window:pointermove",
-          "update": "isDragging ? clamp(round(1 + clamp(x() - controlsX - (showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems) , 0, SlicerLenght ) / (SlicerLenght  / 4)), 1, 5) : development"
+          "update": "isDragging ? clamp(round(1 + clamp(x() - controlsX - (showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems), 0, SlicerLenght) / (SlicerLenght / (MaxLevel - 1))), 1, MaxLevel) : development"
         }
       ]
     },
@@ -1711,7 +1738,7 @@
           "y": {"signal": "controlsY"},
           "width": {"signal": "controlBoxWidth"},
           "height": {"signal": "controlBoxHeight"},
-          "opacity": {"signal": "ShowControls ? 1 : 0"}
+          "opacity": {"signal": "ShowControls? 1 : 0"}
         }
       },
       "marks": [
@@ -1726,7 +1753,7 @@
               "fill": {"signal": "MainColor"},
               "fontSize": {"signal": "ControlsFontSize"},
               "align": {"value": "left"},
-              "opacity": {"signal": "ShowControls ? 1 : 0"}
+              "opacity": {"signal": "ShowLegendsControl ? 1 : 0"}
             }
           }
         },
@@ -1743,7 +1770,7 @@
               "fill": {"signal": "showLegend ? MainColor : '#e9ecef'"},
               "cornerRadius": {"value": 9},
               "cursor": {"value": "pointer"},
-              "opacity": {"signal": "ShowControls ? 1 : 0"}
+              "opacity": {"signal": "ShowLegendsControl ? 1 : 0"}
             }
           }
         },
@@ -1759,7 +1786,7 @@
               "fill": {"value": "white"},
               "stroke": {"value": "none"},
               "cursor": {"value": "pointer"},
-              "opacity": {"signal": "ShowControls ? 1 : 0"}
+              "opacity": {"signal": "ShowLegendsControl ? 1 : 0"}
             }
           }
         },
@@ -1768,13 +1795,13 @@
           "type": "text",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + CheckboxWidth + controlsPaddingBetweenItems"},
+              "x": {"signal": "infosControlX"},
               "y": {"value": 0},
               "text": {"signal": "ControlsInfosText"},
               "fill": {"signal": "MainColor"},
               "fontSize": {"signal": "ControlsFontSize"},
               "align": {"value": "left"},
-              "opacity": {"signal": "ShowControls ? 1 : 0"}
+              "opacity": {"signal": "ShowInfosControl ? 1 : 0"}
             }
           }
         },
@@ -1784,14 +1811,14 @@
           "name": "checkboxZoneInfos",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + CheckboxWidth + controlsPaddingBetweenItems"},
+              "x": {"signal": "infosControlX"},
               "y": {"signal": "controlsClickPadingY"},
               "width": {"signal": "CheckboxWidth"},
               "height": {"signal": "CheckboxHeight"},
               "fill": {"signal": "showInfos ? MainColor : '#e9ecef'"},
               "cornerRadius": {"value": 9},
               "cursor": {"value": "pointer"},
-              "opacity": {"signal": "ShowControls ? 1 : 0"}
+              "opacity": {"signal": "ShowInfosControl ? 1 : 0"}
             }
           }
         },
@@ -1800,14 +1827,14 @@
           "name": "checkboxToggleInfos",
           "encode": {
             "update": {
-              "x": {"signal": "showInfos ? showLegendPaddingX + 2*CheckboxWidth - 9 + controlsPaddingBetweenItems : showLegendPaddingX + CheckboxWidth + 9 + controlsPaddingBetweenItems"},
+              "x": {"signal": "showInfos ? infosControlX + CheckboxWidth - 9 : infosControlX + 9"},
               "y": {"signal": "controlsClickPadingY + CheckboxHeight/2"},
               "size": {"signal": "CheckboxToggleSize"},
               "shape": {"value": "circle"},
               "fill": {"value": "white"},
               "stroke": {"value": "none"},
               "cursor": {"value": "pointer"},
-              "opacity": {"signal": "ShowControls ? 1 : 0"}
+              "opacity": {"signal": "ShowInfosControl ? 1 : 0"}
             }
           }
         },
@@ -1816,13 +1843,13 @@
           "type": "text",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 2*CheckboxWidth + 2*controlsPaddingBetweenItems"},
+              "x": {"signal": "milestoneControlX"},
               "y": {"value": 0},
               "text": {"signal": "ControlsMilestonesText"},
               "fill": {"signal": "MainColor"},
               "fontSize": {"signal": "ControlsFontSize"},
               "align": {"value": "left"},
-              "opacity": {"signal": "ShowControls ? 1 : 0"}
+              "opacity": {"signal": "ShowMilestoneControl ? 1 : 0"}
             }
           }
         },
@@ -1832,14 +1859,14 @@
           "name": "checkboxZoneMilestone",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 2*CheckboxWidth + 2*controlsPaddingBetweenItems"},
+              "x": {"signal": "milestoneControlX"},
               "y": {"signal": "controlsClickPadingY"},
               "width": {"signal": "CheckboxWidth"},
               "height": {"signal": "CheckboxHeight"},
               "fill": {"signal": "showMilestone ? MainColor : '#e9ecef'"},
               "cornerRadius": {"value": 9},
               "cursor": {"value": "pointer"},
-              "opacity": {"signal": "ShowControls ? 1 : 0"}
+              "opacity": {"signal": "ShowMilestoneControl ? 1 : 0"}
             }
           }
         },
@@ -1848,14 +1875,14 @@
           "name": "checkboxToggleMilestone",
           "encode": {
             "update": {
-              "x": {"signal": "showMilestone ? showLegendPaddingX + 3*CheckboxWidth - 9 + 2*controlsPaddingBetweenItems : showLegendPaddingX + 2*CheckboxWidth + 9 + 2*controlsPaddingBetweenItems"},
+              "x": {"signal": "showMilestone ? milestoneControlX + CheckboxWidth - 9 : milestoneControlX + 9"},
               "y": {"signal": "controlsClickPadingY + CheckboxHeight/2"},
               "size": {"signal": "CheckboxToggleSize"},
               "shape": {"value": "circle"},
               "fill": {"value": "white"},
               "stroke": {"value": "none"},
               "cursor": {"value": "pointer"},
-              "opacity": {"signal": "ShowControls ? 1 : 0"}
+              "opacity": {"signal": "ShowMilestoneControl ? 1 : 0"}
             }
           }
         },
@@ -1864,13 +1891,12 @@
           "type": "text",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems"},
+              "x": {"signal": "sliderControlX"},
               "y": {"value": 0},
               "text": {"signal": "ControlsLevelText"},
               "fill": {"signal": "MainColor"},
               "fontSize": {"signal": "ControlsFontSize"},
-              "align": {"value": "left"},
-              "opacity": {"signal": "ShowControls ? 1 : 0"}
+              "align": {"value": "left"}
             }
           }
         },
@@ -1879,13 +1905,12 @@
           "name": "sliderZone",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems"},
+              "x": {"signal": "sliderControlX"},
               "y": {"value": 13},
               "width": {"signal": "SlicerLenght"},
               "height": {"value": 8},
               "fill": {"value": "transparent"},
-              "cursor": {"value": "pointer"},
-              "opacity": {"signal": "ShowControls ? 1 : 0"}
+              "cursor": {"value": "pointer"}
             }
           }
         },
@@ -1894,13 +1919,12 @@
           "name": "sliderTrack",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems"},
+              "x": {"signal": "sliderControlX"},
               "y": {"value": 16},
               "width": {"signal": "SlicerLenght"},
               "height": {"value": 4},
               "fill": {"value": "#e9ecef"},
-              "cornerRadius": {"value": 2},
-              "opacity": {"signal": "ShowControls ? 1 : 0"}
+              "cornerRadius": {"value": 2}
             }
           }
         },
@@ -1909,9 +1933,9 @@
           "name": "sliderFill",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems"},
+              "x": {"signal": "sliderControlX"},
               "y": {"value": 16},
-              "width": {"signal": "(development - 1) * (SlicerLenght / 4)"},
+              "width": {"signal": "(development - 1) * (SlicerLenght / (MaxLevel - 1))"},
               "height": {"value": 4},
               "fill": {"signal": "MainColor"},
               "cornerRadius": {"value": 2},
@@ -1924,15 +1948,14 @@
           "name": "sliderThumbCustom",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems  + (development - 1) * (SlicerLenght / 4)"},
+              "x": {"signal": "MaxLevel != 1 ? sliderControlX + (development - 1) * (SlicerLenght / (MaxLevel - 1)) : sliderControlX + (development - 1) * SlicerLenght"},
               "y": {"value": 18},
               "size": {"value": 180},
               "shape": {"value": "circle"},
               "fill": {"signal": "MainColor"},
               "stroke": {"value": "white"},
               "strokeWidth": {"value": 2.5},
-              "cursor": {"value": "pointer"},
-              "opacity": {"signal": "ShowControls ? 1 : 0"}
+              "cursor": {"value": "pointer"}
             },
             "hover": {
               "size": {"value": 220}
@@ -1943,14 +1966,13 @@
           "type": "text",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX + 3*CheckboxWidth + 3*controlsPaddingBetweenItems + SlicerLenght + 15"},
+              "x": {"signal": "sliderControlX + SlicerLenght + 15"},
               "y": {"value": 20},
               "text": {"signal": "development"},
               "fill": {"signal": "MainColor"},
               "fontSize": {"value": 11},
               "fontWeight": {"value": "bold"},
-              "align": {"value": "right"},
-              "opacity": {"signal": "ShowControls ? 1 : 0"}
+              "align": {"value": "right"}
             }
           }
         }
@@ -2280,7 +2302,7 @@
               "y": {"signal": "scale('yscale', datum.Id) + bandwidth('yscale')"},
               "stroke": {"signal": "MainColor"},
               "strokeWidth": {"value": 1},
-              "strokeDash": {"value": [4, 4]},
+              "strokeDash": {"signal": "datum.Level == 1 ? [1, 0] : [4, 4]"},
               "opacity": {"signal": "ShowSeparator ? 0.3 : 0"}
             },
             "update": {
