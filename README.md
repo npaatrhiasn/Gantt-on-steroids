@@ -6,5 +6,4 @@ Add milestones
 Add your colors  
 etc.  
 
-The documentation will arrived soon  
 The "happy few" mode will also arrived soon
