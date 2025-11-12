@@ -2047,14 +2047,14 @@
             "enter": {
               "x": {"signal": "0"},
               "x2": {"signal": "width"},
-              "y": {"signal": "scale('yscale', datum.Id) + bandwidth('yscale')"},
+              "y": {"signal": "scale('yscale', datum.Id)"},
               "stroke": {"signal": "MainColor"},
               "strokeWidth": {"value": 1},
               "strokeDash": {"signal": "datum.Level == 1 ? [1, 0] : [4, 4]"},
               "opacity": {"signal": "ShowSeparator ? 0.3 : 0"}
             },
             "update": {
-              "y": {"signal": "scale('yscale', datum.Id) + bandwidth('yscale')"}
+              "y": {"signal": "scale('yscale', datum.Id)"}
             }
           }
         },
