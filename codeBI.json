@@ -78,7 +78,7 @@
           "as": "End",
           "expr": "datum.Milestone == 1 ? datum.Start + 1 : datum.FEnd"
         },
-        // Part where we rank level 1 (Category) | Partie où l'on rank les niveau 1 (Category) //
+        // Part where we rank level 1 (Category) | Partie où l'on rank les niveaux 1 (Category) //
         {
           "type": "joinaggregate",
           "groupby": [
@@ -107,7 +107,7 @@
             "RankCategory" // We add the rank (1; 2; 3 etc) to each level 1 row after their ordering | On ajoute le rank (1; 2; 3 etc) à chaque ligne de niveau 1 après leur ordonnancement //
           ]
         },
-        // Part where we rank level 2 (Subcategory) | Partie où l'on rank les niveau 2 (Subcategory) //
+        // Part where we rank level 2 (Subcategory) | Partie où l'on rank les niveaux 2 (Subcategory) //
         {
           "type": "joinaggregate",
           "groupby": [
@@ -140,7 +140,7 @@
             "RankSubcategory"
           ]
         },
-        // Part where we rank level 3 (Segment) | Partie où l'on rank les niveau 3 (Segment) //
+        // Part where we rank level 3 (Segment) | Partie où l'on rank les niveaux 3 (Segment) //
         {
           "type": "joinaggregate",
           "groupby": [
@@ -175,7 +175,7 @@
             "RankSegment"
           ]
         },
-        // Part where we rank level 4 (Subsegment) | Partie où l'on rank les niveau 4 (Subsegment) //
+        // Part where we rank level 4 (Subsegment) | Partie où l'on rank les niveaux 4 (Subsegment) //
         {
           "type": "joinaggregate",
           "groupby": [
@@ -212,7 +212,7 @@
             "RankSubsegment"
           ]
         },
-        // Part where we rank level 5 (Item) | Partie où l'on rank les niveau 5 (Item) //
+        // Part where we rank level 5 (Item) | Partie où l'on rank les niveaux 5 (Item) //
         {
           "type": "joinaggregate",
           "groupby": [
@@ -251,7 +251,7 @@
             "RankItem"
           ]
         },
-        // Calculating how many levels you have created | Calcul de combien de Level avez vous créé //
+        // Calculating how many levels you have created | Calcul de combien de Level vous avez créé //
         {
           "type": "formula",
           "as": "maxLevel",
@@ -1092,7 +1092,6 @@
     {"name": "RectanglesRadius", "value":5},
     {"name": "RectanglesStrokesWidth", "value":1},
     {"name": "RectanglesPadding", "value":0.1},
-    {"name": "AxesTitle", "value":"Chronologie"},
     {"name": "VisibleWeekendsAndBankHollidaysLimit", "value":15552000000},
     {"name": "GanttRectanglesOpacity", "value":0.5},
     {"name": "GanttRectanglesOpacityHoover", "value":0.8},
@@ -1115,6 +1114,36 @@
     {"name": "LegendTextPaddingX", "value":22},
     {"name": "LegendTextFontSize", "value":12},
     {"name": "LegendTextColor", "value":"#000000"},
+
+    { "name": "labelName", "value": "Name" },
+    { "name": "labelCategory", "value": "Level 1" },
+    { "name": "labelSubcategory", "value": "Level 2" },
+    { "name": "labelSegment", "value": "Level 3" },
+    { "name": "labelSubsegment", "value": "Level 4" },
+    { "name": "labelItem", "value": "Level 5" },
+    { "name": "labelStart", "value": "Start" },
+    { "name": "labelEnd", "value": "End" },
+
+    {
+      "name": "dayBandwidth",
+      "update": "span(xdom) > 0 ? width / (span(xdom) / (1000*60*60*24)) : 0"
+    },
+    {
+      "name": "dayBandwidthRound",
+      "update": "round(dayBandwidth * 100) / 110"
+    },
+    {
+      "name": "minDayBandwidth",
+      "value": 20
+    },
+    {
+      "name": "minMonthBandwidth",
+      "value": 4
+    },
+    {
+      "name": "minYearBandwidth",
+      "value": 1
+    },
 
     {
       "name": "legendControlX",
@@ -1951,7 +1980,7 @@
               "y": {"signal": "scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2"},
               "tooltip": {
                 // Bubble info | Infos bulles //
-                "signal": "datum.Level == 1?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 2?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 3?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 4?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Sous-Segment': datum.Subsegment, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Sous-Segment': datum.Subsegment, 'Item': datum.Item, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}"
+                 "signal": "datum.Level == 1?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 2?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 3?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 4?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Sous-Segment': datum.Subsegment, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Sous-Segment': datum.Subsegment, 'Item': datum.Item, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}"
               },
               "opacity": {
                 "signal": "hoveredId === datum.Id ? GanttRectanglesOpacityHoover : GanttRectanglesOpacity"
@@ -2030,7 +2059,7 @@
               "x": {"scale": "xscale", "field": "Start"},
               "y": {"signal": "scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2 + barHeight / 2"},
               "tooltip": {
-                "signal": "datum.Level == 1?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Début': timeFormat(datum.Start, '%d/%m/%Y')}:datum.Level == 2?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Début': timeFormat(datum.Start, '%d/%m/%Y')}:datum.Level == 3?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Début': timeFormat(datum.Start, '%d/%m/%Y')}:datum.Level == 4?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Sous-Segment': datum.Subsegment, 'Début': timeFormat(datum.Start, '%d/%m/%Y')}:{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Sous-Segment': datum.Subsegment, 'Item': datum.Item, 'Début': timeFormat(datum.Start, '%d/%m/%Y')}"
+                "signal": "datum.Level == 1?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 2?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 3?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 4?{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Sous-Segment': datum.Subsegment, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}:{'Nom': datum.DisplayText, 'Catégorie': datum.Category, 'Sous-Catégorie': datum.Subcategory, 'Segment': datum.Segment, 'Sous-Segment': datum.Subsegment, 'Item': datum.Item, 'Début': timeFormat(datum.Start, '%d/%m/%Y'), 'Fin': timeFormat(datum.End, '%d/%m/%Y')}"
               },
               "opacity": {
                 "signal": "!showMilestone ? 0 : (hoveredId === datum.Id ? GanttRectanglesOpacityHoover : GanttRectanglesOpacity)"
@@ -2219,49 +2248,128 @@
   // Part: Managing Gantt axes | Partie : Gestion des axes du Gantt //
   "axes": [
     {
+      "description": "Axe inférieur - jours/mois/années",
       "ticks": true,
-      "orient": "top",
+      "labelPadding": -12,
       "scale": "xscale",
-      "grid": true,
-      "title": {"signal": "AxesTitle"},
       "position": {"signal": "taskColumnWidth"},
-      "format": {
-        "signal": "span(xdom) < (1000*60*60*24*365) ? '%d/%m/%y' : '%m/%y'"
-      },
+      "orient": "top",
+      "tickSize": 15,
+      "grid": false,
+      "zindex": 1,
+      "labelOverlap": false,
+      "formatType": "time",
       "tickCount": {
-        "signal": "span(xdom) < (1000*60*60*24*180) ? max(5, min(9, ceil(span(xdom) / (1000*60*60*24)))) : max(2, min(9, ceil(span(xdom) / (1000*60*60*24*30))))"
+        "signal": "dayBandwidthRound >= minYearBandwidth ? 'day' : 'month'"
       },
       "encode": {
-        "labels": {
-          "update": {
-            "text": {
-              "signal": "span(xdom) < (1000*60*60*24*120) ? (month(datum.value) == 0 && date(datum.value) == 1 ? timeFormat(datum.value, '%d/%m/%y') : timeFormat(datum.value, '%d/%m')) : timeFormat(datum.value, span(xdom) < (1000*60*60*24*365) ? '%d/%m/%y' : '%m/%y')"
-            },
-            "fontWeight": {
-              "signal": "month(datum.value) == 0 && date(datum.value) == 1 ? 'bold' : 'normal'"
-            }
-          }
-        },
         "ticks": {
           "update": {
-            "strokeWidth": {
-              "signal": "month(datum.value) == 0 && date(datum.value) == 1 ? 2 : 1"
-            },
-            "stroke": {
-              "signal": "month(datum.value) == 0 && date(datum.value) == 1 ? 'black' : '#888'"
-            }
+            "strokeWidth": [
+              {"test": "dayBandwidthRound >= minDayBandwidth", "value": 1},
+              {
+                "test": "dayBandwidthRound >= minMonthBandwidth && dayBandwidthRound < minDayBandwidth && date(datum.value) == 1",
+                "value": 1
+              },
+              {
+                "test": "dayBandwidthRound >= minYearBandwidth && dayBandwidthRound < minMonthBandwidth && date(datum.value) == 1",
+                "value": 1
+              },
+              {
+                "test": "dayBandwidthRound < minYearBandwidth && dayofyear(datum.value) == 1",
+                "value": 1
+              },
+              {"value": 0}
+            ]
           }
         },
-        "grid": {
+        "labels": {
           "update": {
-            "strokeWidth": {
-              "signal": "month(datum.value) == 0 && date(datum.value) == 1 ? 2 : 1"
-            },
-            "stroke": {
-              "signal": "month(datum.value) == 0 && date(datum.value) == 1 ? 'black' : '#ddd'"
-            }
+            "text": [
+              {
+                "test": "dayBandwidthRound >= minDayBandwidth",
+                "signal": "timeFormat(datum.value, '%d')"
+              },
+              {
+                "test": "dayBandwidthRound >= minMonthBandwidth && dayBandwidthRound < minDayBandwidth && date(datum.value) == 15",
+                "signal": "timeFormat(datum.value, '%B %y')"
+              },
+              {
+                "test": "dayBandwidthRound >= minYearBandwidth && dayBandwidthRound < minMonthBandwidth && date(datum.value) == 15",
+                "signal": "timeFormat(datum.value, '%b')"
+              },
+              {
+                "test": "dayBandwidthRound < minYearBandwidth && month(datum.value) == 6",
+                "signal": "timeFormat(datum.value, '%Y')"
+              },
+              {"value": ""}
+            ],
+            "align": {"value": "center"},
+            "dx": {"signal": "dayBandwidthRound/2"}
           }
         }
+      }
+    },
+    {
+      "description": "Axe supérieur - mois/années",
+      "scale": "xscale",
+      "position": {"signal": "taskColumnWidth"},
+      "domain": false,
+      "orient": "top",
+      "offset": 0,
+      "tickSize": 22,
+      "labelBaseline": "middle",
+      "grid": false,
+      "zindex": 0,
+      "tickCount": {
+        "signal": "dayBandwidthRound >= minYearBandwidth ? 'day' : 'month'"
+      },
+      "encode": {
+        "ticks": {
+          "update": {
+            "strokeWidth": [
+              {
+                "test": "dayBandwidthRound >= minDayBandwidth && date(datum.value) == 1",
+                "value": 1
+              },
+              {
+                "test": "dayBandwidthRound >= minYearBandwidth && dayBandwidthRound < minDayBandwidth && dayofyear(datum.value) == 1",
+                "value": 1
+              },
+              {"value": 0}
+            ]
+          }
+        },
+        "labels": {
+          "update": {
+            "text": [
+              {
+                "test": "dayBandwidthRound >= minDayBandwidth && date(datum.value) == 15",
+                "signal": "timeFormat(datum.value, '%B %y')"
+              },
+              {
+                "test": "dayBandwidthRound >= minYearBandwidth && dayBandwidthRound < minMonthBandwidth && month(datum.value) == 5 && date(datum.value) == 15",
+                "signal": "timeFormat(datum.value, '%Y')"
+              },
+              {"value": ""}
+            ],
+            "dx": {"signal": "dayBandwidthRound / 2"}
+          }
+        }
+      }
+    },
+    {
+      "description": "Lignes de grille mensuelles",
+      "scale": "xscale",
+      "position": {"signal": "taskColumnWidth"},
+      "domain": false,
+      "orient": "top",
+      "labels": false,
+      "grid": true,
+      "tickSize": 0,
+      "zindex": 0,
+      "tickCount": {
+        "signal": "dayBandwidthRound >= minMonthBandwidth || dayBandwidthRound <= 0.35 ? 0 : 'month'"
       }
     }
   ]
