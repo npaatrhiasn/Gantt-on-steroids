@@ -1131,7 +1131,7 @@
     {"name": "GanttRectTextFontBlackColor", "value":"white"},
     {"name": "GanttRectTextLuminanceBorder", "value":0.5},
     {"name": "AxesTitle", "value":"Chronologie"},
-    {"name": "TextWhere", "value":false},
+    {"name": "TextWhere", "value":true},
 
     // Legend Settings //
     {"name": "LegendGroupWidth", "value":150},
