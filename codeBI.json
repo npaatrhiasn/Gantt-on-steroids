@@ -20,7 +20,7 @@
       // DisplayRectangles matrix, here you decide where and how to display the rectangles (I am level 1, my depth is 1 so I display my level children...on my row) | Matrice d'affichage de rectangles, ici vous décidez où et comment afficher les rectangles (je suis de niveau 1, ma profondeur est 1 alors j'affiche mes enfants de niveau...sur ma ligne) //
       "name": "DisplayRectangles",
       "values": [
-        {"Level": 1,"Depth 1": 5, "Depth 2": 5, "Depth 3": 5, "Depth 4": 5, "Depth 5": 5},
+        {"Level": 1,"Depth 1":5, "Depth 2": 5, "Depth 3": 5, "Depth 4": 5, "Depth 5": 5},
         {"Level": 2,"Depth 1": "X", "Depth 2": 5, "Depth 3": 5, "Depth 4": 5, "Depth 5": 5},
         {"Level": 3,"Depth 1": "X", "Depth 2": "X", "Depth 3": 5, "Depth 4": 5, "Depth 5": 5},
         {"Level": 4,"Depth 1": "X", "Depth 2": "X", "Depth 3": "X", "Depth 4": 5, "Depth 5": 5},
@@ -293,7 +293,8 @@
         {"type": "formula", "as": "Color", "expr": "null"},
         {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 1 ? datum.Legend : datum.Category"},
         {"type": "formula", "as": "Milestone", "expr": "0"},
-        {"type": "formula", "as": "Shape", "expr": "null"}
+        {"type": "formula", "as": "Shape", "expr": "null"},
+        {"type": "formula", "as": "Size", "expr": "null"}
       ]
     },
     {
@@ -323,7 +324,8 @@
         {"type": "formula", "as": "Color", "expr": "datum.Color"},
         {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 1 ? datum.Legend : datum.Category"},
         {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
-        {"type": "formula", "as": "Shape", "expr": "datum.Shape"}
+        {"type": "formula", "as": "Shape", "expr": "datum.Shape"},
+        {"type": "formula", "as": "Size", "expr": "datum.Size"}
       ]
     },
     {
@@ -362,7 +364,8 @@
         {"type": "formula", "as": "Color", "expr": "null"},
         {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 2 ? datum.Legend : datum.Subcategory"},
         {"type": "formula", "as": "Milestone", "expr": "0"},
-        {"type": "formula", "as": "Shape", "expr": "null"}
+        {"type": "formula", "as": "Shape", "expr": "null"},
+        {"type": "formula", "as": "Size", "expr": "null"}
       ]
     },
     {
@@ -393,7 +396,8 @@
         {"type": "formula", "as": "Color", "expr": "datum.Color"},
         {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 2 ? datum.Legend : datum.Subcategory"},
         {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
-        {"type": "formula", "as": "Shape", "expr": "datum.Shape"}
+        {"type": "formula", "as": "Shape", "expr": "datum.Shape"},
+        {"type": "formula", "as": "Size", "expr": "datum.Size"}
       ]
     },
     {
@@ -430,7 +434,8 @@
         {"type": "formula", "as": "Color", "expr": "null"},
         {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 3 ? datum.Legend : datum.Segment"},
         {"type": "formula", "as": "Milestone", "expr": "0"},
-        {"type": "formula", "as": "Shape", "expr": "null"}
+        {"type": "formula", "as": "Shape", "expr": "null"},
+        {"type": "formula", "as": "Size", "expr": "null"}
       ]
     },
     {
@@ -459,7 +464,8 @@
         {"type": "formula", "as": "Color", "expr": "datum.Color"},
         {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 3 ? datum.Legend : datum.Segment"},
         {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
-        {"type": "formula", "as": "Shape", "expr": "datum.Shape"}
+        {"type": "formula", "as": "Shape", "expr": "datum.Shape"},
+        {"type": "formula", "as": "Size", "expr": "datum.Size"}
       ]
     },
     {
@@ -494,7 +500,8 @@
         {"type": "formula", "as": "Color", "expr": "null"},
         {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 4 ? datum.Legend : datum.Subsegment"},
         {"type": "formula", "as": "Milestone", "expr": "0"},
-        {"type": "formula", "as": "Shape", "expr": "null"}
+        {"type": "formula", "as": "Shape", "expr": "null"},
+        {"type": "formula", "as": "Size", "expr": "null"}
       ]
     },
     {
@@ -521,7 +528,8 @@
         {"type": "formula", "as": "Color", "expr": "datum.Color"},
         {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 4 ? datum.Legend : datum.Subsegment"},
         {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
-        {"type": "formula", "as": "Shape", "expr": "datum.Shape"}
+        {"type": "formula", "as": "Shape", "expr": "datum.Shape"},
+        {"type": "formula", "as": "Size", "expr": "datum.Size"}
       ]
     },
     {
@@ -543,7 +551,8 @@
         {"type": "formula", "as": "Level", "expr": "5"},
         {"type": "formula", "as": "Legend", "expr": "datum.Legend"},
         {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
-        {"type": "formula", "as": "Shape", "expr": "datum.Shape"}
+        {"type": "formula", "as": "Shape", "expr": "datum.Shape"},
+        {"type": "formula", "as": "Size", "expr": "datum.Size"}
       ]
     },
     {
@@ -850,7 +859,7 @@
         },
         {
           "type": "project",
-          "fields": ["Id", "Start", "End", "Category", "SubcategoryFull", "SegmentFull", "SubsegmentFull", "ItemFull", "VC", "VSC", "VS", "VSS", "VI", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "VColor", "Milestone", "Shape", "CMode"]
+          "fields": ["Id", "Start", "End", "Category", "SubcategoryFull", "SegmentFull", "SubsegmentFull", "ItemFull", "VC", "VSC", "VS", "VSS", "VI", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "VColor", "Milestone", "Shape", "CMode", "Size"]
         }
       ]
     },
@@ -880,7 +889,7 @@
         },
         {
           "type": "project",
-          "fields": ["Id", "Start", "End", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Milestone", "Shape"]
+          "fields": ["Id", "Start", "End", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Milestone", "Shape", "Size"]
         }
       ]
     },
@@ -894,8 +903,13 @@
           "expr": "!isDefined(datum.Milestone) || datum.Milestone == 0"
         },
         {
+          "type": "formula",
+          "as": "Size",
+          "expr": "isDefined(datum.Size) && datum.Size != null ? datum.Size : 1"
+        },
+        {
           "type": "project",
-          "fields": ["Id", "Start", "End", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor"]
+          "fields": ["Id", "Start", "End", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Size"]
         }
       ]
     },
@@ -910,7 +924,7 @@
         },
         {
           "type": "project",
-          "fields": ["Id", "Start", "End", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Shape"]
+          "fields": ["Id", "Start", "End", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Shape", "Size"]
         }
       ]
     },
@@ -1116,6 +1130,8 @@
     {"name": "GanttRectTextFontWhiteColor", "value":"black"},
     {"name": "GanttRectTextFontBlackColor", "value":"white"},
     {"name": "GanttRectTextLuminanceBorder", "value":0.5},
+    {"name": "AxesTitle", "value":"Chronologie"},
+    {"name": "TextWhere", "value":false},
 
     // Legend Settings //
     {"name": "LegendGroupWidth", "value":150},
@@ -1487,6 +1503,7 @@
         {
           // Title | Titre //
           "type": "text",
+          "name": "headerTitle",
           "encode": {
             "enter": {
               "x": {"signal": "TitleMarginX"}, 
@@ -1503,6 +1520,7 @@
         {
           // Subtitle | Sous Titre //
           "type": "text",
+          "name": "headerSubTitle",
           "encode": {
             "enter": {
               "x": {"signal": "TitleMarginX"}, 
@@ -1540,6 +1558,7 @@
         {
           // Text of the checkbox that controls the visibility of the legend | Texte de la checkbox qui gère la visibilité de la légende //
           "type": "text",
+          "name": "CheckboxLegendText",
           "encode": {
             "update": {
               "x": {"signal": "showLegendPaddingX"},
@@ -1588,6 +1607,7 @@
         {
           // Text of the checkbox that controls the visibility of the informations | Texte de la checkbox qui gère la visibilité des informations //
           "type": "text",
+          "name": "CheckboxInfosText",
           "encode": {
             "update": {
               "x": {"signal": "infosControlX"},
@@ -1636,6 +1656,7 @@
         {
           // Text of the checkbox that controls the visibility of the Milestone | Texte de la checkbox qui gère la visibilité des jalons //
           "type": "text",
+          "name": "CheckboxMilestoneText",
           "encode": {
             "update": {
               "x": {"signal": "milestoneControlX"},
@@ -1684,6 +1705,7 @@
         {
           // Text from the slicer that manages the level of detail | Texte du slicer qui gère le niveau de détails //
           "type": "text",
+          "name": "CheckboxLevelDetailText",
           "encode": {
             "update": {
               "x": {"signal": "sliderControlX"},
@@ -1759,6 +1781,7 @@
         },
         {
           "type": "text",
+          "name": "CheckboxLevelText",
           "encode": {
             "update": {
               "x": {"signal": "sliderControlX + SlicerLenght + 15"},
@@ -1797,6 +1820,7 @@
         {
           // Title of this column | Titre de cette colonne //
           "type": "text",
+          "name": "ColumnLeftTitle",
           "encode": {
             "enter": {
               "x": {"signal": "taskColumnWidth / 2"},
@@ -1815,6 +1839,7 @@
     },
     {
       "type": "group",
+      "name": "ColumnLeftGroup",
       "encode": {
         "enter": {
           "x": {"signal": "columnHolderMarginX"},
@@ -1936,6 +1961,7 @@
         {
           // Displaying Weekends Rectangles | Affichage des rectangles Weekends //
           "type": "rect",
+          "name": "DisplayWE",
           "from": {"data": "weekends"},
           "encode": {
             "enter": {
@@ -1955,6 +1981,7 @@
         {
           // Displaying Holiday Rectangles | Affichage des rectangles Jours Fériés //
           "type": "rect",
+          "name": "DisplayBankHollidays",
           "from": {"data": "BankHollidays"},
           "encode": {
             "enter": {
@@ -1980,8 +2007,12 @@
             "enter": {
               "x": {"scale": "xscale", "field": "Start"},
               "x2": {"scale": "xscale", "field": "End"},
-              "y": {"signal": "scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2"},
-              "height": {"signal": "barHeight"},
+              "y": {
+                "signal": "(scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2) + barHeight * (1 - datum.Size)"
+              },
+              "height": {
+                "signal": "barHeight * (isDefined(datum.Size) ? datum.Size : 1)"
+              },
               "fill": {
                 "signal": "(isDefined(datum.VColor) && datum.VColor != null && datum.VColor != 'null' && datum.VColor != '') ? datum.VColor : scale('colorScale', datum.Legend)" // We put the color that the user defined according to his Legend | On met la couleur que l'utilisateur a définie en fonction de sa Legend //
               },
@@ -1995,7 +2026,9 @@
             "update": {
               "x": {"scale": "xscale", "field": "Start"},
               "x2": {"scale": "xscale", "field": "End"},
-              "y": {"signal": "scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2"},
+              "y": {
+                "signal": "(scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2) + barHeight * (1 - datum.Size)"
+              },
               "tooltip": {
                 // Bubble info | Infos bulles //
                 "signal": "datum.Level == 1?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 2?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 3?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 4?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, '4': labelSubsegment + ': ' + datum.Subsegment, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, '4': labelSubsegment + ': ' + datum.Subsegment, '5': labelItem + ': ' + datum.Item, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}"
@@ -2013,16 +2046,22 @@
           "from": {"data": "VisibleRectangles"},
           "encode": {
             "enter": {
-              "x": {"scale": "xscale", "field": "Start"},
-              "y": {"signal": "scale('yscale', datum.Id) + bandwidth('yscale')/2"},
+              "x": {
+                "signal": "TextWhere ? scale('xscale', datum.Start) : scale('xscale', datum.End)"
+              },
+              "y": {
+                "signal": "(scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2) + barHeight * (1 - (isDefined(datum.Size) ? datum.Size : 1) / 2)"
+              },
               "text": {"signal": "datum.DisplayText"},
               "fontSize": {"signal": "GanttRectTextFontSize"},
               "baseline": {"value": "middle"},
               "align": {"value": "left"},
-              "dx": {"signal": "GanttRectTextDX"},
+              "dx": {
+                "signal": "TextWhere ? GanttRectTextDX : 5"
+              },
               "dy": {"signal": "GanttRectTextDY"},
               "limit": {
-                "signal": "max(0, scale('xscale', datum.End) - scale('xscale', datum.Start) - 20)"
+                "signal": "TextWhere ? max(0, scale('xscale', datum.End) - scale('xscale', datum.Start) - 20) : 0"
               },
               "fill": {
                 "signal": "luminance(datum.VColor) > GanttRectTextLuminanceBorder ? GanttRectTextFontWhiteColor : GanttRectTextFontBlackColor"
@@ -2032,13 +2071,17 @@
               }
             },
             "update": {
-              "x": {"scale": "xscale", "field": "Start"},
-              "y": {"signal": "scale('yscale', datum.Id) + bandwidth('yscale')/2"},
+              "x": {
+                "signal": "TextWhere ? scale('xscale', datum.Start) : scale('xscale', datum.End)"
+              },
+              "y": {
+                "signal": "(scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2) + barHeight * (1 - (isDefined(datum.Size) ? datum.Size : 1) / 2)"
+              },
               "limit": {
-                "signal": "max(0, scale('xscale', datum.End) - scale('xscale', datum.Start) - 20)"
+                "signal": "TextWhere ? max(0, scale('xscale', datum.End) - scale('xscale', datum.Start) - 20) : 0"
               },
               "fill": {
-                "signal": "luminance(datum.VColor) > GanttRectTextLuminanceBorder ? GanttRectTextFontWhiteColor : GanttRectTextFontBlackColor"
+                "signal": "TextWhere ? (luminance(datum.VColor) > GanttRectTextLuminanceBorder ? GanttRectTextFontWhiteColor : GanttRectTextFontBlackColor) : 'black'"
               },
               "tooltip": {
                 // Bubble info | Infos bulles //
@@ -2096,14 +2139,14 @@
             "enter": {
               "x": {"signal": "0"},
               "x2": {"signal": "width"},
-              "y": {"signal": "scale('yscale', datum.Id)"},
+              "y": {"signal": "scale('yscale', datum.Id) - (bandwidth('yscale') * RectanglesPadding) / 2"},
               "stroke": {"signal": "MainColor"},
               "strokeWidth": {"value": 1},
               "strokeDash": {"signal": "datum.Level == 1 ? [1, 0] : [4, 4]"},
               "opacity": {"signal": "ShowSeparator ? 0.3 : 0"}
             },
             "update": {
-              "y": {"signal": "scale('yscale', datum.Id)"}
+              "y": {"signal": "scale('yscale', datum.Id) - (bandwidth('yscale') * RectanglesPadding) / 2"}
             }
           }
         },
@@ -2193,6 +2236,7 @@
         {
           // Symbols for Legends | Symboles pour les légendes //
           "type": "symbol",
+          "name": "LegendSymbol",
           "from": {"data": "LegendColors"},
           "encode": {
             "enter": {
@@ -2213,6 +2257,7 @@
         {
           // Color of Legends | Couleurs des légendes //
           "type": "text",
+          "name": "LegendColor",
           "from": {"data": "LegendColors"},
           "encode": {
             "enter": {
@@ -2266,6 +2311,56 @@
     }
   ],
   // Part: Managing Gantt axes | Partie : Gestion des axes du Gantt //
+  "axes": [
+    {
+      "ticks": true,
+      "orient": "top",
+      "scale": "xscale",
+      "grid": true,
+      "title": {"signal": "AxesTitle"},
+      "position": {"signal": "taskColumnWidth"},
+      "format": {
+        "signal": "span(xdom) < (1000*60*60*24*365) ? '%d/%m/%y' : '%m/%y'"
+      },
+      "tickCount": {
+        "signal": "span(xdom) < (1000*60*60*24*180) ? max(5, min(9, ceil(span(xdom) / (1000*60*60*24)))) : max(2, min(9, ceil(span(xdom) / (1000*60*60*24*30))))"
+      },
+      "encode": {
+        "labels": {
+          "update": {
+            "text": {
+              "signal":
+                "span(xdom) < (1000*60*60*24*365) ? timeFormat(datum.value, '%d/%m/%y') : timeFormat(datum.value, '%m/%y')"
+            },
+            "fontWeight": {
+              "signal": "month(datum.value) == 0 && date(datum.value) == 1 ? 'bold' : 'normal'"
+            }
+          }
+        },
+        "ticks": {
+          "update": {
+            "strokeWidth": {
+              "signal": "month(datum.value) == 0 && date(datum.value) == 1 ? 2 : 1"
+            },
+            "stroke": {
+              "signal": "month(datum.value) == 0 && date(datum.value) == 1 ? 'black' : '#888'"
+            }
+          }
+        },
+        "grid": {
+          "update": {
+            "strokeWidth": {
+              "signal": "month(datum.value) == 0 && date(datum.value) == 1 ? 2 : 1"
+            },
+            "stroke": {
+              "signal": "month(datum.value) == 0 && date(datum.value) == 1 ? 'black' : '#ddd'"
+            }
+          }
+        }
+      }
+    }
+  ]
+  /*
   "axes": [
     {
       "description": "Axe inférieur - jours/mois/années",
@@ -2379,7 +2474,27 @@
       }
     },
     {
-      "description": "Lignes de grille mensuelles",
+      "description": "Lignes de grille des ANNÉES - toujours visibles",
+      "scale": "xscale",
+      "position": {"signal": "taskColumnWidth"},
+      "domain": false,
+      "orient": "top",
+      "labels": false,
+      "grid": true,
+      "tickSize": 0,
+      "zindex": 1,
+      "tickCount": "year",
+      "encode": {
+        "grid": {
+          "update": {
+            "strokeWidth": {"value": 2.5},
+            "stroke": {"value": "#333"}
+          }
+        }
+      }
+    },
+    {
+      "description": "Lignes de grille mensuelles (hors années)",
       "scale": "xscale",
       "position": {"signal": "taskColumnWidth"},
       "domain": false,
@@ -2390,7 +2505,21 @@
       "zindex": 0,
       "tickCount": {
         "signal": "dayBandwidthRound >= minMonthBandwidth || dayBandwidthRound <= 0.35 ? 0 : 'month'"
+      },
+      "encode": {
+        "grid": {
+          "update": {
+            "strokeWidth": [
+              {"test": "dayofyear(datum.value) == 1", "value": 0},
+              {"value": 1}
+            ],
+            "stroke": [
+              {"test": "dayofyear(datum.value) == 1", "value": "transparent"},
+              {"value": "#ddd"}
+            ]
+          }
+        }
       }
     }
-  ]
+  ]*/
 }
