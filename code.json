@@ -112,7 +112,7 @@
           "Legend": "Milestone",
           "Color": "#FFD700",
           "Milestone": 1,
-          "Shape": "circle",
+          "Shape": "wedge",
           "Size": 1.00
         },
 
@@ -282,7 +282,7 @@
           "Legend": "Milestone",
           "Color": "#FFD700",
           "Milestone": 1,
-          "Shape": "diamond",
+          "Shape": "",
           "Size": 1.00
         }
       ]
@@ -1195,7 +1195,7 @@
         },
         {
           "type": "project",
-          "fields": ["Id", "Start", "End", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Shape", "Size"]
+          "fields": ["Id", "Start", "End", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Shape", "Size", "Milestone"]
         }
       ]
     },
@@ -1205,8 +1205,18 @@
       "source": ["VisibleRectangles", "VisibleMilestones"],
       "transform": [
         {
+          "type": "formula",
+          "as": "ShapeX",
+          "expr": "datum.Shape"
+        },
+        {
+          "type": "formula",
+          "as": "MilestoneX",
+          "expr": "datum.Milestone"
+        },
+        {
           "type": "aggregate",
-          "groupby": ["Legend", "VColor"],
+          "groupby": ["Legend", "VColor", "ShapeX", "MilestoneX"],
           "ops": ["max"],
           "fields": ["VColor"],
           "as": ["VColor"]
@@ -1221,6 +1231,11 @@
           "type": "formula",
           "as": "Legend",
           "expr": "datum.idx > 1 ? datum.Legend + '-' + datum.idx : datum.Legend"
+        },
+        {
+          "type": "formula",
+          "as": "Shape",
+          "expr": "(isDefined(datum.ShapeX) && datum.ShapeX != '')? datum.ShapeX : datum.MilestoneX == 1 ? 'diamond' : 'square'"
         },
         {
           "type": "formula",
@@ -1414,7 +1429,6 @@
     {"name": "LegendTitle", "value":"Legend"},
     {"name": "LegendTitleFontSize", "value":12},
     {"name": "LegendGroupShapeSize", "value":120},
-    {"name": "LegendGroupShape", "value":"circle"},
     {"name": "LegendTextPaddingX", "value":22},
     {"name": "LegendTextFontSize", "value":12},
     {"name": "LegendTextColor", "value":"#000000"},
@@ -1494,7 +1508,7 @@
       "name": "zoom",
       "value": 1,
       "on": [
-        {"events": "wheel!", "update": "clamp(zoom * pow(1.001, event.deltaY), 0.001, 1)"}
+        {"events": "wheel!", "update": "clamp(zoom * pow(1.001, event.deltaY), 0.0005, 1)"}
       ]
     },
     {
@@ -2515,7 +2529,7 @@
               "x": {"signal": "LegendPaddingX"},
               "y": {"signal": "scale('LegendScale', datum.Legend) + 40"},
               "height": {"signal": "bandwidth('LegendScale')"},
-              "shape": {"signal": "LegendGroupShape"},
+              "shape": {"field": "Shape"},
               "fill": {"field": "Color"}
             },
             "update": {
@@ -2594,14 +2608,14 @@
         "signal": "span(xdom) < (1000*60*60*24*365) ? '%d/%m/%y' : '%m/%y'"
       },
       "tickCount": {
-        "signal": "span(xdom) < (1000*60*60*24*180) ? max(5, min(9, ceil(span(xdom) / (1000*60*60*24)))) : max(2, min(9, ceil(span(xdom) / (1000*60*60*24*30))))"
+        "signal": "span(xdom) < (1000*60*60*24) ? max(24, min(24, ceil(span(xdom) / (1000*60*60)))) : span(xdom) < (1000*60*60*24*7) ? max(10, min(15, ceil(span(xdom) / (1000*60*60)))) : span(xdom) < (1000*60*60*24*180) ? max(5, min(9, ceil(span(xdom) / (1000*60*60*24)))) : max(2, min(9, ceil(span(xdom) / (1000*60*60*24*30))))"
       },
       "encode": {
         "labels": {
           "update": {
             "text": {
               "signal":
-                "span(xdom) < (1000*60*60*24*365) ? timeFormat(datum.value, '%d/%m/%y') : timeFormat(datum.value, '%m/%y')"
+                "span(xdom) < (1000*60*60*24) ? timeFormat(datum.value, '%Hh/%d/%m') : span(xdom) < (1000*60*60*24*7) ? timeFormat(datum.value, '%Hh/%d/%m') : span(xdom) < (1000*60*60*24*365) ? timeFormat(datum.value, '%d/%m/%y') : timeFormat(datum.value, '%m/%y')"
             },
             "fontWeight": {
               "signal": "month(datum.value) == 0 && date(datum.value) == 1 ? 'bold' : 'normal'"
