@@ -14,7 +14,278 @@
 
     {
       // Dataset that you inject into Vega | Dataset que vous injectez dans Vega //
-      "name": "dataset"
+      "name": "dataset",
+      "values": 
+      [
+        {
+          "Category": "Agent Alpha",
+          "Subcategory": "Research Team",
+          "Segment": "Program 1",
+          "Subsegment": "Concept Phase",
+          "Item": "Initial Benchmarking",
+          "Start": "01/01/2023",
+          "End": "01/03/2023",
+          "Legend": "Research",
+          "Color": "#800020",
+          "Milestone": 0,
+          "Shape": "",
+          "Size": 1
+        },
+        {
+          "Category": "Agent Alpha",
+          "Subcategory": "Research Team",
+          "Segment": "Program 1",
+          "Subsegment": "Concept Phase",
+          "Item": "Technical Study",
+          "Start": "02/03/2027",
+          "End": "30/05/2027",
+          "Legend": "Research",
+          "Color": "#800020",
+          "Milestone": 0,
+          "Shape": "",
+          "Size": 1
+        },
+        {
+          "Category": "Agent Alpha",
+          "Subcategory": "Innovation Lab",
+          "Segment": "Prototype Dev",
+          "Subsegment": "Prototype 1",
+          "Item": "Rapid Prototyping",
+          "Start": "15/05/2025",
+          "End": "30/06/2025",
+          "Legend": "Development",
+          "Color": "#00008B",
+          "Milestone": 0,
+          "Shape": "",
+          "Size": 1
+        },
+        {
+          "Category": "Agent Alpha",
+          "Subcategory": "Innovation Lab",
+          "Segment": "Prototype Dev",
+          "Subsegment": "Prototype 2",
+          "Item": "Internal Test",
+          "Start": "15/07/2025",
+          "End": "15/09/2025",
+          "Legend": "Testing",
+          "Color": "#095228",
+          "Milestone": 0,
+          "Shape": "",
+          "Size": 1
+        },
+        {
+          "Category": "Agent Alpha",
+          "Subcategory": "Innovation Lab",
+          "Segment": "Program 2",
+          "Subsegment": "Review",
+          "Item": "Prototype Review",
+          "Start": "01/10/2025",
+          "End": "01/10/2025",
+          "Legend": "Milestone",
+          "Color": "#FFD700",
+          "Milestone": 1,
+          "Shape": "M -0.05 -0.25 L -0.05 0.05 L -0.05 0.35 L 0 0.35 L 0 0.05 L 0.25 -0.1 L 0 -0.25 L -0.05 -0.25",
+          "Size": 1
+        },
+        {
+          "Category": "Agent Alpha",
+          "Subcategory": "Innovation Lab",
+          "Segment": "Program 3",
+          "Subsegment": "Industrialization",
+          "Item": "Pilot Tests",
+          "Start": "15/10/2025",
+          "End": "01/02/2026",
+          "Legend": "Development",
+          "Color": "#00008B",
+          "Milestone": 0,
+          "Shape": "",
+          "Size": 1
+        },
+        {
+          "Category": "Agent Alpha",
+          "Subcategory": "Innovation Lab",
+          "Segment": "Industrialization",
+          "Subsegment": "Certification",
+          "Item": "Final Approval",
+          "Start": "01/02/2026",
+          "End": "01/02/2026",
+          "Legend": "Milestone",
+          "Color": "#FFD700",
+          "Milestone": 1,
+          "Shape": "wedge",
+          "Size": 1.00
+        },
+
+        {
+          "Category": "Agent Bravo",
+          "Subcategory": "Operations Unit",
+          "Segment": "Deployment",
+          "Subsegment": "Phase 1",
+          "Item": "System Rollout",
+          "Start": "01/01/2025",
+          "End": "01/04/2025",
+          "Legend": "Operations",
+          "Color": "#708090",
+          "Milestone": 0,
+          "Shape": "",
+          "Size": 1
+        },
+        {
+          "Category": "Agent Bravo",
+          "Subcategory": "Operations Unit",
+          "Segment": "Deployment",
+          "Subsegment": "Phase 2",
+          "Item": "Performance Optimization",
+          "Start": "15/03/2025",
+          "End": "15/06/2025",
+          "Legend": "Operations",
+          "Color": "#708090",
+          "Milestone": 0,
+          "Shape": "",
+          "Size": 1
+        },
+        {
+          "Category": "Agent Bravo",
+          "Subcategory": "Maintenance Division",
+          "Segment": "Maintenance",
+          "Subsegment": "Cycle 1",
+          "Item": "Maintenance Window",
+          "Start": "01/07/2025",
+          "End": "01/08/2025",
+          "Legend": "Maintenance",
+          "Color": "#2F4F4F",
+          "Milestone": 0,
+          "Shape": "",
+          "Size": 1
+        },
+        {
+          "Category": "Agent Bravo",
+          "Subcategory": "Maintenance Division",
+          "Segment": "Maintenance",
+          "Subsegment": "Cycle 2",
+          "Item": "Audit & Inspection",
+          "Start": "01/09/2025",
+          "End": "30/09/2025",
+          "Legend": "Maintenance",
+          "Color": "#2F4F4F",
+          "Milestone": 0,
+          "Shape": "",
+          "Size": 1
+        },
+        {
+          "Category": "Agent Bravo",
+          "Subcategory": "Operations Unit",
+          "Segment": "Upgrade",
+          "Subsegment": "Planning",
+          "Item": "Upgrade Planning",
+          "Start": "15/01/2026",
+          "End": "20/02/2026",
+          "Legend": "Operations",
+          "Color": "#708090",
+          "Milestone": 0,
+          "Shape": "",
+          "Size": 1
+        },
+        {
+          "Category": "Agent Bravo",
+          "Subcategory": "Operations Unit",
+          "Segment": "Upgrade",
+          "Subsegment": "Execution",
+          "Item": "Deployment Execution",
+          "Start": "01/03/2026",
+          "End": "01/06/2026",
+          "Legend": "Operations",
+          "Color": "#708090",
+          "Milestone": 0,
+          "Shape": "",
+          "Size": 1
+        },
+
+        {
+          "Category": "Agent Charlie",
+          "Subcategory": "QA Team",
+          "Segment": "Quality Cycle",
+          "Subsegment": "Cycle A",
+          "Item": "Software Validation",
+          "Start": "01/02/2025",
+          "End": "01/04/2025",
+          "Legend": "Testing",
+          "Color": "#095228",
+          "Milestone": 0,
+          "Shape": "",
+          "Size": 1
+        },
+        {
+          "Category": "Agent Charlie",
+          "Subcategory": "QA Team",
+          "Segment": "Quality Cycle",
+          "Subsegment": "Cycle B",
+          "Item": "Hardware Validation",
+          "Start": "15/03/2025",
+          "End": "15/05/2025",
+          "Legend": "Testing",
+          "Color": "#095228",
+          "Milestone": 0,
+          "Shape": "",
+          "Size": 1
+        },
+        {
+          "Category": "Agent Charlie",
+          "Subcategory": "QA Team",
+          "Segment": "Field Trials",
+          "Subsegment": "Trial Round 1",
+          "Item": "Field Deployment",
+          "Start": "01/07/2025",
+          "End": "15/08/2025",
+          "Legend": "Testing",
+          "Color": "#095228",
+          "Milestone": 0,
+          "Shape": "",
+          "Size": 1
+        },
+        {
+          "Category": "Agent Charlie",
+          "Subcategory": "QA Team",
+          "Segment": "Field Trials",
+          "Subsegment": "Trial Round 2",
+          "Item": "User Feedback",
+          "Start": "01/10/2025",
+          "End": "20/11/2025",
+          "Legend": "Testing",
+          "Color": "#095228",
+          "Milestone": 0,
+          "Shape": "",
+          "Size": 1
+        },
+        {
+          "Category": "Agent Charlie",
+          "Subcategory": "QA Team",
+          "Segment": "Final Review",
+          "Subsegment": "Certification",
+          "Item": "Approval Audit",
+          "Start": "10/01/2026",
+          "End": "10/03/2026",
+          "Legend": "Testing",
+          "Color": "#095228",
+          "Milestone": 0,
+          "Shape": "",
+          "Size": 1
+        },
+        {
+          "Category": "Agent Charlie",
+          "Subcategory": "QA Team",
+          "Segment": "Final Review",
+          "Subsegment": "Certification",
+          "Item": "Certification Milestone",
+          "Start": "10/03/2026",
+          "End": "10/03/2026",
+          "Legend": "Milestone",
+          "Color": "#FFD700",
+          "Milestone": 1,
+          "Shape": "",
+          "Size": 1.00
+        }
+      ]
     },
     {
       // DisplayRectangles matrix, here you decide where and how to display the rectangles (I am level 1, my depth is 1 so I display my level children...on my row) | Matrice d'affichage de rectangles, ici vous décidez où et comment afficher les rectangles (je suis de niveau 1, ma profondeur est 1 alors j'affiche mes enfants de niveau...sur ma ligne) //
@@ -52,7 +323,8 @@
       "values": [
         {"Shape": "daimond","Size": "500"},
         {"Shape": "circle","Size": "500"},
-        {"Shape": "wedge","Size": "500"}
+        {"Shape": "wedge","Size": "500"},
+        {"Shape": "M -0.05 -0.25 L -0.05 0.05 L -0.05 0.35 L 0 0.35 L 0 0.05 L 0.25 -0.1 L 0 -0.25 L -0.05 -0.25","Size": "5000"}
       ]
     },
     {
@@ -1154,11 +1426,12 @@
     {"name": "LegendGroupY", "value":1},
     {"name": "LegendGroupBorder", "value":"#e9ecef"},
     {"name": "LegendGroupBorderWidth", "value":1},
-    {"name": "LegendPaddingX", "value":10},
+    {"name": "LegendPaddingX", "value":20},
     {"name": "LegendTitle", "value":"Legend"},
     {"name": "LegendTitleFontSize", "value":12},
     {"name": "LegendGroupShapeSize", "value":120},
-    {"name": "LegendTextPaddingX", "value":22},
+    {"name": "LegendTextPaddingX", "update":"LegendPaddingX + 10"},
+    {"name": "LegendInnerPadding", "value":"25"},
     {"name": "LegendTextFontSize", "value":12},
     {"name": "LegendTextColor", "value":"#000000"},
 
@@ -1489,7 +1762,7 @@
     },
     {
       "name": "legendRange",
-      "update": "[0,legendCount*20]"
+      "update": "[0,legendCount*LegendInnerPadding]"
     }
   ],
   // Part of the element display | Partie de l'affichage des éléments //
@@ -2254,7 +2527,9 @@
           "from": {"data": "LegendColors"},
           "encode": {
             "enter": {
-              "size": {"signal": "LegendGroupShapeSize"},
+              "size": {
+                "signal": "(isDefined(datum.Shape) && isDefined(data('Shape')[indexof(pluck(data('Shape'), 'Shape'), datum.Shape)])) ? +data('Shape')[indexof(pluck(data('Shape'), 'Shape'), datum.Shape)].Size : 200"
+              },
               "x": {"signal": "LegendPaddingX"},
               "y": {"signal": "scale('LegendScale', datum.Legend) + 40"},
               "height": {"signal": "bandwidth('LegendScale')"},
