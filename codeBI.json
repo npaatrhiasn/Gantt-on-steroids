@@ -934,8 +934,13 @@
       "source": ["VisibleRectangles", "VisibleMilestones"],
       "transform": [
         {
+          "type": "formula",
+          "as": "ShapeX",
+          "expr": "datum.Shape"
+        },
+        {
           "type": "aggregate",
-          "groupby": ["Legend", "VColor"],
+          "groupby": ["Legend", "VColor", "ShapeX"],
           "ops": ["max"],
           "fields": ["VColor"],
           "as": ["VColor"]
@@ -950,6 +955,11 @@
           "type": "formula",
           "as": "Legend",
           "expr": "datum.idx > 1 ? datum.Legend + '-' + datum.idx : datum.Legend"
+        },
+        {
+          "type": "formula",
+          "as": "Shape",
+          "expr": "isDefined(datum.ShapeX) ? datum.ShapeX : 'square'"
         },
         {
           "type": "formula",
@@ -1143,7 +1153,6 @@
     {"name": "LegendTitle", "value":"Legend"},
     {"name": "LegendTitleFontSize", "value":12},
     {"name": "LegendGroupShapeSize", "value":120},
-    {"name": "LegendGroupShape", "value":"circle"},
     {"name": "LegendTextPaddingX", "value":22},
     {"name": "LegendTextFontSize", "value":12},
     {"name": "LegendTextColor", "value":"#000000"},
@@ -2244,7 +2253,7 @@
               "x": {"signal": "LegendPaddingX"},
               "y": {"signal": "scale('LegendScale', datum.Legend) + 40"},
               "height": {"signal": "bandwidth('LegendScale')"},
-              "shape": {"signal": "LegendGroupShape"},
+              "shape": {"field": "Shape"},
               "fill": {"field": "Color"}
             },
             "update": {
