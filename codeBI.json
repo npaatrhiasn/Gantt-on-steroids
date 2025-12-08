@@ -924,7 +924,7 @@
         },
         {
           "type": "project",
-          "fields": ["Id", "Start", "End", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Shape", "Size"]
+          "fields": ["Id", "Start", "End", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Shape", "Size", "Milestone"]
         }
       ]
     },
@@ -939,8 +939,13 @@
           "expr": "datum.Shape"
         },
         {
+          "type": "formula",
+          "as": "MilestoneX",
+          "expr": "datum.Milestone"
+        },
+        {
           "type": "aggregate",
-          "groupby": ["Legend", "VColor", "ShapeX"],
+          "groupby": ["Legend", "VColor", "ShapeX", "MilestoneX"],
           "ops": ["max"],
           "fields": ["VColor"],
           "as": ["VColor"]
@@ -959,7 +964,7 @@
         {
           "type": "formula",
           "as": "Shape",
-          "expr": "isDefined(datum.ShapeX) ? datum.ShapeX : 'square'"
+          "expr": "(isDefined(datum.ShapeX) && datum.ShapeX != '')? datum.ShapeX : datum.MilestoneX == 1 ? 'diamond' : 'square'"
         },
         {
           "type": "formula",
