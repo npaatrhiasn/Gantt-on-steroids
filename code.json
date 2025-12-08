@@ -84,7 +84,7 @@
           "Legend": "Milestone",
           "Color": "#FFD700",
           "Milestone": 1,
-          "Shape": "cross",
+          "Shape": "M -0.05 -0.25 L -0.05 0.05 L -0.05 0.35 L 0 0.35 L 0 0.05 L 0.25 -0.1 L 0 -0.25 L -0.05 -0.25",
           "Size": 1
         },
         {
@@ -323,7 +323,8 @@
       "values": [
         {"Shape": "daimond","Size": "500"},
         {"Shape": "circle","Size": "500"},
-        {"Shape": "wedge","Size": "500"}
+        {"Shape": "wedge","Size": "500"},
+        {"Shape": "M -0.05 -0.25 L -0.05 0.05 L -0.05 0.35 L 0 0.35 L 0 0.05 L 0.25 -0.1 L 0 -0.25 L -0.05 -0.25","Size": "5000"}
       ]
     },
     {
@@ -1425,11 +1426,12 @@
     {"name": "LegendGroupY", "value":1},
     {"name": "LegendGroupBorder", "value":"#e9ecef"},
     {"name": "LegendGroupBorderWidth", "value":1},
-    {"name": "LegendPaddingX", "value":10},
+    {"name": "LegendPaddingX", "value":20},
     {"name": "LegendTitle", "value":"Legend"},
     {"name": "LegendTitleFontSize", "value":12},
     {"name": "LegendGroupShapeSize", "value":120},
-    {"name": "LegendTextPaddingX", "value":22},
+    {"name": "LegendTextPaddingX", "update":"LegendPaddingX + 10"},
+    {"name": "LegendInnerPadding", "value":"25"},
     {"name": "LegendTextFontSize", "value":12},
     {"name": "LegendTextColor", "value":"#000000"},
 
@@ -1760,7 +1762,7 @@
     },
     {
       "name": "legendRange",
-      "update": "[0,legendCount*20]"
+      "update": "[0,legendCount*LegendInnerPadding]"
     }
   ],
   // Part of the element display | Partie de l'affichage des éléments //
@@ -2525,7 +2527,9 @@
           "from": {"data": "LegendColors"},
           "encode": {
             "enter": {
-              "size": {"signal": "LegendGroupShapeSize"},
+              "size": {
+                "signal": "(isDefined(datum.Shape) && isDefined(data('Shape')[indexof(pluck(data('Shape'), 'Shape'), datum.Shape)])) ? +data('Shape')[indexof(pluck(data('Shape'), 'Shape'), datum.Shape)].Size : 200"
+              },
               "x": {"signal": "LegendPaddingX"},
               "y": {"signal": "scale('LegendScale', datum.Legend) + 40"},
               "height": {"signal": "bandwidth('LegendScale')"},
