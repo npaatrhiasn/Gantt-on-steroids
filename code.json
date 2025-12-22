@@ -291,10 +291,10 @@
       // DisplayRectangles matrix, here you decide where and how to display the rectangles (I am level 1, my depth is 1 so I display my level children...on my row) | Matrice d'affichage de rectangles, ici vous décidez où et comment afficher les rectangles (je suis de niveau 1, ma profondeur est 1 alors j'affiche mes enfants de niveau...sur ma ligne) //
       "name": "DisplayRectangles",
       "values": [
-        {"Level": 1,"Depth 1":5, "Depth 2": 5, "Depth 3": 5, "Depth 4": 5, "Depth 5": 5},
-        {"Level": 2,"Depth 1": "X", "Depth 2": 5, "Depth 3": 5, "Depth 4": 5, "Depth 5": 5},
-        {"Level": 3,"Depth 1": "X", "Depth 2": "X", "Depth 3": 5, "Depth 4": 5, "Depth 5": 5},
-        {"Level": 4,"Depth 1": "X", "Depth 2": "X", "Depth 3": "X", "Depth 4": 5, "Depth 5": 5},
+        {"Level": 1,"Depth 1":1, "Depth 2": 2, "Depth 3": 3, "Depth 4": 4, "Depth 5": 5},
+        {"Level": 2,"Depth 1": "X", "Depth 2": 2, "Depth 3": 3, "Depth 4": 4, "Depth 5": 5},
+        {"Level": 3,"Depth 1": "X", "Depth 2": "X", "Depth 3": 3, "Depth 4": 4, "Depth 5": 5},
+        {"Level": 4,"Depth 1": "X", "Depth 2": "X", "Depth 3": "X", "Depth 4": 4, "Depth 5": 5},
         {"Level": 5,"Depth 1": "X", "Depth 2": "X", "Depth 3": "X", "Depth 4": "X", "Depth 5": 5}
       ]
     },
@@ -1227,6 +1227,13 @@
           "groupby": ["Legend"],
           "ops": ["rank"],
           "as": ["idx"]
+        },
+        {
+          "type": "collect",
+          "sort": {
+            "field": ["Legend"],
+            "order": ["ascending"]
+          },
         },
         {
           "type": "formula",
