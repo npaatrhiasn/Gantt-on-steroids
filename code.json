@@ -1233,7 +1233,7 @@
           "sort": {
             "field": ["Legend"],
             "order": ["ascending"]
-          },
+          }
         },
         {
           "type": "formula",
