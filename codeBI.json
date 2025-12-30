@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v6.json",
   "width": 1200,
-  "height": 630,
+  "height": 500,
   "padding": 5,
   "description": "Made by Nathan BODIN, inspired by Davide BACCI and Madison GIAMMARIA. You can contact me on Linkedin : Nathan BODIN and on Instagram : @nathanbod1. Every comments that you will find in this code have two parts. The first one is English version and the last one is French version of the comment.",
 
@@ -50,9 +50,16 @@
       // You can decide the size of your milestones according to their shape | Vous pouvez associer une taille à vos formes //
       "name": "Shape",
       "values": [
-        {"Shape": "daimond","Size": "500"},
+        {"Shape": "diamond","Size": "500"},
+        {"Shape": "square","Size": "500"},
         {"Shape": "circle","Size": "500"},
         {"Shape": "wedge","Size": "500"},
+        {"Shape": "cross","Size": "500"},
+        {"Shape": "arrow","Size": "500"},
+        {"Shape": "triangle-up","Size": "500"},
+        {"Shape": "triangle-down","Size": "500"},
+        {"Shape": "triangle-left","Size": "500"},
+        {"Shape": "triangle-right","Size": "500"},
         {"Shape": "M -0.05 -0.25 L -0.05 0.05 L -0.05 0.35 L 0 0.35 L 0 0.05 L 0.25 -0.1 L 0 -0.25 L -0.05 -0.25","Size": "5000"}
       ]
     },
@@ -278,6 +285,7 @@
         },
         {"type": "formula", "as": "Id", "expr": "datum.Category"},
         {"type": "formula", "as": "DisplayText", "expr": "datum.Category"},
+        {"type": "formula","as": "Label","expr": "datum.DisplayText"},
         {"type": "formula", "as": "SubcategoryFull", "expr": "null"},
         {"type": "formula", "as": "SegmentFull", "expr": "null"},
         {"type": "formula", "as": "SubsegmentFull", "expr": "null"},
@@ -294,8 +302,7 @@
         {"type": "formula", "as": "Color", "expr": "null"},
         {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 1 ? datum.Legend : datum.Category"},
         {"type": "formula", "as": "Milestone", "expr": "0"},
-        {"type": "formula", "as": "Shape", "expr": "null"},
-        {"type": "formula", "as": "Size", "expr": "null"}
+        {"type": "formula", "as": "Shape", "expr": "null"}
       ]
     },
     {
@@ -308,7 +315,16 @@
           "expr": "datum.maxLevel == 1"
         },
         {"type": "formula", "as": "Id", "expr": "datum.Category"},
-        {"type": "formula", "as": "DisplayText", "expr": "datum.Category"},
+        {
+          "type": "formula",
+          "as": "DisplayText",
+          "expr": "datum.Category"
+        },
+        {
+          "type": "formula",
+          "as": "Label",
+          "expr": "datum.Label != null && datum.Label != '' ? datum.Label : datum.DisplayText"
+        },
         {"type": "formula", "as": "SubcategoryFull", "expr": "null"},
         {"type": "formula", "as": "SegmentFull", "expr": "null"},
         {"type": "formula", "as": "SubsegmentFull", "expr": "null"},
@@ -326,7 +342,8 @@
         {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 1 ? datum.Legend : datum.Category"},
         {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
         {"type": "formula", "as": "Shape", "expr": "datum.Shape"},
-        {"type": "formula", "as": "Size", "expr": "datum.Size"}
+        {"type": "formula", "as": "Size", "expr": "datum.Size"},
+        {"type": "formula", "as": "ShapeSize", "expr": "datum.ShapeSize"}
       ]
     },
     {
@@ -351,6 +368,7 @@
         },
         {"type": "formula", "as": "Id", "expr": "datum.Category + '_' + datum.Subcategory"},
         {"type": "formula", "as": "DisplayText", "expr": "datum.Subcategory"},
+        {"type": "formula","as": "Label","expr": "datum.DisplayText"},
         {"type": "formula", "as": "SubcategoryFull", "expr": "datum.Category + '_' + datum.Subcategory"},
         {"type": "formula", "as": "SegmentFull", "expr": "null"},
         {"type": "formula", "as": "SubsegmentFull", "expr": "null"},
@@ -383,6 +401,11 @@
         },
         {"type": "formula", "as": "Id", "expr": "datum.Category + '_' + datum.Subcategory"},
         {"type": "formula", "as": "DisplayText", "expr": "datum.Subcategory"},
+        {
+          "type": "formula",
+          "as": "Label",
+          "expr": "datum.Label != null && datum.Label != '' ? datum.Label : datum.DisplayText"
+        },
         {"type": "formula", "as": "SubcategoryFull", "expr": "datum.Category + '_' + datum.Subcategory"},
         {"type": "formula", "as": "SegmentFull", "expr": "null"},
         {"type": "formula", "as": "SubsegmentFull", "expr": "null"},
@@ -398,7 +421,8 @@
         {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 2 ? datum.Legend : datum.Subcategory"},
         {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
         {"type": "formula", "as": "Shape", "expr": "datum.Shape"},
-        {"type": "formula", "as": "Size", "expr": "datum.Size"}
+        {"type": "formula", "as": "Size", "expr": "datum.Size"},
+        {"type": "formula", "as": "ShapeSize", "expr": "datum.ShapeSize"}
       ]
     },
     {
@@ -423,6 +447,7 @@
         },
         {"type": "formula", "as": "Id", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment"},
         {"type": "formula", "as": "DisplayText", "expr": "datum.Segment"},
+        {"type": "formula","as": "Label","expr": "datum.DisplayText"},
         {"type": "formula", "as": "SubcategoryFull", "expr": "datum.Category + '_' + datum.Subcategory"},
         {"type": "formula", "as": "SegmentFull", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment"},
         {"type": "formula", "as": "SubsegmentFull", "expr": "null"},
@@ -453,6 +478,11 @@
         },
         {"type": "formula", "as": "Id", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment"},
         {"type": "formula", "as": "DisplayText", "expr": "datum.Segment"},
+        {
+          "type": "formula",
+          "as": "Label",
+          "expr": "datum.Label != null && datum.Label != '' ? datum.Label : datum.DisplayText"
+        },
         {"type": "formula", "as": "SubcategoryFull", "expr": "datum.Category + '_' + datum.Subcategory"},
         {"type": "formula", "as": "SegmentFull", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment"},
         {"type": "formula", "as": "SubsegmentFull", "expr": "null"},
@@ -466,7 +496,8 @@
         {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 3 ? datum.Legend : datum.Segment"},
         {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
         {"type": "formula", "as": "Shape", "expr": "datum.Shape"},
-        {"type": "formula", "as": "Size", "expr": "datum.Size"}
+        {"type": "formula", "as": "Size", "expr": "datum.Size"},
+        {"type": "formula", "as": "ShapeSize", "expr": "datum.ShapeSize"}
       ]
     },
     {
@@ -491,6 +522,7 @@
         },
         {"type": "formula", "as": "Id", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment + '_' + datum.Subsegment"},
         {"type": "formula", "as": "DisplayText", "expr": "datum.Subsegment"},
+        {"type": "formula","as": "Label","expr": "datum.DisplayText"},
         {"type": "formula", "as": "SubcategoryFull", "expr": "datum.Category + '_' + datum.Subcategory"},
         {"type": "formula", "as": "SegmentFull", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment"},
         {"type": "formula", "as": "SubsegmentFull", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment + '_' + datum.Subsegment"},
@@ -519,6 +551,11 @@
         },
         {"type": "formula", "as": "Id", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment + '_' + datum.Subsegment"},
         {"type": "formula", "as": "DisplayText", "expr": "datum.Subsegment"},
+        {
+          "type": "formula",
+          "as": "Label",
+          "expr": "datum.Label != null && datum.Label != '' ? datum.Label : datum.DisplayText"
+        },
         {"type": "formula", "as": "SubcategoryFull", "expr": "datum.Category + '_' + datum.Subcategory"},
         {"type": "formula", "as": "SegmentFull", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment"},
         {"type": "formula", "as": "SubsegmentFull", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment + '_' + datum.Subsegment"},
@@ -530,7 +567,8 @@
         {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 4 ? datum.Legend : datum.Subsegment"},
         {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
         {"type": "formula", "as": "Shape", "expr": "datum.Shape"},
-        {"type": "formula", "as": "Size", "expr": "datum.Size"}
+        {"type": "formula", "as": "Size", "expr": "datum.Size"},
+        {"type": "formula", "as": "ShapeSize", "expr": "datum.ShapeSize"}
       ]
     },
     {
@@ -544,6 +582,11 @@
         },
         {"type": "formula", "as": "Id", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment + '_' + datum.Subsegment + '_' + datum.Item"},
         {"type": "formula", "as": "DisplayText", "expr": "datum.Item"},
+        {
+          "type": "formula",
+          "as": "Label",
+          "expr": "datum.Label != null && datum.Label != '' ? datum.Label : datum.DisplayText"
+        },
         {"type": "formula", "as": "SubcategoryFull", "expr": "datum.Category + '_' + datum.Subcategory"},
         {"type": "formula", "as": "SegmentFull", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment"},
         {"type": "formula", "as": "SubsegmentFull", "expr": "datum.Category + '_' + datum.Subcategory + '_' + datum.Segment + '_' + datum.Subsegment"},
@@ -553,7 +596,8 @@
         {"type": "formula", "as": "Legend", "expr": "datum.Legend"},
         {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
         {"type": "formula", "as": "Shape", "expr": "datum.Shape"},
-        {"type": "formula", "as": "Size", "expr": "datum.Size"}
+        {"type": "formula", "as": "Size", "expr": "datum.Size"},
+        {"type": "formula", "as": "ShapeSize", "expr": "datum.ShapeSize"}
       ]
     },
     {
@@ -568,6 +612,7 @@
             "order": ["ascending", "ascending", "ascending", "ascending", "ascending"]
           }
         },
+        {"type": "formula", "as": "ShapeSize", "expr": "datum.ShapeSize"},
         {
           "type": "window",
           "ops": ["row_number"],
@@ -860,7 +905,7 @@
         },
         {
           "type": "project",
-          "fields": ["Id", "Start", "End", "Category", "SubcategoryFull", "SegmentFull", "SubsegmentFull", "ItemFull", "VC", "VSC", "VS", "VSS", "VI", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "VColor", "Milestone", "Shape", "CMode", "Size"]
+          "fields": ["Id", "Start", "End", "Category", "SubcategoryFull", "SegmentFull", "SubsegmentFull", "ItemFull", "VC", "VSC", "VS", "VSS", "VI", "DisplayText", "Label", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "VColor", "Milestone", "Shape", "CMode", "Size", "ShapeSize"]
         }
       ]
     },
@@ -890,7 +935,7 @@
         },
         {
           "type": "project",
-          "fields": ["Id", "Start", "End", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Milestone", "Shape", "Size"]
+          "fields": ["Id", "Start", "End", "DisplayText", "Label", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Milestone", "Shape", "Size", "ShapeSize"]
         }
       ]
     },
@@ -910,7 +955,7 @@
         },
         {
           "type": "project",
-          "fields": ["Id", "Start", "End", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Size"]
+          "fields": ["Id", "Start", "End", "DisplayText", "Label", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Size"]
         }
       ]
     },
@@ -924,8 +969,23 @@
           "expr": "datum.Milestone == 1"
         },
         {
+          "type": "formula",
+          "as": "ShapeX",
+          "expr": "datum.Shape"
+        },
+        {
+          "type": "formula",
+          "as": "Shape",
+          "expr": "isDefined(datum.ShapeX) && datum.ShapeX != null && datum.ShapeX != '' ? datum.ShapeX : 'diamond'"
+        },
+        {
+          "type": "formula",
+          "as": "ShapeSize",
+          "expr": "datum.ShapeSize"
+        },
+        {
           "type": "project",
-          "fields": ["Id", "Start", "End", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Shape", "Size", "Milestone"]
+          "fields": ["Id", "Start", "End", "DisplayText", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Shape", "Milestone", "ShapeSize"]
         }
       ]
     },
@@ -945,8 +1005,13 @@
           "expr": "datum.Milestone"
         },
         {
+          "type": "formula",
+          "as": "ShapeSize",
+          "expr": "datum.ShapeSize"
+        },
+        {
           "type": "aggregate",
-          "groupby": ["Legend", "VColor", "ShapeX", "MilestoneX"],
+          "groupby": ["Legend", "VColor", "ShapeX", "MilestoneX", "ShapeSize"],
           "ops": ["max"],
           "fields": ["VColor"],
           "as": ["VColor"]
@@ -973,6 +1038,20 @@
           "type": "formula",
           "as": "Shape",
           "expr": "(isDefined(datum.ShapeX) && datum.ShapeX != '')? datum.ShapeX : datum.MilestoneX == 1 ? 'diamond' : 'square'"
+        },
+        {
+          "type": "lookup",
+          "from": "Shape",
+          "key": "Shape",
+          "fields": ["Shape"],
+          "values": ["Size"],
+          "as": ["SizeX"],
+          "default": "500"
+        },
+        {
+          "type": "formula",
+          "as": "Size",
+          "expr": "(isDefined(datum.ShapeSize) && datum.ShapeSize != '')? datum.ShapeSize : datum.SizeX"
         },
         {
           "type": "formula",
@@ -1067,119 +1146,117 @@
     // ===================================================== //
 
     // General Settings //
-    {"name": "BgColor", "value": "White"},
-    {"name": "MainColor", "value": "#13265C"},
-    {"name": "SecondColor", "value":"#1f77b4"},
-    {"name": "SlicerInit", "value":1},
+    {"name": "BgColor", "value": "White"},    // White //
+    {"name": "MainColor", "value": "#13265C"},    // #13265C //
+    {"name": "SecondColor", "value":"#1f77b4"},    // #1f77b4 //
+    {"name": "SlicerInit", "value":1},    // 1 //
 
     // Header Settings //
-    {"name": "ShowHeader", "value": true},
-    {"name": "headerMarginX", "value": 0},
-    {"name": "headerMarginY", "update": "ShowHeader ? -130 : 0"},
-    {"name": "headerHeight", "value": 50},
-    {"name": "TitleMarginX", "value": 10},
-    {"name": "Title", "update": "ShowHeader ? 'Title that you can change' : ''"},
-    {"name": "TitleFontSize", "value": 24},
-    {"name": "TitleFontWeight", "value": "bold"},
-    {"name": "ButtonWidth", "value":50},
-    {"name": "ButtonHeight", "value":20},
-    {"name": "ButtonRadius", "value":5},
-    {"name": "SubTitle", "update":"ShowHeader ? 'You can change the subtitle if you change the parameter called SubTitle in the code' : ''"},
-    {"name": "SubTitleFontSize", "value":12},
+    {"name": "ShowHeader", "value": true},    // true //
+    {"name": "headerMarginX", "value": 0},    // 0 //
+    {"name": "headerMarginY", "update": "ShowHeader ? -130 : 0"},    // ShowHeader ? -130 : 0 //
+    {"name": "headerHeight", "value": 50},    // 50 //
+    {"name": "TitleMarginX", "value": 10},    // 10 //
+    {"name": "Title", "update": "ShowHeader ? 'Title that you can change' : ''"},    // ShowHeader ? 'Title that you can change' : '' //
+    {"name": "TitleFontSize", "value": 24},    // 24 //
+    {"name": "TitleFontWeight", "value": "bold"},    // bold //
+    {"name": "ButtonWidth", "value":50},    // 50 //
+    {"name": "ButtonHeight", "value":20},    // 20 //
+    {"name": "ButtonRadius", "value":5},    // 5 //
+    {"name": "SubTitle", "update":"ShowHeader ? 'You can change the subtitle if you change the parameter called SubTitle in the code' : ''"},    // ShowHeader ? 'You can change the subtitle if you change the parameter called SubTitle in the code' : '' //
+    {"name": "SubTitleFontSize", "value":12},    // 12 //
 
     // Controls Settings //
-    {"name": "ShowControls", "value": true},
-    {"name": "ShowLegendsControl", "value": true},
-    {"name": "ShowInfosControl", "value": true},
-    {"name": "ShowMilestoneControl", "value": true},
-    {
-      "name": "TrueCountControl",
-      "update": "(ShowLegendsControl ? 1 : 0) + (ShowInfosControl ? 1 : 0) + (ShowMilestoneControl ? 1 : 0)"
-    },
-    {"name": "controlsY", "update": "ShowControls ? -60 : 0"},
-    {"name": "controlsPaddingBetweenItems", "value": 50},
-    {"name": "controlsClickPadingY", "value": 10},
-    {"name": "ControlsFontSize", "value": 12},
-    {"name": "CheckboxWidth", "value": 35},
-    {"name": "CheckboxHeight", "value": 18},
-    {"name": "CheckboxToggleSize", "value": 120},
-    {"name": "ControlsLegendText", "value": "Legends"},
-    {"name": "ControlsInfosText", "value": "Infos"},
-    {"name": "ControlsMilestonesText", "value": "Milestones"},
-    {"name": "ControlsLevelText", "value": "Level of details"},
-    {"name": "SlicerLenght", "value": 100},
-    {"name": "controlBoxHeight", "value": 60},
-    {"name": "showLegendPaddingX", "value": 0},
-    {"name": "controlsX", "update": "width - controlBoxWidth"},
+    {"name": "ShowControls", "value": true},    // true //
+    {"name": "ShowLegendsControl", "value": true},    // true //
+    {"name": "ShowInfosControl", "value": true},    // true //
+    {"name": "ShowMilestoneControl", "value": true},    // true //
+    {"name": "TrueCountControl", "update": "(ShowLegendsControl ? 1 : 0) + (ShowInfosControl ? 1 : 0) + (ShowMilestoneControl ? 1 : 0)"},    // (ShowLegendsControl ? 1 : 0) + (ShowInfosControl ? 1 : 0) + (ShowMilestoneControl ? 1 : 0) //
+    {"name": "controlsY", "update": "ShowControls ? -60 : 0"},    // ShowControls ? -60 : 0 //
+    {"name": "controlsPaddingBetweenItems", "value": 50},    // 50 //
+    {"name": "controlsClickPadingY", "value": 10},    // 10 //
+    {"name": "ControlsFontSize", "value": 12},    // 12 //
+    {"name": "CheckboxWidth", "value": 35},    // 35 //
+    {"name": "CheckboxHeight", "value": 18},    // 18 //
+    {"name": "CheckboxToggleSize", "value": 120},    // 120 //
+    {"name": "ControlsLegendText", "value": "Legends"},    // Legends //
+    {"name": "ControlsInfosText", "value": "Infos"},    // Infos //
+    {"name": "ControlsMilestonesText", "value": "Milestones"},    // Milestones //
+    {"name": "ControlsLevelText", "value": "Level of details"},    // Level of details //
+    {"name": "SlicerLenght", "value": 100},    // 100 //
+    {"name": "controlBoxHeight", "value": 60},    // 60 //
+    {"name": "showLegendPaddingX", "value": 0},    // 0 //
+    {"name": "controlsX", "update": "width - controlBoxWidth"},    // width - controlBoxWidth //
 
     // TaskColumn Settings //
-    {"name": "taskColumnWidth", "value": 250},
-    {"name": "columnHolderMarginX", "value": 0},
-    {"name": "ColumnTaskContainerY", "value":-40},
-    {"name": "ColumnTaskContainerHeight", "value":40},
-    {"name": "ColumnTaskTitleFontSize", "value":16},
-    {"name": "DisplayTextFontOpacity", "value":0.05},
-    {"name": "DisplayTextFontOpacityHoover", "value":0.2},
-    {"name": "DisplayTextFontSizeL1", "value":14},
-    {"name": "DisplayTextFontSizeLX", "value":12},
-    {"name": "TaskColumnWidthSeparatorStrokeWidth", "value":0.5},
-    {"name": "TaskColumnWidthSeparatorOpacity", "value":0.3},
-    {"name": "TaskColumnStrokes", "value":"#e9ecef"},
-    {"name": "TaskColumnStrokesWidth", "value":1},
-    {"name": "ColumnTaskTitle", "value":"Hierarchie"},
-    {"name": "ShapeSize", "value":200},
+    {"name": "taskColumnWidth", "value": 250},    // 250 //
+    {"name": "columnHolderMarginX", "value": 0},    // 0 //
+    {"name": "ColumnTaskContainerY", "value":-40},    // -40 //
+    {"name": "ColumnTaskContainerHeight", "value":40},    // 40 //
+    {"name": "ColumnTaskTitleFontSize", "value":16},    // 16 //
+    {"name": "DisplayTextFontOpacity", "value":0.05},    // 0.05 //
+    {"name": "DisplayTextFontOpacityHoover", "value":0.2},    // 0.2 //
+    {"name": "DisplayTextFontSizeL1", "value":14},    // 14 //
+    {"name": "DisplayTextFontSizeLX", "value":12},    // 12 //
+    {"name": "TaskColumnWidthSeparatorStrokeWidth", "value":0.5},    // 0.5 //
+    {"name": "TaskColumnWidthSeparatorOpacity", "value":0.3},    // 0.3 //
+    {"name": "TaskColumnStrokes", "value":"#e9ecef"},    // #e9ecef //
+    {"name": "TaskColumnStrokesWidth", "value":1},    // 1 //
+    {"name": "ColumnTaskTitle", "value":"Hierarchie"},    // Hiérarchie //
+    {"name": "ShapeSize", "value":200},    // 200 //
 
     // Gantt Settings //
-    {"name": "ShowSeparator", "value": true},
-    {"name": "ShowWeekends", "value": true},
-    {"name": "ShowBankHolidays", "value": true},
-    {"name": "oneDay", "update": "1000*60*60*24"},
-    {"name": "ChartWidth", "update": "width - columnHolderMarginX - taskColumnWidth"},
-    {"name": "barHeight", "value":20},
-    {"name": "TodayText", "value":"Today"},
-    {"name": "RectanglesRadius", "value":5},
-    {"name": "RectanglesStrokesWidth", "value":1},
-    {"name": "RectanglesPadding", "value":0.1},
-    {"name": "VisibleWeekendsAndBankHollidaysLimit", "value":15552000000},
-    {"name": "GanttRectanglesOpacity", "value":0.5},
-    {"name": "GanttRectanglesOpacityHoover", "value":0.8},
-    {"name": "TodayOpacity", "value":0.9},
-    {"name": "TodayStrokeWidth", "value":2},
-    {"name": "VisibleWeekendsAndBankHollidaysOpacity", "value":0.2},
-    {"name": "PaddingBetweenRectangles", "value":10},
-    {"name": "GanttRectTextFontSize", "value":12},
-    {"name": "GanttRectTextDX", "value":5},
-    {"name": "GanttRectTextDY", "value":0},
-    {"name": "GanttRectTextFontWhiteColor", "value":"black"},
-    {"name": "GanttRectTextFontBlackColor", "value":"white"},
-    {"name": "GanttRectTextLuminanceBorder", "value":0.5},
-    {"name": "AxesTitle", "value":"Chronologie"},
-    {"name": "TextWhere", "value":true},
+    {"name": "ShowSeparator", "value": true},    // true //
+    {"name": "ShowWeekends", "value": true},    // true //
+    {"name": "ShowBankHolidays", "value": true},    // true //
+    {"name": "oneDay", "update": "1000*60*60*24"},    // 1000*60*60*24 //
+    {"name": "ChartWidth", "update": "width - columnHolderMarginX - taskColumnWidth"},    // width - columnHolderMarginX - taskColumnWidth //
+    {"name": "barHeight", "value":20},    // 20 //
+    {"name": "TodayText", "value":"Today"},    // Today //
+    {"name": "RectanglesRadius", "value":5},    // 5 //
+    {"name": "RectanglesStrokesWidth", "value":1},    // 1 //
+    {"name": "RectanglesPadding", "value":0.1},    // 0.1 //
+    {"name": "VisibleWeekendsAndBankHollidaysLimit", "value":15552000000},    // 15552000000 //
+    {"name": "GanttRectanglesOpacity", "value":0.5},    // 0.5 //
+    {"name": "GanttRectanglesOpacityHoover", "value":0.8},    // 0.8 //
+    {"name": "TodayOpacity", "value":0.9},    // 0.9 //
+    {"name": "TodayStrokeWidth", "value":2},    // 2 //
+    {"name": "VisibleWeekendsAndBankHollidaysOpacity", "value":0.2},    // 0.2 //
+    {"name": "PaddingBetweenRectangles", "value":10},    // 10 //
+    {"name": "GanttRectTextFontSize", "value":12},    // 12 //
+    {"name": "GanttRectTextDX", "value":5},    // 5 //
+    {"name": "GanttRectTextDY", "value":0},    // 0 //
+    {"name": "GanttRectTextFontWhiteColor", "value":"black"},    // black //
+    {"name": "GanttRectTextFontBlackColor", "value":"white"},    // white //
+    {"name": "GanttRectTextLuminanceBorder", "value":0.5},    // 0.5 //
+    {"name": "AxesTitle", "value":"Chronologie"},    // Chronologie //
+    {"name": "TextWhere", "value":true},    // true //
 
     // Legend Settings //
-    {"name": "LegendGroupWidth", "value":150},
-    {"name": "LegendGroupX", "update":"width - LegendGroupWidth"},
-    {"name": "LegendGroupY", "value":1},
-    {"name": "LegendGroupBorder", "value":"#e9ecef"},
-    {"name": "LegendGroupBorderWidth", "value":1},
-    {"name": "LegendPaddingX", "value":20},
-    {"name": "LegendTitle", "value":"Legend"},
-    {"name": "LegendTitleFontSize", "value":12},
-    {"name": "LegendGroupShapeSize", "value":120},
-    {"name": "LegendTextPaddingX", "update":"LegendPaddingX + 10"},
-    {"name": "LegendInnerPadding", "value":"25"},
-    {"name": "LegendTextFontSize", "value":12},
-    {"name": "LegendTextColor", "value":"#000000"},
+    {"name": "LegendGroupWidth", "value":150},    // 150 //
+    {"name": "LegendGroupX", "update":"width - LegendGroupWidth"},    // width - LegendGroupWidth //
+    {"name": "LegendGroupY", "value":1},    // 1 //
+    {"name": "LegendGroupBorder", "value":"#e9ecef"},    // #e9ecef //
+    {"name": "LegendGroupBorderWidth", "value":1},    // 1 //
+    {"name": "LegendPaddingX", "value":20},    // 20 //
+    {"name": "LegendTitle", "value":"Legend"},    // Legend //
+    {"name": "LegendTitleFontSize", "value":12},    // 12 //
+    {"name": "LegendGroupShapeSize", "value":120},    // 120 //
+    {"name": "LegendTextPaddingX", "update":"LegendPaddingX + 10"},    // LegendPaddingX + 10 //
+    {"name": "LegendInnerPadding", "value":"25"},    // 25 //
+    {"name": "LegendTextFontSize", "value":12},    // 12 //
+    {"name": "LegendTextColor", "value":"#000000"},    // #000000 //
+    {"name": "MilestoneRatioLegend", "value": 0.5},    // 0.5 //
 
     // Tooltip Settings //
-    {"name": "labelName", "value":"Name"},
-    {"name": "labelCategory", "value":"Level 1"},
-    {"name": "labelSubcategory", "value":"Level 2"},
-    {"name": "labelSegment", "value":"Level 3"},
-    {"name": "labelSubsegment", "value":"Level 4"},
-    {"name": "labelItem", "value":"Level 5"},
-    {"name": "labelStart", "value":"Start"},
-    {"name": "labelEnd", "value":"End"},
+    {"name": "labelName", "value":"Name"},    // Name //
+    {"name": "labelCategory", "value":"Level 1"},    // Level 1 //
+    {"name": "labelSubcategory", "value":"Level 2"},    // Level 2 //
+    {"name": "labelSegment", "value":"Level 3"},    // Level 3 //
+    {"name": "labelSubsegment", "value":"Level 4"},    // Level 4 //
+    {"name": "labelItem", "value":"Level 5"},    // Level 5 //
+    {"name": "labelStart", "value":"Start"},    // Start //
+    {"name": "labelEnd", "value":"End"},    // End //
 
     {
       "name": "dayBandwidth",
@@ -2075,7 +2152,7 @@
               "y": {
                 "signal": "(scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2) + barHeight * (1 - (isDefined(datum.Size) ? datum.Size : 1) / 2)"
               },
-              "text": {"signal": "datum.DisplayText"},
+              "text": {"signal": "datum.Label"},
               "fontSize": {"signal": "GanttRectTextFontSize"},
               "baseline": {"value": "middle"},
               "align": {"value": "left"},
@@ -2084,13 +2161,13 @@
               },
               "dy": {"signal": "GanttRectTextDY"},
               "limit": {
-                "signal": "TextWhere ? max(0, scale('xscale', datum.End) - scale('xscale', datum.Start) - 20) : 0"
+                "signal": "TextWhere ? max(20, scale('xscale', datum.End) - scale('xscale', datum.Start) - 20) : 0"
               },
               "fill": {
                 "signal": "luminance(datum.VColor) > GanttRectTextLuminanceBorder ? GanttRectTextFontWhiteColor : GanttRectTextFontBlackColor"
               },
               "opacity": {
-                "signal": "showInfos?1:0"
+                "signal": "showInfos && (!TextWhere || (scale('xscale', datum.End) - scale('xscale', datum.Start)) > 20) ? 1 : 0"
               }
             },
             "update": {
@@ -2101,17 +2178,16 @@
                 "signal": "(scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2) + barHeight * (1 - (isDefined(datum.Size) ? datum.Size : 1) / 2)"
               },
               "limit": {
-                "signal": "TextWhere ? max(0, scale('xscale', datum.End) - scale('xscale', datum.Start) - 20) : 0"
+                "signal": "TextWhere ? max(20, scale('xscale', datum.End) - scale('xscale', datum.Start) - 20) : 0"
               },
               "fill": {
                 "signal": "TextWhere ? (luminance(datum.VColor) > GanttRectTextLuminanceBorder ? GanttRectTextFontWhiteColor : GanttRectTextFontBlackColor) : 'black'"
               },
               "tooltip": {
-                // Bubble info | Infos bulles //
                 "signal": "datum.Level == 1?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 2?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 3?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 4?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, '4': labelSubsegment + ': ' + datum.Subsegment, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, '4': labelSubsegment + ': ' + datum.Subsegment, '5': labelItem + ': ' + datum.Item, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}"
               },
               "opacity": {
-                "signal": "showInfos?1:0"
+                "signal": "showInfos && (!TextWhere || (scale('xscale', datum.End) - scale('xscale', datum.Start)) > 20) ? 1 : 0"
               }
             }
           }
@@ -2129,7 +2205,7 @@
                 "signal": "(isDefined(datum.Shape) && datum.Shape != null && datum.Shape != 'null' && datum.Shape != '') ? datum.Shape : 'diamond'"
               },
               "size": {
-                "signal": "(isDefined(datum.Shape) && isDefined(data('Shape')[indexof(pluck(data('Shape'), 'Shape'), datum.Shape)])) ? +data('Shape')[indexof(pluck(data('Shape'), 'Shape'), datum.Shape)].Size : 500"
+                "signal": "isDefined(datum.ShapeSize) && datum.ShapeSize != null ? datum.ShapeSize : ((isDefined(datum.Shape) && isDefined(data('Shape')[indexof(pluck(data('Shape'), 'Shape'), datum.Shape)])) ? +data('Shape')[indexof(pluck(data('Shape'), 'Shape'), datum.Shape)].Size : 500)"
               },
               "fill": {
                 "signal": "(isDefined(datum.VColor) && datum.VColor != null && datum.VColor != 'null' && datum.VColor != '') ? datum.VColor : scale('colorScale', datum.Legend)"
@@ -2264,7 +2340,7 @@
           "encode": {
             "enter": {
               "size": {
-                "signal": "(isDefined(datum.Shape) && isDefined(data('Shape')[indexof(pluck(data('Shape'), 'Shape'), datum.Shape)])) ? +data('Shape')[indexof(pluck(data('Shape'), 'Shape'), datum.Shape)].Size : 200"
+                "signal": "isDefined(datum.Size) && datum.Size != null ? datum.Size*MilestoneRatioLegend : 500*MilestoneRatioLegend"
               },
               "x": {"signal": "LegendPaddingX"},
               "y": {"signal": "scale('LegendScale', datum.Legend) + 40"},
@@ -2291,6 +2367,9 @@
               "height": {"signal": "bandwidth('LegendScale')"},
               "dy": {"value": 4},
               "text": {"field": "Legend"},
+              "limit": {
+                "signal": "LegendGroupWidth - LegendTextPaddingX - LegendPaddingX"
+              },
               "fontSize": {"signal": "LegendTextFontSize"},
               "fill": {"signal": "LegendTextColor"}
             },
@@ -2547,4 +2626,4 @@
       }
     }
   ]*/
-}
+} 
