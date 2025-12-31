@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v6.json",
   "width": 1200,
-  "height": 500,
+  "height": 480,
   "padding": 5,
   "description": "Made by Nathan BODIN, inspired by Davide BACCI and Madison GIAMMARIA. You can contact me on Linkedin : Nathan BODIN and on Instagram : @nathanbod1. Every comments that you will find in this code have two parts. The first one is English version and the last one is French version of the comment.",
 
@@ -25,12 +25,13 @@
           "Item": "Initial Benchmarking",
           "Start": "01/01/2023",
           "End": "01/03/2023",
-          "Legend": "Research Research Research Research Research",
+          "Legend": "123",
           "Color": "#800020",
           "Milestone": 0,
           "Shape": "",
           "Size": 1,
-          "Label": "123"
+          "Label": "123",
+          "Advancement": 0.5
         },
         {
           "Category": "Agent Alpha",
@@ -360,6 +361,11 @@
           "as": "End",
           "expr": "datum.Milestone == 1 ? datum.Start + 1 : datum.FEnd"
         },
+        {
+          "type": "formula",
+          "as": "Advancement",
+          "expr": "isValid(datum.Advancement) ? datum.Advancement : 1"
+        },
         // Part where we rank level 1 (Category) | Partie où l'on rank les niveaux 1 (Category) //
         {
           "type": "joinaggregate",
@@ -576,7 +582,8 @@
         {"type": "formula", "as": "Color", "expr": "null"},
         {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 1 ? datum.Legend : datum.Category"},
         {"type": "formula", "as": "Milestone", "expr": "0"},
-        {"type": "formula", "as": "Shape", "expr": "null"}
+        {"type": "formula", "as": "Shape", "expr": "null"},
+        {"type": "formula", "as": "Advancement", "expr": "1"}
       ]
     },
     {
@@ -617,7 +624,8 @@
         {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
         {"type": "formula", "as": "Shape", "expr": "datum.Shape"},
         {"type": "formula", "as": "Size", "expr": "datum.Size"},
-        {"type": "formula", "as": "ShapeSize", "expr": "datum.ShapeSize"}
+        {"type": "formula", "as": "ShapeSize", "expr": "datum.ShapeSize"},
+        {"type": "formula", "as": "Advancement", "expr": "datum.Advancement"}
       ]
     },
     {
@@ -658,7 +666,8 @@
         {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 2 ? datum.Legend : datum.Subcategory"},
         {"type": "formula", "as": "Milestone", "expr": "0"},
         {"type": "formula", "as": "Shape", "expr": "null"},
-        {"type": "formula", "as": "Size", "expr": "null"}
+        {"type": "formula", "as": "Size", "expr": "null"},
+        {"type": "formula", "as": "Advancement", "expr": "1"}
       ]
     },
     {
@@ -696,7 +705,8 @@
         {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
         {"type": "formula", "as": "Shape", "expr": "datum.Shape"},
         {"type": "formula", "as": "Size", "expr": "datum.Size"},
-        {"type": "formula", "as": "ShapeSize", "expr": "datum.ShapeSize"}
+        {"type": "formula", "as": "ShapeSize", "expr": "datum.ShapeSize"},
+        {"type": "formula", "as": "Advancement", "expr": "datum.Advancement"}
       ]
     },
     {
@@ -735,7 +745,8 @@
         {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 3 ? datum.Legend : datum.Segment"},
         {"type": "formula", "as": "Milestone", "expr": "0"},
         {"type": "formula", "as": "Shape", "expr": "null"},
-        {"type": "formula", "as": "Size", "expr": "null"}
+        {"type": "formula", "as": "Size", "expr": "null"},
+        {"type": "formula", "as": "Advancement", "expr": "1"}
       ]
     },
     {
@@ -771,7 +782,8 @@
         {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
         {"type": "formula", "as": "Shape", "expr": "datum.Shape"},
         {"type": "formula", "as": "Size", "expr": "datum.Size"},
-        {"type": "formula", "as": "ShapeSize", "expr": "datum.ShapeSize"}
+        {"type": "formula", "as": "ShapeSize", "expr": "datum.ShapeSize"},
+        {"type": "formula", "as": "Advancement", "expr": "datum.Advancement"}
       ]
     },
     {
@@ -808,7 +820,8 @@
         {"type": "formula", "as": "Legend", "expr": "datum.maxLevel == 4 ? datum.Legend : datum.Subsegment"},
         {"type": "formula", "as": "Milestone", "expr": "0"},
         {"type": "formula", "as": "Shape", "expr": "null"},
-        {"type": "formula", "as": "Size", "expr": "null"}
+        {"type": "formula", "as": "Size", "expr": "null"},
+        {"type": "formula", "as": "Advancement", "expr": "1"}
       ]
     },
     {
@@ -842,7 +855,8 @@
         {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
         {"type": "formula", "as": "Shape", "expr": "datum.Shape"},
         {"type": "formula", "as": "Size", "expr": "datum.Size"},
-        {"type": "formula", "as": "ShapeSize", "expr": "datum.ShapeSize"}
+        {"type": "formula", "as": "ShapeSize", "expr": "datum.ShapeSize"},
+        {"type": "formula", "as": "Advancement", "expr": "datum.Advancement"}
       ]
     },
     {
@@ -871,7 +885,8 @@
         {"type": "formula", "as": "Milestone", "expr": "datum.Milestone"},
         {"type": "formula", "as": "Shape", "expr": "datum.Shape"},
         {"type": "formula", "as": "Size", "expr": "datum.Size"},
-        {"type": "formula", "as": "ShapeSize", "expr": "datum.ShapeSize"}
+        {"type": "formula", "as": "ShapeSize", "expr": "datum.ShapeSize"},
+        {"type": "formula", "as": "Advancement", "expr": "datum.Advancement"}
       ]
     },
     {
@@ -1179,7 +1194,7 @@
         },
         {
           "type": "project",
-          "fields": ["Id", "Start", "End", "Category", "SubcategoryFull", "SegmentFull", "SubsegmentFull", "ItemFull", "VC", "VSC", "VS", "VSS", "VI", "DisplayText", "Label", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "VColor", "Milestone", "Shape", "CMode", "Size", "ShapeSize"]
+          "fields": ["Id", "Start", "End", "Category", "SubcategoryFull", "SegmentFull", "SubsegmentFull", "ItemFull", "VC", "VSC", "VS", "VSS", "VI", "DisplayText", "Label", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "VColor", "Milestone", "Shape", "CMode", "Size", "ShapeSize", "Advancement"]
         }
       ]
     },
@@ -1209,7 +1224,7 @@
         },
         {
           "type": "project",
-          "fields": ["Id", "Start", "End", "DisplayText", "Label", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Milestone", "Shape", "Size", "ShapeSize"]
+          "fields": ["Id", "Start", "End", "DisplayText", "Label", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Milestone", "Shape", "Size", "ShapeSize", "Advancement"]
         }
       ]
     },
@@ -1228,8 +1243,13 @@
           "expr": "isDefined(datum.Size) && datum.Size != null ? datum.Size : 1"
         },
         {
+          "type": "formula",
+          "as": "EndAdvancement",
+          "expr": "datum.Start + (datum.End - datum.Start)*datum.Advancement"
+        },
+        {
           "type": "project",
-          "fields": ["Id", "Start", "End", "DisplayText", "Label", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Size"]
+          "fields": ["Id", "Start", "End", "DisplayText", "Label", "Level", "Legend", "Subcategory", "Segment", "Subsegment", "Item", "Category", "VColor", "Size", "Advancement", "EndAdvancement"]
         }
       ]
     },
@@ -1442,17 +1462,18 @@
 
     // Controls Settings //
     {"name": "ShowControls", "value": true},    // true //
+    {"name": "ShowAdvancementControl", "value": true},    // true //
     {"name": "ShowLegendsControl", "value": true},    // true //
     {"name": "ShowInfosControl", "value": true},    // true //
     {"name": "ShowMilestoneControl", "value": true},    // true //
-    {"name": "TrueCountControl", "update": "(ShowLegendsControl ? 1 : 0) + (ShowInfosControl ? 1 : 0) + (ShowMilestoneControl ? 1 : 0)"},    // (ShowLegendsControl ? 1 : 0) + (ShowInfosControl ? 1 : 0) + (ShowMilestoneControl ? 1 : 0) //
-    {"name": "controlsY", "update": "ShowControls ? -60 : 0"},    // ShowControls ? -60 : 0 //
+    {"name": "controlsY", "update": "ShowControls ? -65 : 0"},    // ShowControls ? -65 : 0 //
     {"name": "controlsPaddingBetweenItems", "value": 50},    // 50 //
     {"name": "controlsClickPadingY", "value": 10},    // 10 //
     {"name": "ControlsFontSize", "value": 12},    // 12 //
     {"name": "CheckboxWidth", "value": 35},    // 35 //
     {"name": "CheckboxHeight", "value": 18},    // 18 //
     {"name": "CheckboxToggleSize", "value": 120},    // 120 //
+    {"name": "ControlsAdvancementText", "value": "Advancement"},    // Advancement //
     {"name": "ControlsLegendText", "value": "Legends"},    // Legends //
     {"name": "ControlsInfosText", "value": "Infos"},    // Infos //
     {"name": "ControlsMilestonesText", "value": "Milestones"},    // Milestones //
@@ -1491,8 +1512,12 @@
     {"name": "RectanglesStrokesWidth", "value":1},    // 1 //
     {"name": "RectanglesPadding", "value":0.1},    // 0.1 //
     {"name": "VisibleWeekendsAndBankHollidaysLimit", "value":15552000000},    // 15552000000 //
-    {"name": "GanttRectanglesOpacity", "value":0.5},    // 0.5 //
-    {"name": "GanttRectanglesOpacityHoover", "value":0.8},    // 0.8 //
+    {"name": "GanttRectanglesOpacityBase", "value":0.2},    // 0.5 //
+    {"name": "GanttRectanglesOpacityBaseHoover", "value":0.4},    // 0.8 //
+    {"name": "GanttRectanglesOpacityAdvancement", "value":0.5},    // 0.5 //
+    {"name": "GanttRectanglesOpacityAdvancementHoover", "value":0.8},    // 0.8 //
+    {"name": "GanttMilestonesOpacity", "value":0.5},    // 0.5 //
+    {"name": "GanttMilestonesOpacityHoover", "value":0.8},    // 0.8 //
     {"name": "TodayOpacity", "value":0.9},    // 0.9 //
     {"name": "TodayStrokeWidth", "value":2},    // 2 //
     {"name": "VisibleWeekendsAndBankHollidaysOpacity", "value":0.2},    // 0.2 //
@@ -1505,6 +1530,7 @@
     {"name": "GanttRectTextLuminanceBorder", "value":0.5},    // 0.5 //
     {"name": "AxesTitle", "value":"Chronologie"},    // Chronologie //
     {"name": "TextWhere", "value":true},    // true //
+    {"name": "AdvancementHeight", "value":1},    // 1 //
 
     // Legend Settings //
     {"name": "LegendGroupWidth", "value":150},    // 150 //
@@ -1554,20 +1580,24 @@
     },
 
     {
-      "name": "legendControlX",
+      "name": "AdvancementControlX",
       "update": "showLegendPaddingX"
     },
     {
+      "name": "legendControlX",
+      "update": "ShowAdvancementControl ? (showLegendPaddingX + CheckboxWidth + controlsPaddingBetweenItems) : showLegendPaddingX"
+    },
+    {
       "name": "infosControlX",
-      "update": "ShowLegendsControl ? (showLegendPaddingX + CheckboxWidth + controlsPaddingBetweenItems) : showLegendPaddingX"
+      "update": "legendControlX + (ShowLegendsControl ? (CheckboxWidth + controlsPaddingBetweenItems) : 0)"
     },
     {
       "name": "milestoneControlX",
-      "update": "(ShowLegendsControl ? (showLegendPaddingX + CheckboxWidth + controlsPaddingBetweenItems) : showLegendPaddingX) + (ShowInfosControl ? (CheckboxWidth + controlsPaddingBetweenItems) : 0)"
+      "update": "infosControlX + (ShowInfosControl ? (CheckboxWidth + controlsPaddingBetweenItems) : 0)"
     },
     {
       "name": "sliderControlX",
-      "update": "(ShowLegendsControl ? (showLegendPaddingX + CheckboxWidth + controlsPaddingBetweenItems) : showLegendPaddingX) + (ShowInfosControl ? (CheckboxWidth + controlsPaddingBetweenItems) : 0) + (ShowMilestoneControl ? (CheckboxWidth + controlsPaddingBetweenItems) : 0)"
+      "update": "milestoneControlX + (ShowMilestoneControl ? (CheckboxWidth + controlsPaddingBetweenItems) : 0)"
     },
     {
       "name": "controlBoxWidth",
@@ -1799,7 +1829,7 @@
       "value": null,
       "on": [
         {
-          "events": "@clickableArea:mouseover, @expandCollapseTriangle:mouseover, @itemText:mouseover, @GanttRect:mouseover, @GanttMilestone:mouseover, @GanttRectText:mouseover",
+          "events": "@clickableArea:mouseover, @expandCollapseTriangle:mouseover, @itemText:mouseover, @GanttRect:mouseover, @GanttMilestone:mouseover, @GanttRectText:mouseover, @GanttRectAdvancement:mouseover",
           "update": "datum.Id"
         },
         {
@@ -1840,6 +1870,16 @@
         {
           "events": "@checkboxZoneInfos:click, @checkboxToggleInfos:click",
           "update": "!showInfos"
+        }
+      ]
+    },
+    {
+      "name": "showAdvancement",
+      "value": true,
+      "on": [
+        {
+          "events": "@checkboxZoneAdvancement:click, @checkboxToggleAdvancement:click",
+          "update": "!showAdvancement"
         }
       ]
     },
@@ -1932,10 +1972,59 @@
         {
           // Text of the checkbox that controls the visibility of the legend | Texte de la checkbox qui gère la visibilité de la légende //
           "type": "text",
-          "name": "CheckboxLegendText",
+          "name": "CheckboxAdvancementText",
           "encode": {
             "update": {
               "x": {"signal": "showLegendPaddingX"},
+              "y": {"value": 0},
+              "text": {"signal": "ControlsAdvancementText"},
+              "fill": {"signal": "MainColor"},
+              "fontSize": {"signal": "ControlsFontSize"},
+              "align": {"value": "left"},
+              "opacity": {"signal": "ShowAdvancementControl ? 1 : 0"}
+            }
+          }
+        },
+        {
+          // Checkbox background | Fond de la checkbox //
+          "type": "rect",
+          "name": "checkboxZoneAdvancement",
+          "encode": {
+            "update": {
+              "x": {"signal": "showLegendPaddingX"},
+              "y": {"signal": "controlsClickPadingY"},
+              "width": {"signal": "CheckboxWidth"},
+              "height": {"signal": "CheckboxHeight"},
+              "fill": {"signal": "showAdvancement ? MainColor : '#e9ecef'"},
+              "cornerRadius": {"value": 9},
+              "cursor": {"value": "pointer"},
+              "opacity": {"signal": "ShowAdvancementControl ? 1 : 0"}
+            }
+          }
+        },
+        {
+          "type": "symbol",
+          "name": "checkboxToggleAdvancement",
+          "encode": {
+            "update": {
+              "x": {"signal": "showAdvancement ? showLegendPaddingX + CheckboxWidth - 9 : showLegendPaddingX + 9"},
+              "y": {"signal": "controlsClickPadingY + CheckboxHeight/2"},
+              "size": {"signal": "CheckboxToggleSize"},
+              "shape": {"value": "circle"},
+              "fill": {"value": "white"},
+              "stroke": {"value": "none"},
+              "cursor": {"value": "pointer"},
+              "opacity": {"signal": "ShowAdvancementControl ? 1 : 0"}
+            }
+          }
+        },
+        {
+          // Text of the checkbox that controls the visibility of the legend | Texte de la checkbox qui gère la visibilité de la légende //
+          "type": "text",
+          "name": "CheckboxLegendText",
+          "encode": {
+            "update": {
+              "x": {"signal": "legendControlX"},
               "y": {"value": 0},
               "text": {"signal": "ControlsLegendText"},
               "fill": {"signal": "MainColor"},
@@ -1951,7 +2040,7 @@
           "name": "checkboxZone",
           "encode": {
             "update": {
-              "x": {"signal": "showLegendPaddingX"},
+              "x": {"signal": "legendControlX"},
               "y": {"signal": "controlsClickPadingY"},
               "width": {"signal": "CheckboxWidth"},
               "height": {"signal": "CheckboxHeight"},
@@ -1967,7 +2056,7 @@
           "name": "checkboxToggle",
           "encode": {
             "update": {
-              "x": {"signal": "showLegend ? showLegendPaddingX + CheckboxWidth - 9 : showLegendPaddingX + 9"},
+              "x": {"signal": "showLegend ? legendControlX + CheckboxWidth - 9 : legendControlX + showLegendPaddingX + 9"},
               "y": {"signal": "controlsClickPadingY + CheckboxHeight/2"},
               "size": {"signal": "CheckboxToggleSize"},
               "shape": {"value": "circle"},
@@ -2379,11 +2468,6 @@
           "from": {"data": "VisibleRectangles"},
           "encode": {
             "enter": {
-              "x": {"scale": "xscale", "field": "Start"},
-              "x2": {"scale": "xscale", "field": "End"},
-              "y": {
-                "signal": "(scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2) + barHeight * (1 - datum.Size)"
-              },
               "height": {
                 "signal": "barHeight * (isDefined(datum.Size) ? datum.Size : 1)"
               },
@@ -2393,8 +2477,9 @@
               "stroke": {"signal": "BgColor"},
               "strokeWidth": {"signal": "RectanglesStrokesWidth"},
               "cornerRadius": {"signal": "RectanglesRadius"},
-              "opacity": {
-                "signal": "hoveredId === datum.Id ? GanttRectanglesOpacityHoover : GanttRectanglesOpacity" //If my cursor passes over an element then it is highlighted | Si mon curseur passe sur un élément alors on le met en surbrillance //
+              "tooltip": {
+                // Bubble info | Infos bulles //
+                "signal": "datum.Level == 1?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 2?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 3?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 4?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, '4': labelSubsegment + ': ' + datum.Subsegment, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, '4': labelSubsegment + ': ' + datum.Subsegment, '5': labelItem + ': ' + datum.Item, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}"
               }
             },
             "update": {
@@ -2403,12 +2488,41 @@
               "y": {
                 "signal": "(scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2) + barHeight * (1 - datum.Size)"
               },
+              "opacity": {
+                "signal": "showAdvancement && datum.Level == MaxLevel ? (hoveredId === datum.Id ? GanttRectanglesOpacityBaseHoover : GanttRectanglesOpacityBase) : (hoveredId === datum.Id ? GanttRectanglesOpacityAdvancementHoover : GanttRectanglesOpacityAdvancement)" //If my cursor passes over an element then it is highlighted | Si mon curseur passe sur un élément alors on le met en surbrillance //
+              }
+            }
+          }
+        },
+        {
+          // Displaying Gantt rectangles | Affichage des rectangles du Gantt //
+          "type": "rect",
+          "name": "GanttRectAdvancement",
+          "from": {"data": "VisibleRectangles"},
+          "encode": {
+            "enter": {
+              "height": {
+                "signal": "barHeight * (isDefined(datum.Size) ? datum.Size : 1)*(datum.Level == MaxLevel ? AdvancementHeight : 1)"
+              },
+              "fill": {
+                "signal": "(isDefined(datum.VColor) && datum.VColor != null && datum.VColor != 'null' && datum.VColor != '') ? datum.VColor : scale('colorScale', datum.Legend)" // We put the color that the user defined according to his Legend | On met la couleur que l'utilisateur a définie en fonction de sa Legend //
+              },
+              "stroke": {"signal": "BgColor"},
+              "strokeWidth": {"signal": "RectanglesStrokesWidth"},
+              "cornerRadius": {"signal": "RectanglesRadius"},
               "tooltip": {
                 // Bubble info | Infos bulles //
                 "signal": "datum.Level == 1?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 2?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 3?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 4?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, '4': labelSubsegment + ': ' + datum.Subsegment, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, '4': labelSubsegment + ': ' + datum.Subsegment, '5': labelItem + ': ' + datum.Item, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}"
+              }
+            },
+            "update": {
+              "x": {"scale": "xscale", "field": "Start"},
+              "x2": {"scale": "xscale", "field": "EndAdvancement"},
+              "y": {
+                "signal": "(scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2) + barHeight * (1 - datum.Size) + (barHeight * datum.Size * (1 - (showAdvancement ? AdvancementHeight : 1))) / 2"
               },
               "opacity": {
-                "signal": "hoveredId === datum.Id ? GanttRectanglesOpacityHoover : GanttRectanglesOpacity"
+                "signal": "showAdvancement && datum.Level == MaxLevel ? (hoveredId === datum.Id ? GanttRectanglesOpacityAdvancementHoover : GanttRectanglesOpacityAdvancement) : 0"
               }
             }
           }
@@ -2420,12 +2534,6 @@
           "from": {"data": "VisibleRectangles"},
           "encode": {
             "enter": {
-              "x": {
-                "signal": "TextWhere ? scale('xscale', datum.Start) : scale('xscale', datum.End)"
-              },
-              "y": {
-                "signal": "(scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2) + barHeight * (1 - (isDefined(datum.Size) ? datum.Size : 1) / 2)"
-              },
               "text": {"signal": "datum.Label"},
               "fontSize": {"signal": "GanttRectTextFontSize"},
               "baseline": {"value": "middle"},
@@ -2434,14 +2542,11 @@
                 "signal": "TextWhere ? GanttRectTextDX : 5"
               },
               "dy": {"signal": "GanttRectTextDY"},
-              "limit": {
-                "signal": "TextWhere ? max(20, scale('xscale', datum.End) - scale('xscale', datum.Start) - 20) : 0"
-              },
               "fill": {
                 "signal": "luminance(datum.VColor) > GanttRectTextLuminanceBorder ? GanttRectTextFontWhiteColor : GanttRectTextFontBlackColor"
               },
-              "opacity": {
-                "signal": "showInfos && (!TextWhere || (scale('xscale', datum.End) - scale('xscale', datum.Start)) > 20) ? 1 : 0"
+              "tooltip": {
+                "signal": "datum.Level == 1?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 2?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 3?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 4?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, '4': labelSubsegment + ': ' + datum.Subsegment, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, '4': labelSubsegment + ': ' + datum.Subsegment, '5': labelItem + ': ' + datum.Item, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}"
               }
             },
             "update": {
@@ -2453,12 +2558,6 @@
               },
               "limit": {
                 "signal": "TextWhere ? max(20, scale('xscale', datum.End) - scale('xscale', datum.Start) - 20) : 0"
-              },
-              "fill": {
-                "signal": "TextWhere ? (luminance(datum.VColor) > GanttRectTextLuminanceBorder ? GanttRectTextFontWhiteColor : GanttRectTextFontBlackColor) : 'black'"
-              },
-              "tooltip": {
-                "signal": "datum.Level == 1?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 2?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 3?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 4?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, '4': labelSubsegment + ': ' + datum.Subsegment, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, '4': labelSubsegment + ': ' + datum.Subsegment, '5': labelItem + ': ' + datum.Item, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}"
               },
               "opacity": {
                 "signal": "showInfos && (!TextWhere || (scale('xscale', datum.End) - scale('xscale', datum.Start)) > 20) ? 1 : 0"
@@ -2473,8 +2572,6 @@
           "from": {"data": "VisibleMilestones"},
           "encode": {
             "enter": {
-              "x": {"scale": "xscale", "field": "Start"},
-              "y": {"signal": "scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2 + barHeight / 2"},
               "shape": {
                 "signal": "(isDefined(datum.Shape) && datum.Shape != null && datum.Shape != 'null' && datum.Shape != '') ? datum.Shape : 'diamond'"
               },
@@ -2486,19 +2583,16 @@
               },
               "stroke": {"signal": "BgColor"},
               "strokeWidth": {"signal": "RectanglesStrokesWidth"},
-              "opacity": {
-                "signal": "!showMilestone ? 0 : hoveredId === datum.Id ? GanttRectanglesOpacityHoover : GanttRectanglesOpacity"
+              "tooltip": {
+                // Bubble info | Infos bulles //
+                "signal": "datum.Level == 1?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 2?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 3?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 4?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, '4': labelSubsegment + ': ' + datum.Subsegment, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, '4': labelSubsegment + ': ' + datum.Subsegment, '5': labelItem + ': ' + datum.Item, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}"
               }
             },
             "update": {
               "x": {"scale": "xscale", "field": "Start"},
               "y": {"signal": "scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2 + barHeight / 2"},
-              "tooltip": {
-                // Bubble info | Infos bulles //
-                "signal": "datum.Level == 1?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 2?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 3?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:datum.Level == 4?{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, '4': labelSubsegment + ': ' + datum.Subsegment, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}:{'0': labelName + ': ' + datum.DisplayText, '1': labelCategory + ': ' + datum.Category, '2': labelSubcategory + ': ' + datum.Subcategory, '3': labelSegment + ': ' + datum.Segment, '4': labelSubsegment + ': ' + datum.Subsegment, '5': labelItem + ': ' + datum.Item, 'S': labelStart + ': ' + timeFormat(datum.Start, '%d/%m/%Y'), 'E': labelEnd + ': ' + timeFormat(datum.End, '%d/%m/%Y')}"
-              },
               "opacity": {
-                "signal": "!showMilestone ? 0 : (hoveredId === datum.Id ? GanttRectanglesOpacityHoover : GanttRectanglesOpacity)"
+                "signal": "!showMilestone ? 0 : hoveredId === datum.Id ? GanttMilestonesOpacityHoover : GanttMilestonesOpacity"
               }
             }
           }
@@ -2512,7 +2606,6 @@
             "enter": {
               "x": {"signal": "0"},
               "x2": {"signal": "width"},
-              "y": {"signal": "scale('yscale', datum.Id) - (bandwidth('yscale') * RectanglesPadding) / 2"},
               "stroke": {"signal": "MainColor"},
               "strokeWidth": {"value": 1},
               "strokeDash": {"signal": "datum.Level == 1 ? [1, 0] : [4, 4]"},
@@ -2900,4 +2993,4 @@
       }
     }
   ]*/
-} 
+}
