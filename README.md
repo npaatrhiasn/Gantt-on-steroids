@@ -1,3 +1,4 @@
+[English Version Bellow]  
 # Dynamic & Flexible Hierarchical Gantt Chart  
 # Gantt hiérarchique dynamique et flexible
 
