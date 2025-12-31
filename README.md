@@ -39,8 +39,19 @@ Avec ce Gantt, vous pouvez :
 Si vous avez la moindre question, vous pouvez me contacter via :
 
 - **Email** : nathanbodin01@gmail.com  
-- **LinkedIn** : Nathan Bodin  
-- **Instagram** : @nathanbod1
+- **LinkedIn** : [Nathan Bodin](www.linkedin.com/in/nathan-bodin)  
+- **Instagram** : [@nathanbod1](https://www.instagram.com/nathanbod1)
+
+---
+
+### Remerciements
+
+Je tiens à remercier :
+
+- **Arnaud GELLEZ** pour l’aide et le soutien qu’il m’a apportés lors de la création de cet outil.
+- **David BACCI**, dont le [travail](https://github.com/PBI-David/Deneb-Showcase/tree/main/Gantt%20Chart) m’a inspiré dans la création de cet outil.
+- **Madison GIAMMARIA**, dont le [travail](https://github.com/Giammaria/Vega-Visuals/tree/main/20240724-hierarchical-gantt-chart) m’a également inspiré dans la création de cet outil.
+- **Thibaud GUERET**, **Laetitia BARILLET**, **Christophe DURAND** et **Aurore CABRERA** pour leurs retours utilisateurs.
 
 ---
 
@@ -81,5 +92,16 @@ With this Gantt chart, you can:
 If you have any questions, feel free to reach out:
 
 - **Email**: nathanbodin01@gmail.com  
-- **LinkedIn**: Nathan Bodin  
-- **Instagram**: @nathanbod1
+- **LinkedIn**: [Nathan Bodin](www.linkedin.com/in/nathan-bodin) 
+- **Instagram**: [@nathanbod1](https://www.instagram.com/nathanbod1)
+
+---
+
+### Acknowledgements
+
+I would like to thank:
+
+- **Arnaud GELLEZ** for his help and support throughout the development of this tool.
+- **David BACCI**, whose [work](https://github.com/PBI-David/Deneb-Showcase/tree/main/Gantt%20Chart) inspired the creation of this tool.
+- **Madison GIAMMARIA**, whose [work](https://github.com/Giammaria/Vega-Visuals/tree/main/20240724-hierarchical-gantt-chart) also inspired the development of this tool.
+- **Thibaud GUERET**, **Laetitia BARILLET**, **Christophe DURAND**, and **Aurore CABRERA** for their valuable user feedback.
