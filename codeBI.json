@@ -1237,10 +1237,10 @@
     {"name": "RectanglesStrokesWidth", "value":1},    // 1 //
     {"name": "RectanglesPadding", "value":0.1},    // 0.1 //
     {"name": "VisibleWeekendsAndBankHollidaysLimit", "value":15552000000},    // 15552000000 //
-    {"name": "GanttRectanglesOpacityBase", "value":0.2},    // 0.5 //
-    {"name": "GanttRectanglesOpacityBaseHoover", "value":0.4},    // 0.8 //
-    {"name": "GanttRectanglesOpacityAdvancement", "value":0.5},    // 0.5 //
-    {"name": "GanttRectanglesOpacityAdvancementHoover", "value":0.8},    // 0.8 //
+    {"name": "GanttRectanglesOpacityBase", "value":0.4},    // 0.5 //
+    {"name": "GanttRectanglesOpacityBaseHoover", "value":0.6},    // 0.6 //
+    {"name": "GanttRectanglesOpacityAdvancement", "value":0.7},    // 0.7 //
+    {"name": "GanttRectanglesOpacityAdvancementHoover", "value":0.9},    // 0.9 //
     {"name": "GanttMilestonesOpacity", "value":0.5},    // 0.5 //
     {"name": "GanttMilestonesOpacityHoover", "value":0.8},    // 0.8 //
     {"name": "TodayOpacity", "value":0.9},    // 0.9 //
@@ -1303,7 +1303,6 @@
       "name": "minYearBandwidth",
       "value": 1
     },
-
     {
       "name": "AdvancementControlX",
       "update": "showLegendPaddingX"
@@ -1328,7 +1327,6 @@
       "name": "controlBoxWidth",
       "update": "sliderControlX + SlicerLenght + 15"
     },
-
     {
       // The initial domain is the entire domain of your data. | Le domaine initial c'est le domaine entier de vos données //
       "name": "initialDomain",
@@ -2214,7 +2212,7 @@
                 "signal": "(scale('yscale', datum.Id) + (bandwidth('yscale') - barHeight) / 2) + barHeight * (1 - datum.Size)"
               },
               "opacity": {
-                "signal": "showAdvancement && datum.Level == MaxLevel ? (hoveredId === datum.Id ? GanttRectanglesOpacityBaseHoover : GanttRectanglesOpacityBase) : (hoveredId === datum.Id ? GanttRectanglesOpacityAdvancementHoover : GanttRectanglesOpacityAdvancement)" //If my cursor passes over an element then it is highlighted | Si mon curseur passe sur un élément alors on le met en surbrillance //
+                "signal": "hoveredId === datum.Id ? GanttRectanglesOpacityBaseHoover : GanttRectanglesOpacityBase" //If my cursor passes over an element then it is highlighted | Si mon curseur passe sur un élément alors on le met en surbrillance //
               }
             }
           }
